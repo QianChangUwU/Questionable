@@ -83,12 +83,12 @@ internal sealed class GeneralConfigComponent : ConfigComponent
         if (prependDefault)
         {
             Job[] ids = [DefaultClassJob.ClassJob, .. jobs];
-            string[] names = [DefaultClassJob.Name, .. jobs.Select(x => x.ToString())];
+            string[] names = [DefaultClassJob.Name, .. jobs.Select(x => x.ToFriendlyString())];
             return (ids, names);
         }
         else
         {
-            return ([.. jobs], [.. jobs.Select(x => x.ToString())]);
+            return ([.. jobs], [.. jobs.Select(x => x.ToFriendlyString())]);
         }
     }
 
