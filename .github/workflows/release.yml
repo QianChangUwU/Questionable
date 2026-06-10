@@ -205,52 +205,10 @@ jobs:
 
       - name: Update pluginmaster.json
         run: |
-          VERSION="${{ env.VERSION }}"
-          IS_TESTING="${{ needs.detect-version-change.outputs.testing }}"
-          CHANNEL="${{ needs.detect-version-change.outputs.branch }}"
-
-          DOWNLOAD_URL="https://github.com/${{ github.repository }}/releases/download/v${VERSION}/latest.zip"
-
-          python3 -c "
-import json, os
-
-repo_path = 'dalamud-plugins'
-json_path = os.path.join(repo_path, 'pluginmaster.json')
-
-with open(json_path, 'r', encoding='utf-8') as f:
-    data = json.load(f)
-
-# Find existing entry or use first
-entry = data[0] if data else {}
-
-entry['Name'] = 'Questionable'
-entry['Author'] = 'liza, qstxiv, & various contributors'
-entry['Punchline'] = 'A tiny quest helper plugin.'
-entry['Description'] = 'A tiny little quest helper plugin, which does quests for you automatically where possible.'
-entry['InternalName'] = 'Questionable'
-entry['AssemblyVersion'] = VERSION
-entry['TestingAssemblyVersion'] = VERSION
-entry['DalamudApiLevel'] = 15
-entry['TestingDalamudApiLevel'] = 15
-entry['DownloadLinkInstall'] = DOWNLOAD_URL
-entry['DownloadLinkUpdate'] = DOWNLOAD_URL
-entry['DownloadLinkTesting'] = DOWNLOAD_URL
-entry['RepoUrl'] = 'https://github.com/${{ github.repository }}'
-entry['IconUrl'] = 'https://github.com/${{ github.repository }}/releases/download/v${VERSION}/latest.zip'
-entry['Tags'] = ['quests', 'msq']
-entry['ApplicableVersion'] = 'any'
-entry['LoadPriority'] = 0
-entry['AcceptsFeedback'] = True
-entry['LastUpdate'] = int(__import__('time').time())
-
-if not data:
-    data = [entry]
-else:
-    data[0] = entry
-
-with open(json_path, 'w', encoding='utf-8') as f:
-    json.dump(data, f, indent=4, ensure_ascii=False)
-"
+          python3 .github/update_pluginmaster.py \
+            dalamud-plugins \
+            "${{ env.VERSION }}" \
+            "${{ github.repository }}"
 
       - name: Commit and push to DalamudPlugins
         run: |
