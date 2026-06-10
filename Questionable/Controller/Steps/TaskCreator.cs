@@ -10,6 +10,7 @@ using Questionable.Controller.Steps.Shared;
 using Questionable.Data;
 using Questionable.Model;
 using Questionable.Model.Questing;
+using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Controller.Steps;
 
 internal sealed class TaskCreator
@@ -33,11 +34,11 @@ internal sealed class TaskCreator
         if (quest.Root.Disabled && sequenceNumber.InRange(1, 2))
         {
             var reason = (quest.Root.Comment ?? "<no reason specified>").Split('\n', 2)[0];
-            _chatGui.PrintError($"The quest '{quest.Info.Name}' has been marked as Disabled for the following reason: {reason}",
+            _chatGui.PrintError(_LF("The quest '{0}' has been marked as Disabled for the following reason: {1}", quest.Info.Name, reason),
                 CommandHandler.MessageTag, CommandHandler.TagColor);
-            _chatGui.PrintError("We recommend you complete this quest manually, as the provided path may not run successfully.",
+            _chatGui.PrintError(_L("We recommend you complete this quest manually, as the provided path may not run successfully."),
                 CommandHandler.MessageTag, CommandHandler.TagColor);
-            _chatGui.PrintError("Thank you for your patience as we expand QST's support to include this quest in a future update.",
+            _chatGui.PrintError(_L("Thank you for your patience as we expand QST's support to include this quest in a future update."),
                 CommandHandler.MessageTag, CommandHandler.TagColor);
         }
 # endif
@@ -46,7 +47,7 @@ internal sealed class TaskCreator
             if (!quest.Root.Disabled)
             {
                 _chatGui.PrintError(
-                    $"Path for quest '{quest.Info.Name}' ({quest.Id}) does not contain sequence {sequenceNumber}, please report this: https://github.com/PunishXIV/Questionable/discussions/20",
+                    _LF("Path for quest '{0}' ({1}) does not contain sequence {2}, please report this: https://github.com/PunishXIV/Questionable/discussions/20", quest.Info.Name, quest.Id, sequenceNumber),
                     CommandHandler.MessageTag, CommandHandler.TagColor);
             }
 

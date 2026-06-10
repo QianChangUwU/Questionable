@@ -5,6 +5,7 @@ using Questionable.Data;
 using Questionable.External;
 using Questionable.Model;
 using Questionable.Model.Questing;
+using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Controller.Steps.Common;
 
 internal static class SendNotification
@@ -50,10 +51,10 @@ internal static class SendNotification
 
             string text = Task.InteractionType switch
             {
-                EInteractionType.Duty => "Duty",
-                EInteractionType.SinglePlayerDuty => "Single player duty",
+                EInteractionType.Duty => _L("Duty"),
+                EInteractionType.SinglePlayerDuty => _L("Single player duty"),
                 EInteractionType.Instruction or EInteractionType.WaitForManualProgress or EInteractionType.Snipe =>
-                    "Manual interaction required",
+                    _L("Manual interaction required"),
                 var _ => $"{Task.InteractionType}"
             };
 

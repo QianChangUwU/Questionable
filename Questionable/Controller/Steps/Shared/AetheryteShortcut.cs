@@ -14,6 +14,7 @@ using Questionable.Model;
 using Questionable.Model.Common;
 using Questionable.Model.Questing;
 using Questionable.Utils;
+using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Controller.Steps.Shared;
 
 internal static class AetheryteShortcut
@@ -113,8 +114,8 @@ internal static class AetheryteShortcut
                         logger.LogInformation("Skipping aetheryte shortcut, null result. step:{Step}, nearest:{Nearest}",
                             Task.Step.AetheryteShortcut, nearest);
                         if (Task.Step.AethernetShortcut is not { })
-                            chatGui.PrintError("Questionable could not automatically find an unlocked aetheryte destination in " +
-                                $"{territoryData.GetNameAndId(Task.Step.TerritoryId)}, waiting until you manually navigate there.",
+                            chatGui.PrintError(_LF("Questionable could not automatically find an unlocked aetheryte destination in {0}, waiting until you manually navigate there.",
+                                territoryData.GetNameAndId(Task.Step.TerritoryId)),
                                 CommandHandler.MessageTag, CommandHandler.TagColor);
                         return true;
                     }

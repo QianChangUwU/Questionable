@@ -162,7 +162,7 @@ internal sealed partial class ActiveQuestComponent
             }
 
             if (ImGui.IsItemHovered())
-                ImGui.SetTooltip("Report issue to QST developers");
+                ImGui.SetTooltip(_L("Report issue to QST developers"));
         }
 #endif
     }

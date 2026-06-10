@@ -9,6 +9,7 @@ using FFXIVClientStructs.Interop;
 using Questionable.External;
 using Questionable.Model;
 using Questionable.Model.Questing;
+using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Controller.Steps.Interactions;
 
 internal static class EquipRecommended
@@ -55,7 +56,7 @@ internal static class EquipRecommended
 
             if (!StylistIpc.IsInstalled && config.General.GearsetUpdateSource is Configuration.EGearsetUpdateSource.Stylist)
             {
-                chatGui.Print("You've set Stylist to manage equipped gear, but it is not installed. Resetting to Vanilla.", CommandHandler.MessageTag, CommandHandler.TagColor);
+                chatGui.Print(_L("You've set Stylist to manage equipped gear, but it is not installed. Resetting to Vanilla."), CommandHandler.MessageTag, CommandHandler.TagColor);
                 config.General.GearsetUpdateSource = Configuration.EGearsetUpdateSource.Vanilla;
                 Svc.PluginInterface.SavePluginConfig(config);
             }
@@ -85,7 +86,7 @@ internal static class EquipRecommended
                     {
                         if (!IsAllRecommendedGearEquipped())
                         {
-                            chatGui.Print("Equipping recommended gear.", CommandHandler.MessageTag, CommandHandler.TagColor);
+                            chatGui.Print(_L("Equipping recommended gear."), CommandHandler.MessageTag, CommandHandler.TagColor);
                             recommendedEquipModule->EquipRecommendedGear();
                             _continueAt = DateTime.Now.AddSeconds(1);
                         }

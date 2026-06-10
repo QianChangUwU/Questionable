@@ -15,6 +15,7 @@ using Questionable.Model;
 using Questionable.Model.Gathering;
 using Questionable.Model.Questing;
 using Questionable.Utils;
+using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Controller;
 
 internal sealed class ContextMenuController : IDisposable
@@ -195,6 +196,6 @@ internal sealed class ContextMenuController : IDisposable
             _questController.StartGatheringQuest("SatisfactionSupply prepare gathering");
         }
         else
-            _chatGui.PrintError($"No associated quest ({info.QuestId}).", "Questionable");
+            _chatGui.PrintError(_LF("No associated quest ({0}).", info.QuestId), "Questionable");
     }
 }

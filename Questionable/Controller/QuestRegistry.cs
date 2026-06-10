@@ -26,6 +26,7 @@ using Questionable.Utils;
 using Questionable.Validation;
 using Questionable.Validation.Validators;
 using static Questionable.Model.QuestInfo;
+using static Questionable.Utils.LocalizeShortcut;
 using Sheets = Lumina.Excel.Sheets;
 namespace Questionable.Controller;
 
@@ -170,7 +171,7 @@ internal sealed class QuestRegistry
                 {
                     _quests.Clear();
 
-                    _chatGui.PrintError($"Unable to load quests - {e.GetType().Name}: {e.Message}", CommandHandler.MessageTag, CommandHandler.TagColor);
+                    _chatGui.PrintError(_LF("Unable to load quests - {0}: {1}", e.GetType().Name, e.Message), CommandHandler.MessageTag, CommandHandler.TagColor);
                     _logger.LogError(e, "Failed to load quests from project directory");
                 }
             }

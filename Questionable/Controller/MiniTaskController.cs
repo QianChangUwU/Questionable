@@ -15,6 +15,7 @@ using Questionable.Data;
 using Questionable.Functions;
 using Questionable.Model.Questing;
 using Mount = Questionable.Controller.Steps.Common.Mount;
+using static Questionable.Utils.LocalizeShortcut;
 
 namespace Questionable.Controller;
 
@@ -74,7 +75,7 @@ internal abstract class MiniTaskController<T> : IDisposable
                 {
                     _logger.LogError(e, "Failed to start task {TaskName}", upcomingTask.ToString());
                     _chatGui.PrintError(
-                        $"Failed to start task '{upcomingTask}', please check /xllog for details.", CommandHandler.MessageTag, CommandHandler.TagColor);
+                        _LF("Failed to start task '{0}', please check /xllog for details.", upcomingTask), CommandHandler.MessageTag, CommandHandler.TagColor);
                     Stop("Task failed to start");
                     return;
                 }
@@ -99,7 +100,7 @@ internal abstract class MiniTaskController<T> : IDisposable
             _logger.LogError(e, "Failed to update task {TaskName}",
                 _taskQueue.CurrentTaskExecutor.CurrentTask.ToString());
             _chatGui.PrintError(
-                $"Could not complete '{_taskQueue.CurrentTaskExecutor.CurrentTask}': {e.Message}. Please check /xllog for more details.", CommandHandler.MessageTag, CommandHandler.TagColor);
+                _LF("Could not complete '{0}': {1}. Please check /xllog for more details.", _taskQueue.CurrentTaskExecutor.CurrentTask, e.Message), CommandHandler.MessageTag, CommandHandler.TagColor);
             Stop("Task failed to update");
             return;
         }

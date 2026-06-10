@@ -5,6 +5,7 @@ using Dalamud.Plugin.Services;
 using Microsoft.Extensions.Logging;
 using Questionable.Model.Questing;
 using Quest = Questionable.Model.Quest;
+using static Questionable.Utils.LocalizeShortcut;
 
 namespace Questionable.Controller;
 
@@ -56,7 +57,7 @@ internal sealed class QuestPriorityManager(
         catch (Exception e)
         {
             logger.LogError(e, "Failed to insert quest in priority list");
-            chatGui.PrintError("Failed to insert quest in priority list, please check /xllog for details.",
+            chatGui.PrintError(_L("Failed to insert quest in priority list, please check /xllog for details."),
                 CommandHandler.MessageTag, CommandHandler.TagColor);
             return false;
         }

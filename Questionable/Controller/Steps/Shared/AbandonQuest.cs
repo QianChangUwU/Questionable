@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Questionable.Data;
 using Questionable.Functions;
 using Questionable.Model;
+using static Questionable.Utils.LocalizeShortcut;
 
 namespace Questionable.Controller.Steps.Shared;
 
@@ -66,7 +67,7 @@ internal static class AbandonQuest
             if (Task.Quest == null || !questFunctions.IsQuestAccepted(Task.Quest.Id))
             {
                 logger.LogInformation("Quest abandoned");
-                chatGui.Print($"Quest abandoned{(Task.Quest != null ? $": {Task.Quest?.Info.Name}" : "")}");
+                chatGui.Print(Task.Quest != null ? _LF("Quest abandoned: {0}", Task.Quest.Info.Name) : _L("Quest abandoned"));
                 return ETaskResult.TaskComplete;
             }
             if (EzThrottler.Throttle("AbandonQuest")) AbandonQuestAction();

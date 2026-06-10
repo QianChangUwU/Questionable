@@ -329,7 +329,7 @@ internal sealed class CommandHandler : IDisposable
 
                     _chatGui.Print(_L("Locked taxi stands:"), MessageTag, TagColor);
                     foreach (string taxiStand in taxiStands)
-                        _chatGui.Print($"- {taxiStand}", MessageTag, TagColor);
+                        _chatGui.Print(_LF("- {0}", taxiStand), MessageTag, TagColor);
                 }
 
                 break;

@@ -6,6 +6,7 @@ using Questionable.Data;
 using Questionable.Functions;
 using Questionable.Model;
 using Questionable.Model.Questing;
+using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Controller.Steps.Interactions;
 
 internal static class AetherCurrent
@@ -27,7 +28,7 @@ internal static class AetherCurrent
             if (!aetherCurrentData.IsValidAetherCurrent(step.TerritoryId, step.AetherCurrentId.Value))
             {
                 chatGui.PrintError(
-                    $"Aether current with id {step.AetherCurrentId} is referencing an invalid aether current, will skip attunement",
+                    _LF("Aether current with id {0} is referencing an invalid aether current, will skip attunement", step.AetherCurrentId),
                     CommandHandler.MessageTag, CommandHandler.TagColor);
                 return null;
             }

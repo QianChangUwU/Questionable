@@ -27,6 +27,7 @@ using Questionable.Model.Questing;
 using Questionable.Utils;
 using Questionable.Windows.ConfigComponents;
 using Quest = Questionable.Model.Quest;
+using static Questionable.Utils.LocalizeShortcut;
 
 namespace Questionable.Controller;
 
@@ -373,7 +374,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
                 if (currentLevel >= _configuration.Stop.TargetLevel && IsRunning)
                 {
                     _logger.LogInformation("Reached level stop condition (level: {CurrentLevel}, target: {TargetLevel})", currentLevel, _configuration.Stop.TargetLevel);
-                    _chatGui.Print($"Reached or exceeded target level {_configuration.Stop.TargetLevel}.", CommandHandler.MessageTag, CommandHandler.TagColor);
+                    _chatGui.Print(_LF("Reached or exceeded target level {0}.", _configuration.Stop.TargetLevel), CommandHandler.MessageTag, CommandHandler.TagColor);
                     Stop($"Level stop condition reached [{currentLevel}]");
                     return;
                 }
@@ -464,7 +465,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
                 _logger.LogInformation("Automatically refreshing quest step as no progress detected for {TimeSinceProgress:F1} seconds (quest: {QuestId}, sequence: {Sequence}, step: {Step})",
                     timeSinceProgress.TotalSeconds, currentQuestId, currentSequence, currentStep);
 
-                _chatGui.Print($"Automatically refreshing quest step as no progress detected for {timeSinceProgress.TotalSeconds:F0} seconds.",
+                _chatGui.Print(_LF("Automatically refreshing quest step as no progress detected for {0} seconds.", timeSinceProgress.TotalSeconds:F0),
                     CommandHandler.MessageTag, CommandHandler.TagColor);
 
                 ClearTasksInternal();
@@ -549,7 +550,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
                 {
                     ElementId questId = StartedQuest.Quest.Id;
                     _logger.LogInformation("Reached stopping point (quest: {QuestId})", questId);
-                    _chatGui.Print($"Completed quest '{StartedQuest.Quest.Info.Name}', which is configured as a stopping point.", CommandHandler.MessageTag, CommandHandler.TagColor);
+                    _chatGui.Print(_LF("Completed quest '{0}', which is configured as a stopping point.", StartedQuest.Quest.Info.Name), CommandHandler.MessageTag, CommandHandler.TagColor);
                     StartedQuest = null;
                     Stop($"Stopping point [{questId}] reached");
                     return;
@@ -559,7 +560,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
                 {
                     ElementId questId = StartedQuest.Quest.Id;
                     _logger.LogInformation("Stopping after current quest as requested (quest: {QuestId})", questId);
-                    _chatGui.Print($"Completed quest '{StartedQuest.Quest.Info.Name}', stopping as requested.", CommandHandler.MessageTag, CommandHandler.TagColor);
+                    _chatGui.Print(_LF("Completed quest '{0}', stopping as requested.", StartedQuest.Quest.Info.Name), CommandHandler.MessageTag, CommandHandler.TagColor);
                     StartedQuest = null;
                     Stop($"Stop after quest [{questId}]");
                     return;
@@ -825,13 +826,13 @@ internal sealed class QuestController : MiniTaskController<QuestController>
             if (configStop)
             {
                 _chatGui.Print(
-                    $"Accepted quest '{quest.Info.Name}', which is configured as a stopping point.",
+                    _LF("Accepted quest '{0}', which is configured as a stopping point.", quest.Info.Name),
                     CommandHandler.MessageTag, CommandHandler.TagColor);
             }
             else
             {
                 _chatGui.Print(
-                    $"Accepted quest '{quest.Info.Name}', stopping as requested.",
+                    _LF("Accepted quest '{0}', stopping as requested.", quest.Info.Name),
                     CommandHandler.MessageTag, CommandHandler.TagColor);
             }
         }
@@ -966,7 +967,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
         if (deaths >= MaxConsecutiveDeaths)
         {
             _logger.LogError("Player died {Deaths} times on the same step — stopping", deaths);
-            _chatGui.PrintError($"You died {MaxConsecutiveDeaths} times, manual intervention needed.",
+            _chatGui.PrintError(_LF("You died {0} times, manual intervention needed.", MaxConsecutiveDeaths),
                 CommandHandler.MessageTag, CommandHandler.TagColor);
             StopAllDueToConditionFailed("Died too many times");
             return;
@@ -1018,7 +1019,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
             TeleportTaskDetector.IsUpcomingTeleport(nextTask, _clientState.TerritoryType))
         {
             _logger.LogInformation("Stopping before teleport as requested (upcoming task: {Task})", nextTask);
-            _chatGui.Print("Stopping before teleport as requested.", CommandHandler.MessageTag, CommandHandler.TagColor);
+            _chatGui.Print(_L("Stopping before teleport as requested."), CommandHandler.MessageTag, CommandHandler.TagColor);
             _movementController.Stop();
             Stop("Stop before teleport");
             return;
@@ -1134,7 +1135,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
         catch (Exception e)
         {
             _logger.LogError(e, "Failed to create tasks");
-            _chatGui.PrintError("Failed to start next task sequence, please check /xllog for details.", CommandHandler.MessageTag, CommandHandler.TagColor);
+            _chatGui.PrintError(_L("Failed to start next task sequence, please check /xllog for details."), CommandHandler.MessageTag, CommandHandler.TagColor);
             Stop("Tasks failed to create");
         }
     }
@@ -1330,7 +1331,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
         }
         else
         {
-            _chatGui.PrintError($"No associated quest ({info.QuestId}).", "Questionable");
+            _chatGui.PrintError(_LF("No associated quest ({0}).", info.QuestId), "Questionable");
             return false;
         }
     }

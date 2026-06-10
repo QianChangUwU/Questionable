@@ -19,7 +19,7 @@ internal sealed class RemainingTasksComponent(QuestController questController, G
             using (ImRaii.Disabled())
             {
                 foreach (string task in gatheringTasks)
-                    ImGui.TextUnformatted($"G: {task}");
+                    ImGui.TextUnformatted(_LF("G: {0}", task));
             }
         }
         else

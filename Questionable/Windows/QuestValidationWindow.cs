@@ -45,7 +45,7 @@ internal sealed class QuestValidationWindow : LWindow
         using ImRaii.TableDisposable table = ImRaii.Table("QuestSelection", 5, ImGuiTableFlags.Borders | ImGuiTableFlags.ScrollY);
         if (!table)
         {
-            ImGui.Text("Not table");
+            ImGui.Text(_L("Not table"));
             return;
         }
 

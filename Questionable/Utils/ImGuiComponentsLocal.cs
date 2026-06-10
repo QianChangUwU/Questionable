@@ -6,6 +6,7 @@ using Dalamud.Bindings.ImGui;
 using Dalamud.Interface;
 using Dalamud.Interface.Components;
 using Dalamud.Interface.Utility.Raii;
+using static Questionable.Utils.LocalizeShortcut;
 
 namespace Questionable.Utils;
 
@@ -99,7 +100,7 @@ internal static class ImGuiComponentsLocal
             ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X);
             if (ImGui.IsWindowAppearing())
                 ImGui.SetKeyboardFocusHere();
-            ImGui.InputTextWithHint("##filter", "Search...", ref searchString, 256);
+            ImGui.InputTextWithHint("##filter", _L("Search..."), ref searchString, 256);
 
             // The option list lives in its own fixed-height scrollable child so the search box above
             // stays pinned and visible; SetItemDefaultFocus() then scrolls the child, not the popup.

@@ -18,6 +18,7 @@ using Questionable.External;
 using Questionable.Functions;
 using Questionable.Model;
 using Questionable.Model.Questing;
+using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Controller.Steps.Interactions;
 
 internal static class SinglePlayerDuty
@@ -360,7 +361,7 @@ internal static class SinglePlayerDuty
                     "SinglePlayerDuty {Cfc} failed {Failures} times — stopping",
                     Task.ContentFinderConditionId, failures);
                 chatGui.PrintError(
-                    $"You failed this instance {MaxRetries} times, Questionable is stopping. Please check it manually and report any issues to the instance.",
+                    _LF("You failed this instance {0} times, Questionable is stopping. Please check it manually and report any issues to the instance.", MaxRetries),
                     CommandHandler.MessageTag, CommandHandler.TagColor);
                 ClearRetryCount();
                 return ETaskResult.End;

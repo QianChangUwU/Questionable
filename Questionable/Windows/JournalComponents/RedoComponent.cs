@@ -33,7 +33,7 @@ internal sealed class RedoComponent
 
         using (ImRaii.Disabled(EzThrottler.Throttle("stopredo") || !redoUtil.IsRedoActive()))
         {
-            if (ImGuiComponentsLocal.IconButtonWithText(FontAwesomeIcon.Ban, ("Stop NG+")))
+            if (ImGuiComponentsLocal.IconButtonWithText(FontAwesomeIcon.Ban, _L("Stop NG+")))
                 redoUtil.SendRedoCommand(redoChapter:RedoChapter.Off);
         }
         ImGui.SameLine();
@@ -44,7 +44,7 @@ internal sealed class RedoComponent
         ImGui.Text(_L("Active:"));
         ImGui.SameLine();
         redoUtil.TryGetActiveRedoChapter(out var questRedoChapter);
-        ImGui.Text(questRedoChapter?.ChapterName.ToString() ?? ("None"));
+        ImGui.Text(questRedoChapter?.ChapterName.ToString() ?? _L("None"));
 
         using ImRaii.TableDisposable table = ImRaii.Table("RedoTable", 3, ImGuiTableFlags.NoSavedSettings);
         if (!table)

@@ -13,6 +13,7 @@ using Questionable.Functions;
 using Questionable.Gear;
 using Questionable.Model;
 using Questionable.Model.Questing;
+using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Controller.Steps.Interactions;
 
 internal static class Duty
@@ -110,7 +111,7 @@ internal static class Duty
                 if (cfcData.RequiredItemLevel > currentItemLevel)
                 {
                     string errorText =
-                        $"Could not use AutoDuty to queue for {cfcData.Name}, required item level: {cfcData.RequiredItemLevel}, current item level: {currentItemLevel}.";
+                        _LF("Could not use AutoDuty to queue for {0}, required item level: {1}, current item level: {2}.", cfcData.Name, cfcData.RequiredItemLevel, currentItemLevel);
                     if (!sendNotificationExecutor.Start(new SendNotification.Task(EInteractionType.Duty, errorText)))
                         chatGui.PrintError(errorText, CommandHandler.MessageTag, CommandHandler.TagColor);
 
