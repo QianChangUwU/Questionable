@@ -465,7 +465,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
                 _logger.LogInformation("Automatically refreshing quest step as no progress detected for {TimeSinceProgress:F1} seconds (quest: {QuestId}, sequence: {Sequence}, step: {Step})",
                     timeSinceProgress.TotalSeconds, currentQuestId, currentSequence, currentStep);
 
-                _chatGui.Print(_LF("Automatically refreshing quest step as no progress detected for {0} seconds.", timeSinceProgress.TotalSeconds:F0),
+                _chatGui.Print(_LF("Automatically refreshing quest step as no progress detected for {0:F0} seconds.", timeSinceProgress.TotalSeconds),
                     CommandHandler.MessageTag, CommandHandler.TagColor);
 
                 ClearTasksInternal();
