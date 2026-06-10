@@ -138,7 +138,7 @@
   <Entry>
     <!-- Found in: Controller\CommandHandler.cs -->
     <Key>/qst do &lt;questId&gt; - highlights the specified quest in the debug overlay (requires debug overlay to be enabled)</Key>
-      <Value lang="zh-cn">/qst do <任务ID> - 在调试覆盖层中高亮指定任务（需要启用调试覆盖层）</Value>
+      <Value lang="zh-cn">/qst do &lt;任务ID&gt; - 在调试覆盖层中高亮指定任务（需要启用调试覆盖层）</Value>
   </Entry>
   <Entry>
     <!-- Found in: Controller\CommandHandler.cs -->
@@ -148,12 +148,12 @@
   <Entry>
     <!-- Found in: Controller\CommandHandler.cs -->
     <Key>/qst next &lt;questId&gt; - sets the next quest to do (or clears it if no questId is specified)</Key>
-      <Value lang="zh-cn">/qst next <任务ID> - 设置下一个要执行的任务（不指定ID则清除设置）</Value>
+      <Value lang="zh-cn">/qst next &lt;任务ID&gt; - 设置下一个要执行的任务（不指定ID则清除设置）</Value>
   </Entry>
   <Entry>
     <!-- Found in: Controller\CommandHandler.cs -->
     <Key>/qst sim &lt;questId&gt; [sequence] [step] - simulates the specified quest (or clears it if no questId is specified)</Key>
-      <Value lang="zh-cn">/qst sim <任务ID> [序列] [步骤] - 模拟指定任务（不指定ID则清除设置）</Value>
+      <Value lang="zh-cn">/qst sim &lt;任务ID&gt; [序列] [步骤] - 模拟指定任务（不指定ID则清除设置）</Value>
   </Entry>
   <Entry>
     <!-- Found in: Controller\CommandHandler.cs -->
@@ -1904,7 +1904,7 @@
   <Entry>
     <!-- Found in: Windows\JournalComponents\QuestJournalComponent.cs -->
     <Key>&lt;no reason specified&gt;</Key>
-      <Value lang="zh-cn"><未指定原因></Value>
+      <Value lang="zh-cn">&lt;未指定原因&gt;</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\JournalComponents\QuestJournalComponent.cs -->
