@@ -1473,6 +1473,7 @@
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
     <Key>vnavmesh handles the navigation within a zone, moving\r\nyour character to the next quest-related objective.</Key>
+      <Value lang="zh-cn">vnavmesh处理区域内的导航，将您的角色移动到下一个任务目标。</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
@@ -1482,6 +1483,7 @@
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
     <Key>Automatically accepts and turns in quests, skips cutscenes\r\nand dialogue.</Key>
+      <Value lang="zh-cn">自动接取和交还任务，跳过过场动画和对话。</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
@@ -2530,6 +2532,7 @@
   <Entry>
     <!-- Found in: Windows\QuestComponents\QuickAccessButtonsComponent.cs -->
     <Key>vnavmesh is not available.\nPlease install it first.</Key>
+      <Value lang="zh-cn">vnavmesh不可用。\n请先安装它。</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\QuestComponents\QuickAccessButtonsComponent.cs -->
@@ -3078,5 +3081,35 @@
     <!-- Found in: Data\JobExtensions.cs -->
     <Key>Pictomancer</Key>
     <Value lang="zh-cn">绘灵法师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model\EExpansionVersion.cs -->
+    <Key>A Realm Reborn</Key>
+    <Value lang="zh-cn">重生之境</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model\EExpansionVersion.cs -->
+    <Key>Heavensward</Key>
+    <Value lang="zh-cn">苍穹之禁城</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model\EExpansionVersion.cs -->
+    <Key>Stormblood</Key>
+    <Value lang="zh-cn">红莲之狂潮</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model\EExpansionVersion.cs -->
+    <Key>Shadowbringers</Key>
+    <Value lang="zh-cn">暗影之逆焰</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model\EExpansionVersion.cs -->
+    <Key>Endwalker</Key>
+    <Value lang="zh-cn">晓月之终途</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model\EExpansionVersion.cs -->
+    <Key>Dawntrail</Key>
+    <Value lang="zh-cn">金曦之遗辉</Value>
   </Entry>
 </I18N>

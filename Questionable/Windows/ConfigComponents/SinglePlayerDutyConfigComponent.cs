@@ -394,7 +394,7 @@ internal sealed class SinglePlayerDutyConfigComponent
             if (_mainScenarioBattles.TryGetValue(expansion, out List<SinglePlayerDutyInfo>? dutyInfos))
             {
                 (int enabledCount, int totalCountForExpansion) = GetQuestBattleCounts(dutyInfos);
-                string expansionHeaderText = $"{expansion.ToFriendlyString()} ({enabledCount}/{totalCountForExpansion})";
+                string expansionHeaderText = $"{_L(expansion.ToFriendlyString())} ({enabledCount}/{totalCountForExpansion})";
                 string expansionKey = expansion.ToString();
                 bool isExpansionHeaderOpen = Configuration.SinglePlayerDuties.HeaderStates.GetValueOrDefault(expansionKey, false);
                 ImGui.SetNextItemOpen(isExpansionHeaderOpen, ImGuiCond.Always);

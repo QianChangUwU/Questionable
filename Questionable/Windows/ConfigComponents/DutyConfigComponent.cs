@@ -135,9 +135,9 @@ internal sealed class DutyConfigComponent : ConfigComponent
         {
             (int enabledCount, int totalCount) = GetDutyCountsForExpansion(expansion);
 
-            string headerText = totalCount > 0
-                ? $"{expansion.ToFriendlyString()} ({enabledCount}/{totalCount})"
-                : expansion.ToFriendlyString();
+string headerText = totalCount > 0
+    ? $"{_L(expansion.ToFriendlyString())} ({enabledCount}/{totalCount})"
+    : _L(expansion.ToFriendlyString());
 
             string expansionKey = expansion.ToString();
 
