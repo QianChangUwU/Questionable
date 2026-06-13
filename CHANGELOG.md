@@ -1,3 +1,4 @@
+- Chore: remove `testing` branch from GitHub workflow triggers (testing is local-only) - downstream 502
 - Feature: click "xx quests loaded" to check for updates to quest data from server -alydev
 - Feature: Open Editor feature -alydev
   - This currently opens the quest path JSON in your default text editor, or generates a new quest path JSON for the current quest. A GUI quest editor will be included Soon :tm:
