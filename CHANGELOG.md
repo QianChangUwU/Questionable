@@ -3,3 +3,5 @@
   - The Edit button now has a tooltip showing how it works. If quests stop working, right click this button and delete all quest paths in that folder first to see if that fixes it.
 - Feature: Language selection -alydev
    - 详见插件设置
+- Fix: I18N.xml merge conflict corruption (duplicate <Key> elements) - 修复合并冲突导致的 XML 损坏
+- L10n: zh-cn translations for upstream ja-jp additions - 新增上游日文条目的中文翻译
