@@ -3206,7 +3206,7 @@
   <Entry>
     <!-- Found in: Windows\ConfigComponents\GeneralConfigComponent.cs -->
     <Key>Language</Key>
-    <Value lang="zh-cn">语</Value>
+    <Value lang="zh-cn">语言</Value>
     <Value lang="ja-jp">言語</Value>
   </Entry>
   <Entry>
@@ -3367,155 +3367,206 @@
   </Entry>
   <Entry>
     <Key>/qst do &lt;questId&gt; - highlights the specified quest in the debug overlay (requires debug overlay to be enabled)</Key>
+    <Value lang="zh-cn">/qst do &lt;questId&gt; - 在调试覆盖层中高亮显示指定的任务（需要启用调试覆盖层）</Value>
   </Entry>
   <Entry>
     <Key>/qst next &lt;questId&gt; - sets the next quest to do (or clears it if no questId is specified)</Key>
+    <Value lang="zh-cn">/qst next &lt;questId&gt; - 将下一个要做的任务设置为指定的任务（如果不指定任务ID则清除当前设置）</Value>  
   </Entry>
   <Entry>
     <Key>/qst sim &lt;questId&gt; [sequence] [step] - simulates the specified quest (or clears it if no questId is specified)</Key>
+    <Value lang="zh-cn">/qst next &lt;questId&gt; [sequence] [step] - 模拟指定的任务（如果不指定任务ID则清除当前模拟）</Value>
   </Entry>
   <Entry>
     <Key>&lt;no reason specified&gt;</Key>
+    <Value lang="zh-cn">&lt;未指定原因&gt;</Value> 
   </Entry>
   <Entry>
     <Key>A short configurable message from Settings, if set</Key>
+    <Value lang="zh-cn">如果已设置，则显示来自设置中的自定义消息</Value>  
   </Entry>
   <Entry>
     <Key>As of version xxxx, QST includes a feature where you can click the ! button next to the quest progress buttons to report an issue with the current quest. This message is to notify you that if you choose to make use of this new feature and submit a bug report, QST will automatically capture and upload the following information:</Key>
+    <Value lang="zh-cn">从版本xxxx开始，QST包含一个功能，您可以点击任务进度按钮旁边的!按钮来报告当前任务的问题。此消息是为了通知您，如果您选择使用此新功能并提交错误报告，QST将自动捕获并上传以下信息：</Value>
   </Entry>
   <Entry>
     <Key>Automatically refresh quest steps when stuck (WIP see tooltip)</Key>
+    <Value lang="zh-cn">卡住时自动刷新任务步骤（正在开发中，见提示）</Value>
   </Entry>
   <Entry>
     <Key>Bug Report</Key>
+    <Value lang="zh-cn">错误报告</Value> 
   </Entry>
   <Entry>
     <Key>Clicking this button writes the quest path to a file and opens it in your default\ntext editor. After making a change, click Reload Data below. To revert to the\nofficial version, delete the file and click Reload Data again.\nLeft click: Open this quest in your default .json text editor\nRight click: Open Quests folder</Key>
+    <Value lang="zh-cn">点击此按钮会将任务路径写入文件，并在你的默认\n文本编辑器中打开。修改完成后，点击下方的"重新加载数据"。要恢复为\n官方版本，请删除该文件并再次点击"重新加载数据"。\n左键点击：在默认 .json 文本编辑器中打开此任务\n右键点击：打开任务文件夹</Value>
   </Entry>
   <Entry>
     <Key>Close window &amp; don&apos;t enable Questionable</Key>
+    <Value lang="zh-cn">关闭窗口并且&amp;不启动&apos; Questionable</Value>
   </Entry>
   <Entry>
     <Key>Difficulty when retrying a quest battle</Key>
+    <Value lang="zh-cn">重试任务战斗时的难度</Value>
   </Entry>
   <Entry>
     <Key>Dismiss</Key>
+    <Value lang="zh-cn">忽略</Value>
   </Entry>
   <Entry>
     <Key>Duty</Key>
+    <Value lang="zh-cn">副本</Value> 
   </Entry>
   <Entry>
     <Key>Easy</Key>
+    <Value lang="zh-cn">简单</Value> 
   </Entry>
   <Entry>
     <Key>Equipping recommended gear.</Key>
+    <Value lang="zh-cn">自动最强装备。</Value> 
   </Entry>
   <Entry>
     <Key>Failed to insert quest in priority list, please check /xllog for details.</Key>
+    <Value lang="zh-cn">无法将任务插入优先列表，请检查 /xllog 获取详细信息。</Value>
   </Entry>
   <Entry>
     <Key>Failed to start next task sequence, please check /xllog for details.</Key>
+    <Value lang="zh-cn">无法开始下一个任务序列，请检查 /xllog 获取详细信息。</Value>
   </Entry>
   <Entry>
     <Key>Filter</Key>
+    <Value lang="zh-cn">过滤</Value>
   </Entry>
   <Entry>
     <Key>Future message</Key>
+    <Value lang="zh-cn">提示信息</Value>
   </Entry>
   <Entry>
     <Key>Hide Report warning</Key>
+    <Value lang="zh-cn">隐藏报告警告</Value>
   </Entry>
   <Entry>
     <Key>If the level of your current job is greater than 15 levels above a duty&apos;s sync level, or if your average item level is greater than 100 over a duty&apos;s required item level, Questionable will ask AutoDuty to run it solo as an Unrestricted Party.</Key>
+    <Value lang="zh-cn">如果你当前职业的等级比副本的同步等级高出15级以上，或者你的平均装备等级比副本要求的装备等级高出100以上，Questionable将请求AutoDuty以解除限制的形式通关该副本。</Value>
   </Entry>
   <Entry>
     <Key>If you don&apos;t have any active MSQ quest and there is no Priority Quest added here, it will always try to pick up the next quest in the MSQ first.</Key>
+    <Value lang="zh-cn">如果你没有接取尚未完成的主线任务，并且没有添加任何优先任务，将始终尝试首先接取主线任务中的下一个任务</Value>
   </Entry>
   <Entry>
     <Key>List of all enabled plugins and their version numbers</Key>
+    <Value lang="zh-cn">所有启用插件及其版本号的列表</Value>
   </Entry>
   <Entry>
     <Key>Manual interaction required</Key>
+    <Value lang="zh-cn">需要手动操作</Value>
   </Entry>
   <Entry>
     <Key>Normal</Key>
+    <Value lang="zh-cn">普通</Value>
   </Entry>
   <Entry>
     <Key>Not table</Key>
+    <Value lang="zh-cn">表格控件创建失败</Value>
   </Entry>
   <Entry>
     <Key>Opt Out</Key>
+    <Value lang="zh-cn">选择退出</Value>
   </Entry>
   <Entry>
     <Key>Opt out of bug reports</Key>
+    <Value lang="zh-cn">选择退出错误报告</Value>
   </Entry>
   <Entry>
     <Key>Quest abandoned</Key>
+    <Value lang="zh-cn">任务已放弃</Value>
   </Entry>
   <Entry>
     <Key>Questionable will automatically refresh a quest step if it appears to be stuck after the configured delay.</Key>
+    <Value lang="zh-cn">如果在配置的延迟后任务步骤似乎卡住了，Questionable将自动刷新该任务步骤。</Value>
   </Entry>
   <Entry>
     <Key>Quests marked with orange need to be reported as working\nor not via the LastChecked system. Ask Aly for more details!</Key>
+    <Value lang="zh-cn">标记为橙色的任务需要通过LastChecked系统报告是否可用\n详情请咨询Aly！</Value>
   </Entry>
   <Entry>
     <Key>Refresh delay (seconds)</Key>
+    <Value lang="zh-cn">刷新延迟（秒）</Value>
   </Entry>
   <Entry>
     <Key>Report issue to QST developers</Key>
+    <Value lang="zh-cn">向QST开发者反馈问题</Value>
   </Entry>
   <Entry>
     <Key>Report message</Key>
+    <Value lang="zh-cn">反馈消息</Value>
   </Entry>
   <Entry>
     <Key>Search...</Key>
+    <Value lang="zh-cn">搜索...</Value>
   </Entry>
   <Entry>
     <Key>Selecting a preset will override your current priority list and activate the preset. You can save your current list as a preset by entering a name below and selecting Save.</Key>
+    <Value lang="zh-cn">选择预设将覆盖您当前的优先列表并激活预设。您可以通过在下面输入名称并选择保存来将当前列表保存为预设。</Value>
   </Entry>
   <Entry>
     <Key>Single player duty</Key>
+    <Value lang="zh-cn">单人副本</Value>
   </Entry>
   <Entry>
     <Key>Stopping before teleport as requested.</Key>
+    <Value lang="zh-cn">按照要求在传送前停止。</Value>
   </Entry>
   <Entry>
     <Key>Thank you for your patience as we expand QST&apos;s support to include this quest in a future update.</Key>
+    <Value lang="zh-cn">请您的耐心等待，我们将在未来的更新中扩展QST的支持以包含此任务。</Value>
   </Entry>
   <Entry>
     <Key>The last ten actions taken by QST</Key>
+    <Value lang="zh-cn">QST执行的最后十个操作</Value>
   </Entry>
   <Entry>
     <Key>The quest/sequence/step you are on when clicking the button</Key>
+    <Value lang="zh-cn">点击按钮时所在的任务/序列/步骤</Value>
   </Entry>
   <Entry>
     <Key>This feature will never send any information to the bug report service unless you click the ! button highlighted in red below. If you would like to opt out of seeing this button, click the orange &quot;Opt Out&quot; button below. Otherwise, click the green &quot;Dismiss&quot; button to hide this warning.</Key>
+    <Value lang="zh-cn">除非您点击下面红色突出显示的!按钮，否则此功能永远不会向错误报告服务发送任何信息。如果您想选择不再看到此按钮，请点击下面橙色的"选择退出"按钮。否则，点击绿色的"忽略"按钮以隐藏此警告。</Value>
   </Entry>
   <Entry>
     <Key>This helps resume automated quest completion when interruptions occur.</Key>
+    <Value lang="zh-cn">当发生中断时，这有助于恢复自动完成任务。</Value>
   </Entry>
   <Entry>
     <Key>This quest uses the White Wolf Gate, which requires that you unlock all aethernet shards in Gridania.\nThis should have happened as part of the quest &quot;Close To Home&quot; if starting in Gridania, or &quot;The Ul&apos;dahn/Lominsan Envoy&quot; for the other cities.\nPlease unlock the aethernet shards, or complete the current quest sequence manually before continuing.</Key>
+    <Value lang="zh-cn">此任务将传送到白狼之门，需要您在格里达尼亚解锁所有以太之光。\n如果从格里达尼亚开始，这应该是任务"Close To Home"的一部分，或者对于其他城市则是"The Ul'dahn/Lominsan Envoy"。\n请解锁以太之光，或在继续之前手动完成当前任务序列。</Value>
   </Entry>
   <Entry>
     <Key>Very Easy</Key>
+    <Value lang="zh-cn">非常简单</Value>
   </Entry>
   <Entry>
     <Key>vnavmesh was not able to find a path. This may be due to the &apos;Disable flying&apos; setting in QST config &gt; Advanced. Please uncheck this if you expected this to run fine.</Key>
+    <Value lang="zh-cn">vnavmesh无法找到路径。这可能是由于QST配置&gt;高级中的"禁用飞行"设置造成的。如果您希望它正常运行，请取消选中此选项。</Value>
   </Entry>
   <Entry>
     <Key>We recommend you complete this quest manually, as the provided path may not run successfully.</Key>
+    <Value lang="zh-cn">我们建议您手动完成此任务，因为提供的路径可能无法成功运行。</Value>
   </Entry>
   <Entry>
     <Key>When enabled, Questionable will also remove a quest from the priority queue when it is abandoned. This setting is reset to Off when the plugin is loaded to avoid confusion with quests not being completed.</Key>
+    <Value lang="zh-cn">启用后，Questionable还会在任务被放弃时将其从优先队列中移除。加载插件时，此设置会重置为关闭，以避免与未完成的任务混淆。</Value>
   </Entry>
   <Entry>
     <Key>When enabled, Questionable will attempt to send an AbandonQuest command to the server when it arrives at the CompleteQuest step. This setting is reset to Off when the plugin is loaded to avoid confusion with quests not being completed.</Key>
+    <Value lang="zh-cn">启用后，Questionable将在到达CompleteQuest步骤时尝试向服务器发送AbandonQuest命令。加载插件时，此设置会重置为关闭，以避免与未完成的任务混淆。</Value>
   </Entry>
   <Entry>
     <Key>WIP feature, rather than remove it, this is a warning that it isn&apos;t fully complete.</Key>
+    <Value lang="zh-cn">正在开发中的功能，这不是要删除它，而是一个警告，说明它还没有完全完成。</Value> 
   </Entry>
   <Entry>
     <Key>Your list of priority quests</Key>
+    <Value lang="zh-cn">您的优先任务列表</Value> 
   </Entry>
 </I18N>
