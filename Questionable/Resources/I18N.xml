@@ -3365,4 +3365,157 @@
     <Key>Click to reload quest path data from server</Key>
     <Value lang="zh-cn">点击从服务器重新加载任务路径数据</Value>
   </Entry>
+  <Entry>
+    <Key>/qst do &lt;questId&gt; - highlights the specified quest in the debug overlay (requires debug overlay to be enabled)</Key>
+  </Entry>
+  <Entry>
+    <Key>/qst next &lt;questId&gt; - sets the next quest to do (or clears it if no questId is specified)</Key>
+  </Entry>
+  <Entry>
+    <Key>/qst sim &lt;questId&gt; [sequence] [step] - simulates the specified quest (or clears it if no questId is specified)</Key>
+  </Entry>
+  <Entry>
+    <Key>&lt;no reason specified&gt;</Key>
+  </Entry>
+  <Entry>
+    <Key>A short configurable message from Settings, if set</Key>
+  </Entry>
+  <Entry>
+    <Key>As of version xxxx, QST includes a feature where you can click the ! button next to the quest progress buttons to report an issue with the current quest. This message is to notify you that if you choose to make use of this new feature and submit a bug report, QST will automatically capture and upload the following information:</Key>
+  </Entry>
+  <Entry>
+    <Key>Automatically refresh quest steps when stuck (WIP see tooltip)</Key>
+  </Entry>
+  <Entry>
+    <Key>Bug Report</Key>
+  </Entry>
+  <Entry>
+    <Key>Clicking this button writes the quest path to a file and opens it in your default\ntext editor. After making a change, click Reload Data below. To revert to the\nofficial version, delete the file and click Reload Data again.\nLeft click: Open this quest in your default .json text editor\nRight click: Open Quests folder</Key>
+  </Entry>
+  <Entry>
+    <Key>Close window &amp; don&apos;t enable Questionable</Key>
+  </Entry>
+  <Entry>
+    <Key>Difficulty when retrying a quest battle</Key>
+  </Entry>
+  <Entry>
+    <Key>Dismiss</Key>
+  </Entry>
+  <Entry>
+    <Key>Duty</Key>
+  </Entry>
+  <Entry>
+    <Key>Easy</Key>
+  </Entry>
+  <Entry>
+    <Key>Equipping recommended gear.</Key>
+  </Entry>
+  <Entry>
+    <Key>Failed to insert quest in priority list, please check /xllog for details.</Key>
+  </Entry>
+  <Entry>
+    <Key>Failed to start next task sequence, please check /xllog for details.</Key>
+  </Entry>
+  <Entry>
+    <Key>Filter</Key>
+  </Entry>
+  <Entry>
+    <Key>Future message</Key>
+  </Entry>
+  <Entry>
+    <Key>Hide Report warning</Key>
+  </Entry>
+  <Entry>
+    <Key>If the level of your current job is greater than 15 levels above a duty&apos;s sync level, or if your average item level is greater than 100 over a duty&apos;s required item level, Questionable will ask AutoDuty to run it solo as an Unrestricted Party.</Key>
+  </Entry>
+  <Entry>
+    <Key>If you don&apos;t have any active MSQ quest and there is no Priority Quest added here, it will always try to pick up the next quest in the MSQ first.</Key>
+  </Entry>
+  <Entry>
+    <Key>List of all enabled plugins and their version numbers</Key>
+  </Entry>
+  <Entry>
+    <Key>Manual interaction required</Key>
+  </Entry>
+  <Entry>
+    <Key>Normal</Key>
+  </Entry>
+  <Entry>
+    <Key>Not table</Key>
+  </Entry>
+  <Entry>
+    <Key>Opt Out</Key>
+  </Entry>
+  <Entry>
+    <Key>Opt out of bug reports</Key>
+  </Entry>
+  <Entry>
+    <Key>Quest abandoned</Key>
+  </Entry>
+  <Entry>
+    <Key>Questionable will automatically refresh a quest step if it appears to be stuck after the configured delay.</Key>
+  </Entry>
+  <Entry>
+    <Key>Quests marked with orange need to be reported as working\nor not via the LastChecked system. Ask Aly for more details!</Key>
+  </Entry>
+  <Entry>
+    <Key>Refresh delay (seconds)</Key>
+  </Entry>
+  <Entry>
+    <Key>Report issue to QST developers</Key>
+  </Entry>
+  <Entry>
+    <Key>Report message</Key>
+  </Entry>
+  <Entry>
+    <Key>Search...</Key>
+  </Entry>
+  <Entry>
+    <Key>Selecting a preset will override your current priority list and activate the preset. You can save your current list as a preset by entering a name below and selecting Save.</Key>
+  </Entry>
+  <Entry>
+    <Key>Single player duty</Key>
+  </Entry>
+  <Entry>
+    <Key>Stopping before teleport as requested.</Key>
+  </Entry>
+  <Entry>
+    <Key>Thank you for your patience as we expand QST&apos;s support to include this quest in a future update.</Key>
+  </Entry>
+  <Entry>
+    <Key>The last ten actions taken by QST</Key>
+  </Entry>
+  <Entry>
+    <Key>The quest/sequence/step you are on when clicking the button</Key>
+  </Entry>
+  <Entry>
+    <Key>This feature will never send any information to the bug report service unless you click the ! button highlighted in red below. If you would like to opt out of seeing this button, click the orange &quot;Opt Out&quot; button below. Otherwise, click the green &quot;Dismiss&quot; button to hide this warning.</Key>
+  </Entry>
+  <Entry>
+    <Key>This helps resume automated quest completion when interruptions occur.</Key>
+  </Entry>
+  <Entry>
+    <Key>This quest uses the White Wolf Gate, which requires that you unlock all aethernet shards in Gridania.\nThis should have happened as part of the quest &quot;Close To Home&quot; if starting in Gridania, or &quot;The Ul&apos;dahn/Lominsan Envoy&quot; for the other cities.\nPlease unlock the aethernet shards, or complete the current quest sequence manually before continuing.</Key>
+  </Entry>
+  <Entry>
+    <Key>Very Easy</Key>
+  </Entry>
+  <Entry>
+    <Key>vnavmesh was not able to find a path. This may be due to the &apos;Disable flying&apos; setting in QST config &gt; Advanced. Please uncheck this if you expected this to run fine.</Key>
+  </Entry>
+  <Entry>
+    <Key>We recommend you complete this quest manually, as the provided path may not run successfully.</Key>
+  </Entry>
+  <Entry>
+    <Key>When enabled, Questionable will also remove a quest from the priority queue when it is abandoned. This setting is reset to Off when the plugin is loaded to avoid confusion with quests not being completed.</Key>
+  </Entry>
+  <Entry>
+    <Key>When enabled, Questionable will attempt to send an AbandonQuest command to the server when it arrives at the CompleteQuest step. This setting is reset to Off when the plugin is loaded to avoid confusion with quests not being completed.</Key>
+  </Entry>
+  <Entry>
+    <Key>WIP feature, rather than remove it, this is a warning that it isn&apos;t fully complete.</Key>
+  </Entry>
+  <Entry>
+    <Key>Your list of priority quests</Key>
+  </Entry>
 </I18N>
