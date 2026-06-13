@@ -723,11 +723,14 @@
   <Entry>
     <!-- Found in: Windows\PriorityWindow.cs -->
     <Key>Supported quests in your 'To-Do list'\n(quests from your Quest Journal that are always on-screen)</Key>
+    <Value lang="zh-cn">任务列表中支持的任务
+（会常驻显示的日志任务）</Value>
     <Value lang="ja-jp">「To-Doリスト」にあるサポート済みクエスト\n（常に画面上に表示されるクエストジャーナルのクエスト）</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\PriorityWindow.cs -->
     <Key>MSQ quest (if available, unless it is marked as 'ignored'\nin your Journal)</Key>
+    <Value lang="zh-cn">主线任务（如有，除非在日志中标记为忽略）</Value>
     <Value lang="ja-jp">メインシナリオクエスト（利用可能な場合、ジャーナルで「無視」とマークされていない限り）</Value>
   </Entry>
   <Entry>
@@ -1767,10 +1770,6 @@
     <Value lang="ja-jp">'アクティブタイムマニューバー自動化'が有効</Value>
   </Entry>
   <Entry>
-    <Key>Automatically completes active time maneuvers in\r\nsingle player instances, trials and raids"</Key>
-    <Value lang="ja-jp">シングルプレイヤーインスタンス、討滅戦、レイドのアクティブタイムマニューバーを自動完了します。</Value>
-  </Entry>
-  <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
     <Key>Automates crafting</Key>
     <Value lang="zh-cn">自动制作</Value>
@@ -1959,6 +1958,8 @@
   <Entry>
     <!-- Found in: Windows\ConfigComponents\SinglePlayerDutyConfigComponent.cs -->
     <Key>Please don't enable this option when using a BossMod fork (such as Reborn);\nwith the missing combat module configuration, it is unlikely to be compatible.</Key>
+    <Value lang="zh-cn">使用 BossMod 分支（如 Reborn）时请勿启用此选项；
+缺失的战斗模块配置可能导致不兼容。</Value>
     <Value lang="ja-jp">BossModのフォーク（Rebornなど）を使用する場合はこのオプションを有効にしないでください。\n戦闘モジュールの設定が欠如しているため、互換性がない可能性があります。</Value>
   </Entry>
   <Entry>
@@ -2474,6 +2475,8 @@
   <Entry>
     <!-- Found in: Windows\QuestComponents\ActiveQuestComponent.cs -->
     <Key>This quest is loaded from your 'pluginConfigs\\Questionable\\Quests' directory.\nThis gets loaded even if Questionable ships with a newer/different version of the quest.</Key>
+    <Value lang="zh-cn">此任务从 'pluginConfigs\\Questionable\\Quests' 目录加载。
+即使 Questionable 包含更新版本的任务也会加载。</Value>
     <Value lang="ja-jp">このクエストはあなたの 'pluginConfigs\\Questionable\\Quests' ディレクトリから読み込まれています。\nQuestionableにより新しい/別バージョンのクエストが同梱されていても、こちらが読み込まれます。</Value>
   </Entry>
   <Entry>
@@ -2515,6 +2518,8 @@
   <Entry>
     <!-- Found in: Windows\QuestComponents\ActiveQuestComponent.cs -->
     <Key>Certain priority quest (e.g. class quests) may be started/completed by\nthe plugin prior to continuing, usually at a teleport step.</Key>
+    <Value lang="zh-cn">某些优先任务（如职业任务）可能会被插件在继续前
+（通常在传送步骤）先开始或完成。</Value>
     <Value lang="ja-jp">特定の優先クエスト（クラスクエストなど）は、通常テレポートステップで、\nプラグインが続行前に開始/完了することがあります。</Value>
   </Entry>
   <Entry>
@@ -2790,11 +2795,15 @@
   <Entry>
     <!-- Found in: Windows\QuestComponents\CreationUtilsComponent.cs -->
     <Key>Left click: Copy target position as JSON.\nRight click: Copy target position as C# code.</Key>
+    <Value lang="zh-cn">左键：将目标位置复制为 JSON。
+右键：将目标位置复制为 C# 代码。</Value>
     <Value lang="ja-jp">左クリック：ターゲット位置をJSONとしてコピー\n右クリック：ターゲット位置をC#コードとしてコピー</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\QuestComponents\CreationUtilsComponent.cs -->
     <Key>Left click: Copy your position as JSON.\nRight click: Copy your position as C# code.</Key>
+    <Value lang="zh-cn">左键：将自己的位置复制为 JSON。
+右键：将自己的位置复制为 C# 代码。</Value>
     <Value lang="ja-jp">左クリック：自分の位置をJSONとしてコピー\n右クリック：自分の位置をC#コードとしてコピー</Value>
   </Entry>
   <Entry>
@@ -2968,6 +2977,8 @@
   <Entry>
     <!-- Found in: Windows\QuestComponents\QuickAccessButtonsComponent.cs -->
     <Key>Hold CTRL to enable this button.\nRebuilding the navmesh will take some time.</Key>
+    <Value lang="zh-cn">按住 CTRL 启用此按钮。
+重建导航网格需要一些时间。</Value>
     <Value lang="ja-jp">このボタンを有効にするにはCTRLを押したままにしてください。\nナビメッシュの再構築には時間がかかります。</Value>
   </Entry>
   <Entry>
@@ -2985,6 +2996,8 @@
   <Entry>
     <!-- Found in: Windows\QuestComponents\QuickAccessButtonsComponent.cs -->
     <Key>Left click: Copy troubleshooting information to clipboard\nRight click: Copy list of completed quests to clipboard</Key>
+    <Value lang="zh-cn">左键：将故障排除信息复制到剪贴板
+右键：将已完成任务列表复制到剪贴板</Value>
     <Value lang="ja-jp">左クリック：トラブルシューティング情報をクリップボードにコピー\n右クリック：完了済みクエストリストをクリップボードにコピー</Value>
   </Entry>
   <Entry>
@@ -3104,43 +3117,53 @@
   <Entry>
     <!-- Found in: Windows\ConfigComponents\GeneralConfigComponent.cs -->
     <Key>Japanese</Key>
+    <Value lang="zh-cn">日语</Value>
     <Value lang="ja-jp">日本語</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigWindow.cs -->
     <Key>About</Key>
+    <Value lang="zh-cn">关于</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
     <Key>Advanced</Key>
+    <Value lang="zh-cn">高级</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
     <Key>Open editor when starting quest</Key>
+    <Value lang="zh-cn">开始任务时打开编辑器</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
     <Key>On starting a quest, Questionable will open the path for it in your default text editor.</Key>
+    <Value lang="zh-cn">开始任务时，Questionable 将在默认文本编辑器中打开任务路径。</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
     <Key>Automatically completes active time maneuvers in\r\nsingle player instances, trials and raids</Key>
+    <Value lang="zh-cn">在单人副本、试炼和大型任务中自动完成\r\n蓄力操作</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
     <Key>Sends a configurable out-of-game notification if a quest\r\nrequires manual actions.</Key>
+    <Value lang="zh-cn">如果任务需要手动操作，发送可配置的游戏外通知。</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\JournalComponents\QuestJournalUtils.cs -->
     <Key>Edit quest path</Key>
+    <Value lang="zh-cn">编辑任务路径</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\JournalComponents\QuestJournalUtils.cs -->
     <Key>Sim quest</Key>
+    <Value lang="zh-cn">模拟任务</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\JournalComponents\RedoComponent.cs -->
     <Key>Start NG+ here</Key>
+    <Value lang="zh-cn">从此开始 NG+</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\JournalComponents\RedoComponent.cs -->
@@ -3150,5 +3173,11 @@
   <Entry>
     <!-- Found in: Windows\QuestComponents\ActiveQuestComponent.cs -->
     <Key>Idle</Key>
+    <Value lang="zh-cn">待机</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\QuestComponents\ActiveQuestComponent.cs -->
+    <Key>Click to reload quest path data from server</Key>
+    <Value lang="zh-cn">点击从服务器重新加载任务路径数据</Value>
   </Entry>
 </I18N>
