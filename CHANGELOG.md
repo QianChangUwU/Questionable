@@ -1,3 +1,5 @@
+- Feature: Open Editor feature -alydev
+  - This currently opens the quest path JSON in your default text editor, or generates a new quest path JSON for the current quest. A GUI quest editor will be included Soon :tm:
+  - The Edit button now has a tooltip showing how it works. If quests stop working, right click this button and delete all quest paths in that folder first to see if that fixes it.
 - Feature: Language selection -alydev
-  - We are requesting (human-sourced, non AI) translations of the strings in this file: https://github.com/PunishXIV/Questionable/blob/new-main/Questionable/Resources/I18N.xml
-  - See discord for more details https://discord.com/channels/1001823907193552978/1408201462722596945/1513807639312728167
+   - 详见插件设置

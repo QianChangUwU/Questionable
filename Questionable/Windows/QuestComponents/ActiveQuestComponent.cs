@@ -117,10 +117,44 @@ internal sealed partial class ActiveQuestComponent
             }
 
             DrawSimulationControls();
+
+            ImGui.SameLine();
+            bool editButtonLeft = ImGuiComponentsLocal.IconButton(FontAwesomeIcon.Edit);
+            bool editButtonRight = ImGui.IsItemClicked(ImGuiMouseButton.Right);
+            if (editButtonLeft)
+            {
+                (bool success, string filename) = currentQuest != null ? QuestRegistry.OpenEditor(currentQuest.Quest.Info) : _questRegistry.OpenEditor();
+                _logger.LogDebug("OpenEditor {Success}: {Filename}", success, filename);
+            }
+            else if (editButtonRight)
+            {
+                QuestRegistry.OpenFolder();
+                _logger.LogDebug("OpenFolder executed");
+            }
+            if (ImGui.IsItemHovered())
+                ImGui.SetTooltip(_L("Clicking this button writes the quest path to a file and opens it in your default\n" +
+                                    "text editor. After making a change, click Reload Data below. To revert to the\n" +
+                                    "official version, delete the file and click Reload Data again.\n" +
+                                    "Left click: Open this quest in your default .json text editor\n" +
+                                    "Right click: Open Quests folder"));
+            if (_configuration.Advanced.Debug)
+            {
+                ImGui.SameLine();
+                if (ImGuiComponentsLocal.IconButton(FontAwesomeIcon.Ban) && currentQuest != null)
+                {
+                    GameMain.ExecuteCommand((int)GameCommand.AbandonQuest, (int)currentQuest.Quest.Id.Value);
+                    _logger.LogDebug("AbandonQuest fired");
+                }
+                if (ImGui.IsItemHovered())
+                    ImGui.SetTooltip("Ask the game to abandon this quest");
+            }
         }
         else
         {
-            ImGui.Text(_L("No active quest"));
+            if (pathDataUpdater.Status != _L("Idle") && (DateTime.Now - pathDataUpdater.StatusLastChanged).TotalSeconds < 30 )
+                ImGui.Text(pathDataUpdater.Status);
+            else
+                ImGui.Text(_L("No active quest"));
             if (!isMinimized)
                 ImGui.TextColored(ImGuiColors.DalamudGrey, _LF("{0} quests loaded", _questRegistry.Count));
 
@@ -135,21 +169,6 @@ internal sealed partial class ActiveQuestComponent
             if (ImGuiComponentsLocal.IconButton(FontAwesomeIcon.SortAmountDown))
                 _priorityWindow.ToggleOrUncollapse();
         }
-
-#if DEBUG
-        ImGui.SameLine();
-        if (ImGuiComponentsLocal.IconButton(FontAwesomeIcon.Edit))
-        {
-            (bool success, string filename) = currentQuest != null ? QuestRegistry.OpenEditor(currentQuest.Quest.Info) : _questRegistry.OpenEditor();
-            _logger.LogDebug("OpenEditor {Success}: {Filename}", success, filename);
-        }
-        ImGui.SameLine();
-        if (ImGuiComponentsLocal.IconButton(FontAwesomeIcon.Ban) && currentQuest != null)
-        {
-            GameMain.ExecuteCommand((int)GameCommand.AbandonQuest, (int)currentQuest.Quest.Id.Value);
-            _logger.LogDebug("AbandonQuest fired");
-        }
-#endif
 
 #if REPORTING
         if (!_configuration.General.ReportsDisabled)

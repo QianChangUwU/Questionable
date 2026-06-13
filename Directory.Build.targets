@@ -1,10 +1,10 @@
 <Project>
     <PropertyGroup Condition="$(MSBuildProjectName) != 'GatheringPathRenderer'">
-        <!-- Version scheme: A.B.C.(D*100+E)
+<!-- Version scheme: A.B.C.(D*100+E)
              A.B.C.D = upstream version from PunishXIV/Questionable
              E = downstream patch counter (01~99), reset per upstream release
-             Current: upstream 15.298.0.1 + downstream 07 -->
-        <Version>15.298.0.107</Version>
+             Current: upstream 15.300.0.3 + downstream 01 -->
+        <Version>15.300.0.301</Version>
     </PropertyGroup>
 
     <PropertyGroup>

@@ -109,8 +109,7 @@ internal sealed class QuickAccessButtonsComponent
             {
                 output = JsonSerializer.Serialize(questCompletions, JsonOptions.Default);
                 ImGui.SetClipboardText(output);
-                Svc.Chat.Print(_L("List of completed quests has been copied to clipboard. Please paste it to this discord channel, and then run " +
-                        "'/qst clearlog' to reset the log.") + "\nhttps://discord.com/channels/1001823907193552978/1447612869431656508/1447612869431656508",
+                Svc.Chat.Print(_L("已完成任务列表已复制到剪贴板。请将其粘贴到反馈渠道，然后运行 '/qst clearlog' 重置日志。"),
                         CommandHandler.MessageTag, CommandHandler.TagColor);
             }
             else
@@ -139,17 +138,13 @@ internal sealed class QuickAccessButtonsComponent
                         ) ?? []);
                 }
                 catch (Exception) { }
+                var config = Svc.PluginInterface.GetPluginConfig();
+                Configuration configCast = config != null ? (Configuration)config : new();
                 Dictionary<string, object?> troubleshooting = new(){
                     { "LoadedPlugins", plugins },
                     { "QST", new Dictionary<string,string>(){
                         { "Version", CommandHandler.MessageTag },
-                        { "Debug", 
-                        #if DEBUG
-                        "true"
-                        #else
-                        "false"
-                        #endif
-                        }
+                        { "Debug", configCast.Advanced.Debug.ToString() ?? "false" }
                     } },
                     { "Configuration", Svc.PluginInterface.GetPluginConfig() },
                     { "CompletedQuests", questCompletions.Count },
@@ -160,8 +155,7 @@ internal sealed class QuickAccessButtonsComponent
                 };
                 output = JsonSerializer.Serialize(troubleshooting, JsonOptions.Default);
                 ImGui.SetClipboardText(output);
-                Svc.Chat.Print(_L("Troubleshooting information has been copied to clipboard. " +
-                    "Please create a new thread in #questionable-issues in https://discord.gg/punishxiv describing the problem and pasting this troubleshooting information."),
+                Svc.Chat.Print(_L("故障排除信息已复制到剪贴板。请将其粘贴到反馈渠道并描述遇到的问题。"),
                     CommandHandler.MessageTag, CommandHandler.TagColor);
             }
         }

@@ -23,7 +23,8 @@ internal sealed class RedoComponent
     QuestController questController,
     QuestJournalComponent questJournalComponent,
     QuestData questData,
-    QuestRegistry questRegistry)
+    QuestRegistry questRegistry,
+    Configuration configuration)
 {
     public void DrawRedoChapters()
     {
@@ -70,7 +71,7 @@ internal sealed class RedoComponent
                 questRegistry.TryGetQuest(new QuestId((ushort)q.RowId), out Model.Quest? quest);
                 if (quest != null && (quest.Root.LastChecked.Date == null ||
                         (quest.Root.LastChecked.Date != null &&
-                         quest.Root.LastChecked.Since(DateTime.Now)!.Value.TotalDays > 90
+                         quest.Root.LastChecked.Since(DateTime.Now)!.Value.TotalDays > 30
                         )))
                     return quest;
                 return null;
@@ -155,8 +156,7 @@ internal sealed class RedoComponent
             if (quests.Count >= 1)
                 questController.SimulateQuest(quests[0], 0, 0);
 
-#if DEBUG
-        if (!startDisabled)
+        if (configuration.Advanced.Debug && !startDisabled)
         {
             bool redoActive = redoUtil.IsRedoActive();
             using (ImRaii.Disabled(redoActive))
@@ -172,7 +172,6 @@ internal sealed class RedoComponent
             if (redoActive && ImGui.MenuItem(_L("Stop NG+")))
                 redoUtil.SendRedoCommand(redoChapter:RedoChapter.Off);
         }
-#endif
 
     }
 

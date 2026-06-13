@@ -120,15 +120,15 @@ internal sealed class AlliedSocietyJournalComponent
                 if (quests.Any(x => !x.QuestId.Value.Equals(1569) && ( // is not the Ixal delivery quest "Deliverance", and
                         !questRegistry.TryGetQuest(x.QuestId, out Quest? quest) || // is not a valid quest in the registry, or
                         (quest.Root.Disabled && quest.Root.Comment == null) || // is disabled without a comment explaining why, or
-                        (quest.Root.LastChecked.Date != null && (quest.Root.LastChecked.Since(DateTime.Now)!.Value.TotalDays > 90 || // has not been reported checked in more than 90 days, or
-                                                                 (quest.Root.Comment ?? "").Contains("FATE")) // is a FATE quest where we don't care that much
-                        )
+                        (quest.Root.LastChecked.Date != null && (
+                            quest.Root.LastChecked.Since(DateTime.Now)!.Value.TotalDays > 30 || // has not been reported checked in more than 30 days, or
+                            (quest.Root.Comment ?? "").Contains("FATE") // is a FATE quest where we don't care that much
+                        ) )
                     )
                 ))
                 {
                     using (ImRaii.PushColor(ImGuiCol.Text, ImGuiColors.DalamudOrange)) // highlight the category orange
                     {
-                        ImGui.SetNextItemOpen(true, ImGuiCond.Always);
                         isOpen = ImGui.CollapsingHeader(label);
                     }
                     _unchecked += 1;
@@ -137,14 +137,11 @@ internal sealed class AlliedSocietyJournalComponent
                 {
                     using (ImRaii.PushColor(ImGuiCol.Text, ImGuiColors.DalamudYellow))
                     {
-                        ImGui.SetNextItemOpen(true, ImGuiCond.Always);
                         isOpen = ImGui.CollapsingHeader(label);
                     }
                 }
                 else
                 {
-                    if (_unchecked > 0 || _incomplete > 0)
-                        ImGui.SetNextItemOpen(false, ImGuiCond.Always);
                     isOpen = ImGui.CollapsingHeader(label);
                 }
             }
@@ -188,7 +185,7 @@ internal sealed class AlliedSocietyJournalComponent
             if (quest.Root.LastChecked.Date != null)
             {
                 lastChecked = $"({quest.Root.LastChecked.Date})";
-                if (quest.Root.LastChecked.Since(DateTime.Now)!.Value.TotalDays > 90)
+                if (quest.Root.LastChecked.Since(DateTime.Now)!.Value.TotalDays > 30)
                     color = ImGuiColors.DalamudRed;
             }
             else

@@ -124,7 +124,7 @@ internal sealed class PluginConfigComponent
                 new(_L("'Auto Active Time Maneuver' enabled"),
                     _L("""
                     Automatically completes active time maneuvers in
-                    single player instances, trials and raids"
+                    single player instances, trials and raids
                     """),
                     () => pandorasBoxIpc.IsAutoActiveTimeManeuverEnabled)
             ]),
@@ -136,6 +136,15 @@ internal sealed class PluginConfigComponent
             new("https://github.com/PunishXIV/Artisan"),
             new("https://puni.sh/api/plugins"),
             "/artisan"),
+        new("NotificationMaster",
+            "NotificationMaster",
+            _L("""
+            Sends a configurable out-of-game notification if a quest
+            requires manual actions.
+            """),
+            new Uri("https://github.com/NightmareXIV/NotificationMaster"),
+            new("https://github.com/NightmareXIV/MyDalamudPlugins/raw/main/pluginmaster.json"),
+            "/pnotify"),
         new("AutoDuty",
             "AutoDuty",
             _L("Automates duties"),
