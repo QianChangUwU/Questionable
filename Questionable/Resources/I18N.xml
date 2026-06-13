@@ -385,6 +385,191 @@
     <Value lang="ja-jp">青魔道士</Value>
   </Entry>
   <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Paladin</Key>
+    <Value lang="zh-cn">骑士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Monk</Key>
+    <Value lang="zh-cn">武僧</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Warrior</Key>
+    <Value lang="zh-cn">战士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Dragoon</Key>
+    <Value lang="zh-cn">龙骑士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Bard</Key>
+    <Value lang="zh-cn">吟游诗人</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Summoner</Key>
+    <Value lang="zh-cn">召唤师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Scholar</Key>
+    <Value lang="zh-cn">学者</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Ninja</Key>
+    <Value lang="zh-cn">忍者</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Machinist</Key>
+    <Value lang="zh-cn">机工士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Astrologian</Key>
+    <Value lang="zh-cn">占星术士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Samurai</Key>
+    <Value lang="zh-cn">武士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Gunbreaker</Key>
+    <Value lang="zh-cn">绝枪战士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Dancer</Key>
+    <Value lang="zh-cn">舞者</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Reaper</Key>
+    <Value lang="zh-cn">钐镰客</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Sage</Key>
+    <Value lang="zh-cn">贤者</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Viper</Key>
+    <Value lang="zh-cn">蝰蛇剑士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Pictomancer</Key>
+    <Value lang="zh-cn">绘灵法师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Gladiator</Key>
+    <Value lang="zh-cn">剑术师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Pugilist</Key>
+    <Value lang="zh-cn">格斗家</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Marauder</Key>
+    <Value lang="zh-cn">斧术师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Lancer</Key>
+    <Value lang="zh-cn">枪术师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Archer</Key>
+    <Value lang="zh-cn">弓箭手</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Conjurer</Key>
+    <Value lang="zh-cn">幻术师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Thaumaturge</Key>
+    <Value lang="zh-cn">咒术师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Arcanist</Key>
+    <Value lang="zh-cn">秘术师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Rogue</Key>
+    <Value lang="zh-cn">双剑师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Carpenter</Key>
+    <Value lang="zh-cn">刻木匠</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Blacksmith</Key>
+    <Value lang="zh-cn">锻铁匠</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Armorer</Key>
+    <Value lang="zh-cn">铸甲匠</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Goldsmith</Key>
+    <Value lang="zh-cn">雕金匠</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Leatherworker</Key>
+    <Value lang="zh-cn">制革匠</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Weaver</Key>
+    <Value lang="zh-cn">裁衣匠</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Alchemist</Key>
+    <Value lang="zh-cn">炼金术士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Culinarian</Key>
+    <Value lang="zh-cn">烹调师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Miner</Key>
+    <Value lang="zh-cn">采矿工</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Botanist</Key>
+    <Value lang="zh-cn">园艺工</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Fisher</Key>
+    <Value lang="zh-cn">捕鱼人</Value>
+  </Entry>
+  <Entry>
     <!-- Found in: Data\JournalData.cs -->
     <Key>Starting in Limsa Lominsa</Key>
     <Value lang="zh-cn">起始于海都</Value>
