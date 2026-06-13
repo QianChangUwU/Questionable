@@ -1857,7 +1857,7 @@
   <Entry>
     <!-- Found in: Windows\ConfigComponents\GeneralConfigComponent.cs -->
     <Key>Use aetheryte tickets where available</Key>
-    <Value lang="zh-cn">使用以太之光车票（如可用）</Value>
+    <Value lang="zh-cn">使用传送网使用券（如可用）</Value>
     <Value lang="ja-jp">転送網利用券が使用可能な場合は使用する</Value>
   </Entry>
   <Entry>
