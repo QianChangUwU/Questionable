@@ -2,7 +2,7 @@ name: Publish path data bundle
 
 on:
   push:
-    branches: [ new-main, testing ]
+    branches: [ new-main ]
     paths:
       - 'QuestPaths/**'
       - 'GatheringPaths/**'

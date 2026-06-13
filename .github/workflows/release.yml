@@ -2,7 +2,7 @@ name: Auto release on watched branch push
 
 on:
   push:
-    branches: [ new-main, testing ]
+    branches: [ new-main ]
     paths-ignore:
       - 'QuestPaths/**'
       - 'GatheringPaths/**'
