@@ -89,7 +89,7 @@ jobs:
             echo "Will not create release (tag exists and not forced)"
           fi
 
-  build-and-release:
+  build:
     needs: detect-version-change
     if: needs.detect-version-change.outputs.should-release == 'true'
     runs-on: ubuntu-latest
@@ -105,11 +105,6 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 10.0.x
-
-      - name: Generate changelog
-        id: changelog
-        run: |
-          echo -e "changelog<<EOF\n$(cat CHANGELOG.md)\nEOF" >> $GITHUB_OUTPUT
 
       - name: Cache NuGet packages
         uses: actions/cache@v4
@@ -136,6 +131,36 @@ jobs:
           -f net10.0-windows \
           -p:DalamudLibPath=$DALAMUD_HOME \
           --source $PWD/.nuget
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: Questionable/dist/Questionable/
+          retention-days: 1
+
+  release:
+    needs: [detect-version-change, build]
+    if: needs.detect-version-change.outputs.should-release == 'true' && needs.detect-version-change.outputs.testing == 'false'
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ needs.detect-version-change.outputs.version }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: Questionable/dist/Questionable/
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          echo -e "changelog<<EOF\n$(cat CHANGELOG.md)\nEOF" >> $GITHUB_OUTPUT
 
       - name: Prepare artifacts
         run: |
@@ -194,7 +219,7 @@ jobs:
           files: |
             release/*
           draft: false
-          prerelease: ${{ needs.detect-version-change.outputs.testing }}
+          prerelease: false
 
       - name: Publish to DalamudPlugins repo
         uses: actions/checkout@v4
