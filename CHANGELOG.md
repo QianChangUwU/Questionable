@@ -1,10 +1,14 @@
-- Chore: remove `testing` branch from GitHub workflow triggers (testing is local-only) - downstream 502
-- Fix: path data bundle URL now points to QianChangUwU/Questionable (downstream) instead of PunishXIV/Questionable - downstream 503
+- Merge upstream v15.301.0.1 → downstream 15.301.0.101
+- Bug: incorrect parameter on delivery moogle translation string -alydev
 - Feature: click "xx quests loaded" to check for updates to quest data from server -alydev
 - Feature: Open Editor feature -alydev
   - This currently opens the quest path JSON in your default text editor, or generates a new quest path JSON for the current quest. A GUI quest editor will be included Soon :tm:
   - The Edit button now has a tooltip showing how it works. If quests stop working, right click this button and delete all quest paths in that folder first to see if that fixes it.
 - Feature: Language selection -alydev
-   - 详见插件设置
-- Fix: I18N.xml merge conflict corruption (duplicate <Key> elements) - 修复合并冲突导致的 XML 损坏
+  - Chinese (Simplified) translation -ShadyWhite
+  - Japanese translation -fuuga
+  - 详见插件设置
+- Chore: remove `testing` branch from GitHub workflow triggers (testing is local-only) - downstream 502
+- Fix: path data bundle URL now points to downstream repo - downstream 503
+- Fix: I18N.xml merge conflict corruption (duplicate elements) - 修复合并冲突
 - L10n: zh-cn translations for upstream ja-jp additions - 新增上游日文条目的中文翻译
