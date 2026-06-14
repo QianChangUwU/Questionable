@@ -20,7 +20,7 @@ namespace Questionable.PathData;
 /// </summary>
 internal sealed class PathDataUpdater : IDisposable
 {
-    private const string RepositoryUrl = "https://github.com/PunishXIV/Questionable";
+    private const string RepositoryUrl = "https://github.com/QianChangUwU/Questionable";
 
     private readonly IDalamudPluginInterface _pluginInterface;
     private readonly Configuration _configuration;
