@@ -90,6 +90,6 @@ internal abstract class ConfigComponent(IDalamudPluginInterface pluginInterface,
         ImGui.TextColored(ImGuiColors.DalamudYellow,
             _L("While testing, the following issues have been found:"));
         foreach (string note in notes)
-            ImGui.BulletText(note);
+            ImGui.BulletText(_L(note));
     }
 }
