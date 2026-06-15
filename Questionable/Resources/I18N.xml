@@ -3494,6 +3494,48 @@
   <Entry>
     <!-- Found in: PathData\PathDataUpdater.cs -->
     <Key>Updated to data version {0}</Key>
-    <Value lang="ja-jp">データバージョン {0} に更新しました</Value>
+    <Value lang="ja-jp">データバージョンを {0} に更新しました。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model/EExpansionVersion.cs -->
+    <Key>A Realm Reborn</Key>
+    <Value lang="zh-cn">重生之境</Value>
+    <Value lang="ja-jp">新生エオルゼア</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model/EExpansionVersion.cs -->
+    <Key>Heavensward</Key>
+    <Value lang="zh-cn">苍穹之禁城</Value>
+    <Value lang="ja-jp">蒼天のイシュガルド</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model/EExpansionVersion.cs -->
+    <Key>Stormblood</Key>
+    <Value lang="zh-cn">红莲之狂潮</Value>
+    <Value lang="ja-jp">紅蓮のリベレーター</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model/EExpansionVersion.cs -->
+    <Key>Shadowbringers</Key>
+    <Value lang="zh-cn">暗影之逆焰</Value>
+    <Value lang="ja-jp">漆黒のヴィランズ</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model/EExpansionVersion.cs -->
+    <Key>Endwalker</Key>
+    <Value lang="zh-cn">晓月之终途</Value>
+    <Value lang="ja-jp">暁月のフィナーレ</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model/EExpansionVersion.cs -->
+    <Key>Dawntrail</Key>
+    <Value lang="zh-cn">金曦之遗辉</Value>
+    <Value lang="ja-jp">黄金のレガシー</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model/EExpansionVersion.cs -->
+    <Key>Evercold</Key>
+    <Value lang="zh-cn">永寒之境</Value>
+    <Value lang="ja-jp">エバーコールド</Value>
   </Entry>
 </I18N>
