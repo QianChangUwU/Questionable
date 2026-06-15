@@ -1,5 +1,6 @@
 - Merge upstream v15.301.0.5 → downstream 15.301.0.501
 - Chore: switch from Dalamud.NET.Sdk to Dalamud.CN.NET.Sdk - downstream 502
+- Fix: restore zh-cn translations for 37 missing job names (lost during upstream merge) - downstream 504
 - Fix: I18N.xml raw string literal keys use \n instead of \r\n (translation match fix) - downstream 503
 - Feature: retry path data bundle download if failed -alydev
 - Feature: Language selection -alydev

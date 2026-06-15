@@ -385,6 +385,191 @@
     <Value lang="ja-jp">青魔道士</Value>
   </Entry>
   <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Paladin</Key>
+    <Value lang="zh-cn">骑士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Monk</Key>
+    <Value lang="zh-cn">武僧</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Warrior</Key>
+    <Value lang="zh-cn">战士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Dragoon</Key>
+    <Value lang="zh-cn">龙骑士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Bard</Key>
+    <Value lang="zh-cn">吟游诗人</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Summoner</Key>
+    <Value lang="zh-cn">召唤师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Scholar</Key>
+    <Value lang="zh-cn">学者</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Ninja</Key>
+    <Value lang="zh-cn">忍者</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Machinist</Key>
+    <Value lang="zh-cn">机工士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Astrologian</Key>
+    <Value lang="zh-cn">占星术士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Samurai</Key>
+    <Value lang="zh-cn">武士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Gunbreaker</Key>
+    <Value lang="zh-cn">绝枪战士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Dancer</Key>
+    <Value lang="zh-cn">舞者</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Reaper</Key>
+    <Value lang="zh-cn">钐镰客</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Sage</Key>
+    <Value lang="zh-cn">贤者</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Viper</Key>
+    <Value lang="zh-cn">蝰蛇剑士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Pictomancer</Key>
+    <Value lang="zh-cn">绘灵法师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Gladiator</Key>
+    <Value lang="zh-cn">剑术师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Pugilist</Key>
+    <Value lang="zh-cn">格斗家</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Marauder</Key>
+    <Value lang="zh-cn">斧术师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Lancer</Key>
+    <Value lang="zh-cn">枪术师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Archer</Key>
+    <Value lang="zh-cn">弓箭手</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Conjurer</Key>
+    <Value lang="zh-cn">幻术师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Thaumaturge</Key>
+    <Value lang="zh-cn">咒术师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Arcanist</Key>
+    <Value lang="zh-cn">秘术师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Rogue</Key>
+    <Value lang="zh-cn">双剑师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Carpenter</Key>
+    <Value lang="zh-cn">刻木匠</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Blacksmith</Key>
+    <Value lang="zh-cn">锻铁匠</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Armorer</Key>
+    <Value lang="zh-cn">铸甲匠</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Goldsmith</Key>
+    <Value lang="zh-cn">雕金匠</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Leatherworker</Key>
+    <Value lang="zh-cn">制革匠</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Weaver</Key>
+    <Value lang="zh-cn">裁衣匠</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Alchemist</Key>
+    <Value lang="zh-cn">炼金术士</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Culinarian</Key>
+    <Value lang="zh-cn">烹调师</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Miner</Key>
+    <Value lang="zh-cn">采矿工</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Botanist</Key>
+    <Value lang="zh-cn">园艺工</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Fisher</Key>
+    <Value lang="zh-cn">捕鱼人</Value>
+  </Entry>
+  <Entry>
     <!-- Found in: Data\JournalData.cs -->
     <Key>Starting in Limsa Lominsa</Key>
     <Value lang="zh-cn">起始城市 利姆萨·罗敏萨</Value>
@@ -1760,13 +1945,13 @@
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
     <Key>vnavmesh handles the navigation within a zone, moving\nyour character to the next quest-related objective.</Key>
-    <Value lang="zh-cn">vnavmesh 会处理区域内的导航，将\n你的角色移动到下一个与任务相关的目标。</Value>
+    <Value lang="zh-cn">vnavmesh 会自动寻路去到下一个任务目标点。</Value>
     <Value lang="ja-jp">vnavmeshはゾーン内のナビゲーションを処理し、\nキャラクターを次のクエスト関連の目標に移動させます。</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
     <Key>Used to travel to aethernet shards in cities.</Key>
-    <Value lang="zh-cn">用于城内以太之晶之间的传送。</Value>
+    <Value lang="zh-cn">用于都市传送网之间的传送。</Value>
     <Value lang="ja-jp">都市内のエーテライトへの移動に使用します。</Value>
   </Entry>
   <Entry>
@@ -1777,7 +1962,7 @@
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Automaton is a collection of automation-related tweaks.</Key>
+    <Key>Automaton is a collection of automation-related tweaks.\n</Key>
     <Value lang="zh-cn">Automaton 是一系列自动化相关功能的合集。</Value>
     <Value lang="ja-jp">Automatonは自動化関連のカスタマイズ集です。</Value>
   </Entry>
@@ -1795,7 +1980,7 @@
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Pandora's Box is a collection of tweaks.</Key>
+    <Key>Pandora's Box is a collection of tweaks.\n</Key>
     <Value lang="zh-cn">Pandora's Box 是一组便捷功能合集。</Value>
     <Value lang="ja-jp">「Pandora's Box」は、各種の調整機能を集めたプラグインです。</Value>
   </Entry>
@@ -1806,13 +1991,13 @@
     <Value lang="ja-jp">'アクティブタイムマニューバー自動化'が有効</Value>
   </Entry>
   <Entry>
-    <Key>Automatically completes active time maneuvers in\nsingle player instances, trials and raids</Key>
+    <Key>Automatically completes active time maneuvers in\nsingle player instances, trials and raids\n</Key>
     <Value lang="zh-cn">自动完成单人副本、讨伐歼灭战、大型任务的动态演练。</Value>
     <Value lang="ja-jp">シングルプレイヤーインスタンス、討滅戦、レイドのアクティブタイムマニューバーを自動完了します。</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Automates crafting</Key>
+    <Key>Automates crafting\n</Key>
     <Value lang="zh-cn">自动化制作</Value>
     <Value lang="ja-jp">クラフトを自動化</Value>
   </Entry>
@@ -1824,7 +2009,7 @@
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Gear manager</Key>
+    <Key>Gear manager\n</Key>
     <Value lang="zh-cn">装备管理器</Value>
     <Value lang="ja-jp">装備マネージャー</Value>
   </Entry>
@@ -1873,7 +2058,7 @@
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
     <Key>Recommended/niche plugins:</Key>
-    <Value lang="zh-cn">推荐/小众插件：</Value>
+    <Value lang="zh-cn">推荐插件(非必要)：</Value>
     <Value lang="ja-jp">推奨/ニッチなプラグイン：</Value>
   </Entry>
   <Entry>
@@ -3220,13 +3405,7 @@
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Automatically completes active time maneuvers in\nsingle player instances, trials and raids</Key>
-    <Value lang="ja-jp">シングルプレイヤーインスタンス、討滅戦、レイドのアクティブタイムマニューバーを自動完了します。</Value>
-    <Value lang="zh-cn">在单人副本、讨伐战及团队副本中自动完成动态演练</Value>
-  </Entry>
-  <Entry>
-    <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Sends a configurable out-of-game notification if a quest\nrequires manual actions.</Key>
+    <Key>Sends a configurable out-of-game notification if a quest\nrequires manual actions.\n</Key>
     <Value lang="ja-jp">クエストで手動操作が必要な場合、設定可能なゲーム外通知を送信します。</Value>
     <Value lang="zh-cn">当任务需要手动操作时，发送可配置的桌面通知。</Value>
   </Entry>
@@ -3315,6 +3494,203 @@
   <Entry>
     <!-- Found in: PathData\PathDataUpdater.cs -->
     <Key>Updated to data version {0}</Key>
-    <Value lang="ja-jp">データバージョン {0} に更新しました</Value>
+    <Value lang="ja-jp">データバージョンを {0} に更新しました。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model/EExpansionVersion.cs -->
+    <Key>A Realm Reborn</Key>
+    <Value lang="zh-cn">重生之境</Value>
+    <Value lang="ja-jp">新生エオルゼア</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model/EExpansionVersion.cs -->
+    <Key>Heavensward</Key>
+    <Value lang="zh-cn">苍穹之禁城</Value>
+    <Value lang="ja-jp">蒼天のイシュガルド</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model/EExpansionVersion.cs -->
+    <Key>Stormblood</Key>
+    <Value lang="zh-cn">红莲之狂潮</Value>
+    <Value lang="ja-jp">紅蓮のリベレーター</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model/EExpansionVersion.cs -->
+    <Key>Shadowbringers</Key>
+    <Value lang="zh-cn">暗影之逆焰</Value>
+    <Value lang="ja-jp">漆黒のヴィランズ</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model/EExpansionVersion.cs -->
+    <Key>Endwalker</Key>
+    <Value lang="zh-cn">晓月之终途</Value>
+    <Value lang="ja-jp">暁月のフィナーレ</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model/EExpansionVersion.cs -->
+    <Key>Dawntrail</Key>
+    <Value lang="zh-cn">金曦之遗辉</Value>
+    <Value lang="ja-jp">黄金のレガシー</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Model/EExpansionVersion.cs -->
+    <Key>Evercold</Key>
+    <Value lang="zh-cn">银海之天舟</Value>
+    <Value lang="ja-jp">エバーコールド</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Debug</Key>
+    <Value lang="zh-cn">调试</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Urgent</Key>
+    <Value lang="zh-cn">紧急</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Notice</Key>
+    <Value lang="zh-cn">通知</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Say</Key>
+    <Value lang="zh-cn">说话</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Shout</Key>
+    <Value lang="zh-cn">喊话</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Tell</Key>
+    <Value lang="zh-cn">悄悄话</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Party</Key>
+    <Value lang="zh-cn">小队</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Alliance</Key>
+    <Value lang="zh-cn">团队</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 1</Key>
+    <Value lang="zh-cn">通讯贝1</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 2</Key>
+    <Value lang="zh-cn">通讯贝2</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 3</Key>
+    <Value lang="zh-cn">通讯贝3</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 4</Key>
+    <Value lang="zh-cn">通讯贝4</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 5</Key>
+    <Value lang="zh-cn">通讯贝5</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 6</Key>
+    <Value lang="zh-cn">通讯贝6</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 7</Key>
+    <Value lang="zh-cn">通讯贝7</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 8</Key>
+    <Value lang="zh-cn">通讯贝8</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Free Company</Key>
+    <Value lang="zh-cn">部队</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Novice Network</Key>
+    <Value lang="zh-cn">新人频道</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Custom Emotes</Key>
+    <Value lang="zh-cn">自定义情感动作</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Yell</Key>
+    <Value lang="zh-cn">呼喊</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 1</Key>
+    <Value lang="zh-cn">跨服通讯贝1</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 2</Key>
+    <Value lang="zh-cn">跨服通讯贝2</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 3</Key>
+    <Value lang="zh-cn">跨服通讯贝3</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 4</Key>
+    <Value lang="zh-cn">跨服通讯贝4</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 5</Key>
+    <Value lang="zh-cn">跨服通讯贝5</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 6</Key>
+    <Value lang="zh-cn">跨服通讯贝6</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 7</Key>
+    <Value lang="zh-cn">跨服通讯贝7</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 8</Key>
+    <Value lang="zh-cn">跨服通讯贝8</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>PvP Team</Key>
+    <Value lang="zh-cn">战队</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Echo</Key>
+    <Value lang="zh-cn">默语</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>None</Key>
+    <Value lang="zh-cn">无</Value>
   </Entry>
 </I18N>

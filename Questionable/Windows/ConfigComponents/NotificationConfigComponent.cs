@@ -38,7 +38,7 @@ internal sealed class NotificationConfigComponent
                     .Where(x => x != XivChatType.StandardEmote)
                     .ToArray();
                 string[] chatTypeNames = xivChatTypes
-                    .Select(t => t.GetAttribute<XivChatTypeInfoAttribute>()?.FancyName ?? t.ToString())
+                    .Select(t => _L(t.GetAttribute<XivChatTypeInfoAttribute>()?.FancyName ?? t.ToString()))
                     .ToArray();
                 DrawComboOption(_L("Chat channel"), xivChatTypes, chatTypeNames,
                     () => Configuration.Notifications.ChatType,
