@@ -1759,9 +1759,9 @@
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>vnavmesh handles the navigation within a zone, moving\r\nyour character to the next quest-related objective.</Key>
-    <Value lang="zh-cn">vnavmesh 会处理区域内的导航，将\r\n你的角色移动到下一个与任务相关的目标。</Value>
-    <Value lang="ja-jp">vnavmeshはゾーン内のナビゲーションを処理し、\r\nキャラクターを次のクエスト関連の目標に移動させます。</Value>
+    <Key>vnavmesh handles the navigation within a zone, moving\nyour character to the next quest-related objective.</Key>
+    <Value lang="zh-cn">vnavmesh 会处理区域内的导航，将\n你的角色移动到下一个与任务相关的目标。</Value>
+    <Value lang="ja-jp">vnavmeshはゾーン内のナビゲーションを処理し、\nキャラクターを次のクエスト関連の目標に移動させます。</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
@@ -1771,7 +1771,7 @@
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Automatically accepts and turns in quests, skips cutscenes\r\nand dialogue.</Key>
+    <Key>Automatically accepts and turns in quests, skips cutscenes\nand dialogue.</Key>
     <Value lang="zh-cn">自动接受/提交任务，跳过过场动画和对话。</Value>
     <Value lang="ja-jp">クエストの自動受注・納品、カットシーンとセリフのスキップを行います。</Value>
   </Entry>
@@ -1806,7 +1806,7 @@
     <Value lang="ja-jp">'アクティブタイムマニューバー自動化'が有効</Value>
   </Entry>
   <Entry>
-    <Key>Automatically completes active time maneuvers in\r\nsingle player instances, trials and raids"</Key>
+    <Key>Automatically completes active time maneuvers in\nsingle player instances, trials and raids</Key>
     <Value lang="zh-cn">自动完成单人副本、讨伐歼灭战、大型任务的动态演练。</Value>
     <Value lang="ja-jp">シングルプレイヤーインスタンス、討滅戦、レイドのアクティブタイムマニューバーを自動完了します。</Value>
   </Entry>
@@ -3220,13 +3220,13 @@
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Automatically completes active time maneuvers in\r\nsingle player instances, trials and raids</Key>
+    <Key>Automatically completes active time maneuvers in\nsingle player instances, trials and raids</Key>
     <Value lang="ja-jp">シングルプレイヤーインスタンス、討滅戦、レイドのアクティブタイムマニューバーを自動完了します。</Value>
     <Value lang="zh-cn">在单人副本、讨伐战及团队副本中自动完成动态演练</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Sends a configurable out-of-game notification if a quest\r\nrequires manual actions.</Key>
+    <Key>Sends a configurable out-of-game notification if a quest\nrequires manual actions.</Key>
     <Value lang="ja-jp">クエストで手動操作が必要な場合、設定可能なゲーム外通知を送信します。</Value>
     <Value lang="zh-cn">当任务需要手动操作时，发送可配置的桌面通知。</Value>
   </Entry>
