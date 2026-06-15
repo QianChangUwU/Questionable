@@ -3748,4 +3748,449 @@
     <Key>Role Quests: Caster</Key>
     <Value lang="zh-cn">职能任务：魔法远程</Value>
   </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(after boss 1) the drawbridges being up will lead you to die from the spikes</Key>
+    <Value lang="zh-cn">(BOSS1后) 吊桥升起会导致你被尖刺击杀</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(after boss 1) the lift isn't working properly</Key>
+    <Value lang="zh-cn">(BOSS1后) 升降机无法正常工作</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(before boss 2) AD doesn't attack magitek pods, but waits for enemies to spawn from them (even though it has explicit waypoints)</Key>
+    <Value lang="zh-cn">(BOSS2前) AutoDuty不攻击魔导荚舱，而是等待敌人从中生成（即使有明确的路径点）</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(before Ran'jit wears the veil) AI doesn't pull, doesn't attack and VBM doesn't recognize any AOEs.</Key>
+    <Value lang="zh-cn">(兰吉特戴面纱前) AI不开怪、不攻击，VBM无法识别任何AOE</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(boss 1) Doesn't knock all moogles out of the rez area</Key>
+    <Value lang="zh-cn">(BOSS1) 无法将所有莫古力击出复活区域</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(boss 2) Requires vbm's auto-turn gaze option</Key>
+    <Value lang="zh-cn">(BOSS2) 需要VBM的自动转身注视选项</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(boss 2) VBM moves out of the towers before their mechanic is resolved, sometimes killing the NPC healer</Key>
+    <Value lang="zh-cn">(BOSS2) VBM在塔机制完成前离开塔，有时导致治疗NPC死亡</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(boss 2) Will walk out of the boss arena to try and attack optional enemies on the upper level, thus resetting the boss and breaking the path</Key>
+    <Value lang="zh-cn">(BOSS2) 会走出BOSS场地尝试攻击上层的可选敌人，导致BOSS重置和路径中断</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(boss 3) Dashes (such as on SMN) will dash into the hole</Key>
+    <Value lang="zh-cn">(BOSS3) 冲锋技能（如召唤）会冲进坑里</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(boss 3) Stack goal zone isn't properly removed from NPC, so the character will stack even for spread markers + slide into AOEs during ice</Key>
+    <Value lang="zh-cn">(BOSS3) 集合目标区域未正确从NPC移除，导致角色在分散标记时仍会集合，并在冰阶段滑入AOE</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(First Barrier) If the player is too far south, after being stunned by Vishap's roar, AI doesn't move out of the AOE and dies to the Cauterize</Key>
+    <Value lang="zh-cn">(第一屏障) 如果玩家过于靠南，被维刹普的咆哮眩晕后，AI不会离开AOE区域并在灼炎下死亡</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(Fordola) Gets hit by AOEs due to moving into them before the mechanic resolves</Key>
+    <Value lang="zh-cn">(芙朵拉) 在机制完成前提前移动导致被AOE击中</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(Lunar Odin) AI doesn't pull Odin to start combat</Key>
+    <Value lang="zh-cn">(月面奥丁) AI不开奥丁进入战斗</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(Lunar Ravana) AI doesn't move out of directional parry directions</Key>
+    <Value lang="zh-cn">(月面罗波那) AI不离开定向格挡方向</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(Lunar Ravana) AI doesn't pull Ravana to start combat</Key>
+    <Value lang="zh-cn">(月面罗波那) AI不开罗波那进入战斗</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(Magnai) Keeps focussing the boss instead of the axes, thus getting killed by the AOEs</Key>
+    <Value lang="zh-cn">(马格奈) 持续攻击BOSS而非斧头，导致被AOE击杀</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(outdated) (after boss 2) Will not pick up the bloody parchment, and instead run off to open a random unrelated chest that it can't reach</Key>
+    <Value lang="zh-cn">(已过时) (BOSS2后) 不会拾取血染的文书，反而跑去开一个够不到的无关宝箱</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(outside) Doesn't use obstacle maps or vnav to move to the shield generators, gets stuck on the big crates</Key>
+    <Value lang="zh-cn">(室外) 不使用障碍物地图或vnav移动到护盾发生器，卡在大箱子上</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 1 + 2) AI automatically removes Hidden status</Key>
+    <Value lang="zh-cn">(阶段1+2) AI自动移除隐藏状态</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 1) AI doesn't move automatically</Key>
+    <Value lang="zh-cn">(阶段1) AI不会自动移动</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 1) AI doesn't move close enough to the tattered plumage; needs to be re-tested</Key>
+    <Value lang="zh-cn">(阶段1) AI无法移动到足够靠近破碎羽毛的位置；需要重新测试</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 1) AI doesn't move or pick up the stolen firearms</Key>
+    <Value lang="zh-cn">(阶段1) AI不移动或不拾取被盗的枪械</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 1) AI doesn't pull boss</Key>
+    <Value lang="zh-cn">(阶段1) AI不开BOSS</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 1) AI gets stuck on trees/posts/walls.</Key>
+    <Value lang="zh-cn">(阶段1) AI卡在树木/柱子/墙壁上</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 1) AI walks (a bit) towards enemies, but doesn't target them and doesn't attack</Key>
+    <Value lang="zh-cn">(阶段1) AI向敌人移动（一点点），但不锁定目标也不攻击</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 1) AI will never reach the Ostall Imperative, it instead walks circles around Radisca's Round even with all enemies dead.</Key>
+    <Value lang="zh-cn">(阶段1) AI永远无法到达奥斯塔尔训命，反而在拉迪丝卡的回合周围绕圈，即使所有敌人都已死亡</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 1) Gets stuck in the wall while walking to the evacuee NPCs</Key>
+    <Value lang="zh-cn">(阶段1) 在走向撤离的NPC时卡在墙里</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(Phase 1) Healer NPCs are only killed after the boss dies - allied NPCs will kill them eventually; all NPCs need to be killed for the duty to complete</Key>
+    <Value lang="zh-cn">(阶段1) 治疗NPC只在BOSS死后才会被击杀——友方NPC最终会杀死它们；需要击杀所有NPC才能完成任务</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(Phase 1) Kills PGL NPCs and then the boss - allied NPCs will kill most other NPCs eventually; all NPCs need to be killed for the duty to complete</Key>
+    <Value lang="zh-cn">(阶段1) 击杀格斗家NPC然后击杀BOSS——友方NPC最终会杀死大部分其他NPC；需要击杀所有NPC才能完成任务</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 1) Need to manually move in range to trigger combat</Key>
+    <Value lang="zh-cn">(阶段1) 需要手动移动进入范围以触发战斗</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 1) VBM doesn't know about some AOEs (e.g. Vein Splitter)</Key>
+    <Value lang="zh-cn">(阶段1) VBM无法识别部分AOE（如静脉分裂）</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 1) VBM ignores markers to stack on Lyse (she still survives)</Key>
+    <Value lang="zh-cn">(阶段1) VBM无视集合标记（莉瑟仍然存活）</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(Phase 1, second enemy group) Stuck with enemy being out of sight -- but still able to attack you (tested on ACN)</Key>
+    <Value lang="zh-cn">(阶段1，第二组敌人) 敌人处于视野外但仍能攻击你（以秘书术师测试）</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 1/2) No VBM module, so doesn't target the leg, doesn't avoid AOEs and dies</Key>
+    <Value lang="zh-cn">(阶段1/2) 无VBM模块，不会攻击腿部、不会躲避AOE并死亡</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 2) AI can walk outside the arena to get a bleed + damage down when dodging mechanics</Key>
+    <Value lang="zh-cn">(阶段2) AI在躲避机制时会走到场地外，导致流血+伤害降低</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 2) AI doesn't even attempt to navigate to the end of the quest</Key>
+    <Value lang="zh-cn">(阶段2) AI甚至不尝试导航到任务终点</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 2) AI doesn't target Ardbert to start combat</Key>
+    <Value lang="zh-cn">(阶段2) AI不锁定阿德伯特进入战斗</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 2) AI doesn't target enemy</Key>
+    <Value lang="zh-cn">(阶段2) AI不锁定敌人</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 2) AI doesn't use any of the Red Baron's attacks, just moves with it and eventually dies (after a few minutes)</Key>
+    <Value lang="zh-cn">(阶段2) AI不使用红男爵的任何攻击，只是跟着移动并在几分钟后死亡</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 2) AI only moves while targeted enemies are in range + gets stuck on corners while trying to get to irrelevant enemies</Key>
+    <Value lang="zh-cn">(阶段2) AI仅在目标敌人在范围内时移动，并在试图接近无关敌人时卡在角落</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 2) AI runs away with the stack marker; doesn't pick up orbs</Key>
+    <Value lang="zh-cn">(阶段2) AI带着集合标记逃跑；不拾取球体</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 2) AI will still try to walk to Radisca's Round, but (usually) prioritizes fighting enemies.</Key>
+    <Value lang="zh-cn">(阶段2) AI仍会尝试走向拉迪丝卡的回合，但（通常）优先战斗</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(phase 2) VBM module: Elidibus' line cleave only covers half the length of the actual line (survivable)</Key>
+    <Value lang="zh-cn">(阶段2) VBM模块：艾里迪布斯的直线顺劈只覆盖实际长度的一半（可存活）</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(pre-fight) AI doesn't move to the Rroneeks or interact with them</Key>
+    <Value lang="zh-cn">(战前) AI不移动到罗尼克斯处或与之互动</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(room 2) AI tries to walk straight to the next door, ignoring all walls</Key>
+    <Value lang="zh-cn">(房间2) AI试图直线走向下一扇门，无视所有墙壁</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>(Thancred) How many enemies get pulled during the stealth section is random; if you pull multiple you can die here. Can probably be fixed by retrying on very easy.</Key>
+    <Value lang="zh-cn">(桑克瑞德) 潜行阶段引到的敌人数量随机；如果引到多个可能会死。可通过非常简单难度重试解决。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>After moving from the arena boundary, AI doesn't move into melee range and stops too far away when initially attacking</Key>
+    <Value lang="zh-cn">从场地边界移动后，AI不进入近战范围，初始攻击时停在过远处</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>After walking downstairs automatically, AI tries to run back towards the stairs (ignoring the arena boudnary)</Key>
+    <Value lang="zh-cn">自动下楼后，AI试图跑回楼梯方向（无视场地边界）</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI doesn't attempt to move to the correct direction when killing orbs</Key>
+    <Value lang="zh-cn">AI在击杀球体时不尝试往正确方向移动</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI doesn't heal NPCs</Key>
+    <Value lang="zh-cn">AI不治疗NPC</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI doesn't kill ads</Key>
+    <Value lang="zh-cn">AI不击杀小怪</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI doesn't move after starting the instance, so enemies won't be triggered</Key>
+    <Value lang="zh-cn">AI在进入副本后不移动，导致无法触发敌人</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI doesn't move automatically for the dialogue with gaius on the bridge</Key>
+    <Value lang="zh-cn">AI在桥上与盖乌斯对话时不会自动移动</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI doesn't move automatically for the first boss</Key>
+    <Value lang="zh-cn">AI在第一个BOSS处不会自动移动</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI doesn't move behind the shield for 'Extinction Flare' and dies</Key>
+    <Value lang="zh-cn">AI不移动到护盾后躲避'灭绝耀星'并死亡</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI doesn't move behind the shield to take cover and dies</Key>
+    <Value lang="zh-cn">AI不移动到护盾后躲避并死亡</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI doesn't move to first enemy</Key>
+    <Value lang="zh-cn">AI不移动到第一个敌人处</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI doesn't pull enemies when spawning into the instance</Key>
+    <Value lang="zh-cn">AI在进入副本时不拉怪</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI doesn't stand in towers</Key>
+    <Value lang="zh-cn">AI不站在塔里</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI doesn't target boss</Key>
+    <Value lang="zh-cn">AI不锁定BOSS</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI doesn't target Fafnir to start combat</Key>
+    <Value lang="zh-cn">AI不锁定法夫尼尔进入战斗</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI doesn't unmount from the Magitek Reaper</Key>
+    <Value lang="zh-cn">AI不从魔导死神上下来</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI only dodges some, but not all AOEs</Key>
+    <Value lang="zh-cn">AI只躲避部分AOE，并非全部</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>AI will kill initial adds before the boss, but not switch target whenever new enemies spawn; all NPCs need to be killed for the duty to complete</Key>
+    <Value lang="zh-cn">AI会在BOSS之前击杀初始小怪，但不会在新生敌人出现时切换目标；需要击杀所有NPC才能完成任务</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>And there is a part, where the user needs to interact.</Key>
+    <Value lang="zh-cn">有一部分需要玩家手动交互。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>BossMod can't handle QuickButton Actions yet.</Key>
+    <Value lang="zh-cn">BossMod尚不支持快捷按钮操作。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>BossMod doesn't use Healing Actions for Tanks.</Key>
+    <Value lang="zh-cn">BossMod不对坦克使用治疗技能。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>BossMod doesn't use Interject.</Key>
+    <Value lang="zh-cn">BossMod不使用插言。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Currently it won't work, because the logic is missing NPC healing.</Key>
+    <Value lang="zh-cn">目前无法工作，因为缺少治疗NPC的逻辑。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Doesn't walk to the teleporter to finish the duty</Key>
+    <Value lang="zh-cn">不走向传送器完成任务</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Duty somewhat expects you to put the boss to sleep, vbm doesn't and lets the friendly NPC die</Key>
+    <Value lang="zh-cn">任务期望你将BOSS催眠，VBM不会导致友方NPC死亡</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Healer NPC is only killed after the boss dies; all NPCs need to be killed for the duty to complete</Key>
+    <Value lang="zh-cn">治疗NPC只在BOSS死后才会被击杀；需要击杀所有NPC才能完成任务</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>If the target isn't in melee range but other NPCs are, whether any AOEs are used for nearby enemies seems random</Key>
+    <Value lang="zh-cn">如果目标不在近战范围内但有其他NPC在附近，是否对附近敌人使用AOE似乎是随机的</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Instance probably only works on very easy difficulty</Key>
+    <Value lang="zh-cn">副本可能只适用于非常简单难度</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>It will need alot of manual work</Key>
+    <Value lang="zh-cn">需要大量手动操作</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Keeps attacking the invulnerable boss instead of the mammoths, thus letting your allied NPC die</Key>
+    <Value lang="zh-cn">持续攻击无敌状态的BOSS而非猛犸，导致友方NPC死亡</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Move up the ramp to the bridge, stay by Mylla, ignore Leavold</Key>
+    <Value lang="zh-cn">走上坡道到桥边，待在米拉身旁，无视利沃尔德</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Navigation gets stuck in various places</Key>
+    <Value lang="zh-cn">导航在多处卡住</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Navigation issues for area transitions</Key>
+    <Value lang="zh-cn">区域过渡存在导航问题</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Navmesh takes 5+ minutes to build</Key>
+    <Value lang="zh-cn">导航网格需要5分钟以上才能生成</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Needs manual targeting</Key>
+    <Value lang="zh-cn">需要手动锁定目标</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>No VBM module</Key>
+    <Value lang="zh-cn">无VBM模块</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Should ignore lv20 Nameless Attacker, but doesn't, takes a while</Key>
+    <Value lang="zh-cn">应该忽略20级无名攻击者，但实际上不会，耗时较长</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Sometimes the movement is the cause of a duty failing.</Key>
+    <Value lang="zh-cn">有时移动方式是副本失败的原因。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>There is currently no BossMod Supported Bosses Logic.</Key>
+    <Value lang="zh-cn">目前没有BossMod支持的BOSS逻辑。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>vbm doesn't interact with the urn</Key>
+    <Value lang="zh-cn">VBM不与瓮交互</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>vbm doesn't move to the enemies automatically</Key>
+    <Value lang="zh-cn">VBM不会自动移动到敌人处</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Will not move into melee range to kill the gate; Alphinaud will kill it after a while</Key>
+    <Value lang="zh-cn">不会进入近战范围击杀城门；阿尔菲诺会在一段时间后击杀</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: QuestPaths JSON data -->
+    <Key>Will target Eline first (other NPCs later), and move to some -other- group of NPCs; only re-targets once they're at 1 HP (for Eline) or die</Key>
+    <Value lang="zh-cn">会先锁定艾琳（之后再打其他NPC），并移动到另一组NPC处；只有在目标剩1HP（艾琳）或死亡时才会重新锁定</Value>
+  </Entry>
 </I18N>
