@@ -3535,7 +3535,157 @@
   <Entry>
     <!-- Found in: Model/EExpansionVersion.cs -->
     <Key>Evercold</Key>
-    <Value lang="zh-cn">永寒之境</Value>
+    <Value lang="zh-cn">银海之天舟</Value>
     <Value lang="ja-jp">エバーコールド</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Debug</Key>
+    <Value lang="zh-cn">调试</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Urgent</Key>
+    <Value lang="zh-cn">紧急</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Notice</Key>
+    <Value lang="zh-cn">通知</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Say</Key>
+    <Value lang="zh-cn">说话</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Shout</Key>
+    <Value lang="zh-cn">大喊</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Tell</Key>
+    <Value lang="zh-cn">悄悄话</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Party</Key>
+    <Value lang="zh-cn">队伍</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Alliance</Key>
+    <Value lang="zh-cn">团队</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 1</Key>
+    <Value lang="zh-cn">通讯贝1</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 2</Key>
+    <Value lang="zh-cn">通讯贝2</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 3</Key>
+    <Value lang="zh-cn">通讯贝3</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 4</Key>
+    <Value lang="zh-cn">通讯贝4</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 5</Key>
+    <Value lang="zh-cn">通讯贝5</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 6</Key>
+    <Value lang="zh-cn">通讯贝6</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 7</Key>
+    <Value lang="zh-cn">通讯贝7</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Linkshell 8</Key>
+    <Value lang="zh-cn">通讯贝8</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Free Company</Key>
+    <Value lang="zh-cn">部队</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Novice Network</Key>
+    <Value lang="zh-cn">新人频道</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Custom Emotes</Key>
+    <Value lang="zh-cn">自定义情感动作</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Yell</Key>
+    <Value lang="zh-cn">呼喊</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 1</Key>
+    <Value lang="zh-cn">跨界通讯贝1</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 2</Key>
+    <Value lang="zh-cn">跨界通讯贝2</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 3</Key>
+    <Value lang="zh-cn">跨界通讯贝3</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 4</Key>
+    <Value lang="zh-cn">跨界通讯贝4</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 5</Key>
+    <Value lang="zh-cn">跨界通讯贝5</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 6</Key>
+    <Value lang="zh-cn">跨界通讯贝6</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 7</Key>
+    <Value lang="zh-cn">跨界通讯贝7</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Crossworld Linkshell 8</Key>
+    <Value lang="zh-cn">跨界通讯贝8</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>PvP Team</Key>
+    <Value lang="zh-cn">PvP战队</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/NotificationConfigComponent.cs -->
+    <Key>Echo</Key>
+    <Value lang="zh-cn">系统提示</Value>
   </Entry>
 </I18N>
