@@ -22,10 +22,7 @@ namespace Questionable.Windows.ConfigComponents;
 
 internal sealed class GeneralConfigComponent : ConfigComponent
 {
-    private static readonly (uint Id, string Name) DefaultMount = (0, _L("Mount Roulette"));
-    private static readonly (Job ClassJob, string Name) DefaultClassJob = (Job.ADV, _L("Auto (highest level/item level)"));
-
-    private readonly string[] _grandCompanyNames =
+    private string[] GrandCompanyNames =>
         [_L("None (manually pick quest)"), _L("Maelstrom"), _L("Twin Adder"), _L("Immortal Flames")];
 
     private readonly QuestRegistry _questRegistry;
@@ -71,8 +68,8 @@ internal sealed class GeneralConfigComponent : ConfigComponent
             .Where(x => !string.IsNullOrEmpty(x.Name))
             .OrderBy(x => x.Name)
             .ToList();
-        uint[] ids = [DefaultMount.Id, .. mounts.Select(x => x.MountId)];
-        string[] names = [DefaultMount.Name, .. mounts.Select(x => x.Name)];
+        uint[] ids = [0, .. mounts.Select(x => x.MountId)];
+        string[] names = [_L("Mount Roulette"), .. mounts.Select(x => x.Name)];
         return (ids, names);
     }
 
@@ -82,8 +79,8 @@ internal sealed class GeneralConfigComponent : ConfigComponent
         List<Job> jobs = [.. source.OrderBy(x => sorted.IndexOf(x))];
         if (prependDefault)
         {
-            Job[] ids = [DefaultClassJob.ClassJob, .. jobs];
-            string[] names = [DefaultClassJob.Name, .. jobs.Select(x => x.ToFriendlyString())];
+            Job[] ids = [Job.ADV, .. jobs];
+            string[] names = [_L("Auto (highest level/item level)"), .. jobs.Select(x => x.ToFriendlyString())];
             return (ids, names);
         }
         else
@@ -144,8 +141,8 @@ internal sealed class GeneralConfigComponent : ConfigComponent
         }
 
         int grandCompany = (int)Configuration.General.GrandCompany;
-        if (ImGui.Combo(_L("Preferred Grand Company"), ref grandCompany, _grandCompanyNames,
-            _grandCompanyNames.Length))
+        if (ImGui.Combo(_L("Preferred Grand Company"), ref grandCompany, GrandCompanyNames,
+            GrandCompanyNames.Length))
         {
             Configuration.General.GrandCompany = (GrandCompany)grandCompany;
             Save();

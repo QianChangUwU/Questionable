@@ -1951,7 +1951,7 @@
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
     <Key>Used to travel to aethernet shards in cities.</Key>
-    <Value lang="zh-cn">用于城内以太之光之间的传送。</Value>
+    <Value lang="zh-cn">用于都市传送网之间的传送。</Value>
     <Value lang="ja-jp">都市内のエーテライトへの移動に使用します。</Value>
   </Entry>
   <Entry>
@@ -1962,7 +1962,7 @@
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Automaton is a collection of automation-related tweaks.</Key>
+    <Key>Automaton is a collection of automation-related tweaks.\n</Key>
     <Value lang="zh-cn">Automaton 是一系列自动化相关功能的合集。</Value>
     <Value lang="ja-jp">Automatonは自動化関連のカスタマイズ集です。</Value>
   </Entry>
@@ -1980,7 +1980,7 @@
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Pandora's Box is a collection of tweaks.</Key>
+    <Key>Pandora's Box is a collection of tweaks.\n</Key>
     <Value lang="zh-cn">Pandora's Box 是一组便捷功能合集。</Value>
     <Value lang="ja-jp">「Pandora's Box」は、各種の調整機能を集めたプラグインです。</Value>
   </Entry>
@@ -1991,13 +1991,13 @@
     <Value lang="ja-jp">'アクティブタイムマニューバー自動化'が有効</Value>
   </Entry>
   <Entry>
-    <Key>Automatically completes active time maneuvers in\nsingle player instances, trials and raids</Key>
+    <Key>Automatically completes active time maneuvers in\nsingle player instances, trials and raids\n</Key>
     <Value lang="zh-cn">自动完成单人副本、讨伐歼灭战、大型任务的动态演练。</Value>
     <Value lang="ja-jp">シングルプレイヤーインスタンス、討滅戦、レイドのアクティブタイムマニューバーを自動完了します。</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Automates crafting</Key>
+    <Key>Automates crafting\n</Key>
     <Value lang="zh-cn">自动化制作</Value>
     <Value lang="ja-jp">クラフトを自動化</Value>
   </Entry>
@@ -2009,7 +2009,7 @@
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Gear manager</Key>
+    <Key>Gear manager\n</Key>
     <Value lang="zh-cn">装备管理器</Value>
     <Value lang="ja-jp">装備マネージャー</Value>
   </Entry>
@@ -3405,13 +3405,7 @@
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Automatically completes active time maneuvers in\nsingle player instances, trials and raids</Key>
-    <Value lang="ja-jp">シングルプレイヤーインスタンス、討滅戦、レイドのアクティブタイムマニューバーを自動完了します。</Value>
-    <Value lang="zh-cn">在单人副本、讨伐战及团队副本中自动完成动态演练</Value>
-  </Entry>
-  <Entry>
-    <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Sends a configurable out-of-game notification if a quest\nrequires manual actions.</Key>
+    <Key>Sends a configurable out-of-game notification if a quest\nrequires manual actions.\n</Key>
     <Value lang="ja-jp">クエストで手動操作が必要な場合、設定可能なゲーム外通知を送信します。</Value>
     <Value lang="zh-cn">当任务需要手动操作时，发送可配置的桌面通知。</Value>
   </Entry>
