@@ -3693,4 +3693,59 @@
     <Key>None</Key>
     <Value lang="zh-cn">无</Value>
   </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/SinglePlayerDutyConfigComponent.cs -->
+    <Key>Tank Role Quests</Key>
+    <Value lang="zh-cn">坦克职能任务</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/SinglePlayerDutyConfigComponent.cs -->
+    <Key>Healer Role Quests</Key>
+    <Value lang="zh-cn">治疗职能任务</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/SinglePlayerDutyConfigComponent.cs -->
+    <Key>Melee Role Quests</Key>
+    <Value lang="zh-cn">近战职能任务</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/SinglePlayerDutyConfigComponent.cs -->
+    <Key>Physical Ranged Role Quests</Key>
+    <Value lang="zh-cn">物理远程职能任务</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/SinglePlayerDutyConfigComponent.cs -->
+    <Key>Magical Ranged Role Quests</Key>
+    <Value lang="zh-cn">魔法远程职能任务</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/ConfigComponents/SinglePlayerDutyConfigComponent.cs -->
+    <Key>Role Quests ({0}/{1})</Key>
+    <Value lang="zh-cn">职能任务（{0}/{1}）</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/PriorityWindow.cs -->
+    <Key>Role Quests: Tank</Key>
+    <Value lang="zh-cn">职能任务：坦克</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/PriorityWindow.cs -->
+    <Key>Role Quests: Healer</Key>
+    <Value lang="zh-cn">职能任务：治疗</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/PriorityWindow.cs -->
+    <Key>Role Quests: Melee DPS</Key>
+    <Value lang="zh-cn">职能任务：近战</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/PriorityWindow.cs -->
+    <Key>Role Quests: Physical Ranged</Key>
+    <Value lang="zh-cn">职能任务：物理远程</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows/PriorityWindow.cs -->
+    <Key>Role Quests: Caster</Key>
+    <Value lang="zh-cn">职能任务：魔法远程</Value>
+  </Entry>
 </I18N>
