@@ -1,4 +1,5 @@
 - Merge upstream v15.301.0.5 → downstream 15.301.0.501
+- Chore: switch from Dalamud.NET.Sdk to Dalamud.CN.NET.Sdk - downstream 502
 - Feature: retry path data bundle download if failed -alydev
 - Feature: Language selection -alydev
   - Chinese (Simplified) translation -ShadyWhite
