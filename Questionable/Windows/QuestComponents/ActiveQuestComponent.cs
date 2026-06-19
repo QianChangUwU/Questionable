@@ -132,11 +132,7 @@ internal sealed partial class ActiveQuestComponent
                 _logger.LogDebug("OpenFolder executed");
             }
             if (ImGui.IsItemHovered())
-                ImGui.SetTooltip(_L("Clicking this button writes the quest path to a file and opens it in your default\n" +
-                                    "text editor. After making a change, click Reload Data below. To revert to the\n" +
-                                    "official version, delete the file and click Reload Data again.\n" +
-                                    "Left click: Open this quest in your default .json text editor\n" +
-                                    "Right click: Open Quests folder"));
+                ImGui.SetTooltip(QuestRegistry.OpenEditorDescription);
             if (_configuration.Advanced.Debug)
             {
                 ImGui.SameLine();
@@ -151,7 +147,7 @@ internal sealed partial class ActiveQuestComponent
         }
         else
         {
-            if (pathDataUpdater.Status != _L("Idle") && (DateTime.Now - pathDataUpdater.StatusLastChanged).TotalSeconds < 30 )
+            if (pathDataUpdater.Status != _L("Idle") && (DateTime.Now - pathDataUpdater.StatusLastChanged).TotalSeconds < 30)
                 ImGui.Text(pathDataUpdater.Status);
             else
                 ImGui.Text(_L("No active quest"));
@@ -349,20 +345,28 @@ internal sealed partial class ActiveQuestComponent
                 }
 
 
-                List<PriorityQuestInfo> priorityQuests = _questFunctions.GetNextPriorityQuestsThatCanBeAccepted();
-                List<ElementId> availablePriorityQuests = priorityQuests
-                    .Where(x => x.IsAvailable)
-                    .Select(x => x.QuestId)
-                    .ToList();
-                List<PriorityQuestInfo> unavailablePriorityQuests = priorityQuests
-                    .Where(x => !x.IsAvailable)
-                    .ToList();
-                if (availablePriorityQuests.Count > 0 || unavailablePriorityQuests.Count > 0)
+                List<PriorityQuestInfo> priorityQuests = _questFunctions.NextPriorityQuestsThatCanBeAccepted;
+                bool anyAvailable = false;
+                bool anyUnavailable = false;
+                foreach (var p in priorityQuests)
+                {
+                    if (p.IsAvailable) anyAvailable = true;
+                    else anyUnavailable = true;
+                    if (anyAvailable && anyUnavailable) break;
+                }
+                if (anyAvailable || anyUnavailable)
                 {
                     ImGui.SameLine();
                     ImGui.TextColored(ImGuiColors.DalamudYellow, SeIconChar.Hyadelyn.ToIconString());
                     if (ImGui.IsItemHovered())
                     {
+                        List<ElementId> availablePriorityQuests = priorityQuests
+                            .Where(x => x.IsAvailable)
+                            .Select(x => x.QuestId)
+                            .ToList();
+                        List<PriorityQuestInfo> unavailablePriorityQuests = priorityQuests
+                            .Where(x => !x.IsAvailable)
+                            .ToList();
                         using ImRaii.TooltipDisposable tooltip = ImRaii.Tooltip();
                         ImGui.Text(
                             _L("Certain priority quest (e.g. class quests) may be started/completed by\nthe plugin prior to continuing, usually at a teleport step."));
@@ -522,7 +526,8 @@ internal sealed partial class ActiveQuestComponent
                     ? _L("Cancel scheduled stop after accepting the next quest.")
                     : _L("Stop after accepting the next quest."));
 
-            ImGui.SameLine();
+            if (!isMinimized)
+                ImGui.SameLine();
 
             if (ImGuiComponentsLocal.IconButton(FontAwesomeIcon.MapMarkerAlt,
                     _questController.StopBeforeTeleport ? ImGuiColors.DalamudOrange : null))

@@ -16,6 +16,8 @@ using Questionable.Model.Questing;
 using Questionable.Windows;
 using Quest = Questionable.Model.Quest;
 using static Questionable.Utils.LocalizeShortcut;
+using Questionable.Data;
+using Questionable.Model;
 
 namespace Questionable.Controller;
 
@@ -42,6 +44,8 @@ internal sealed class CommandHandler : IDisposable
     private readonly QuestSelectionWindow _questSelectionWindow;
     private readonly QuestValidationWindow _questValidationWindow;
     private readonly QuestWindow _questWindow;
+    private readonly QuestData _questData;
+    private readonly TerritoryData _territoryData;
     private readonly ITargetManager _targetManager;
 
     private IReadOnlyList<uint> _previouslyUnlockedUnlockLinks = [];
@@ -65,7 +69,9 @@ internal sealed class CommandHandler : IDisposable
         GameFunctions gameFunctions,
         IDataManager dataManager,
         IClientState clientState,
-        Configuration configuration)
+        Configuration configuration,
+        QuestData questData,
+        TerritoryData territoryData)
     {
         _commandManager = commandManager;
         _chatGui = chatGui;
@@ -86,6 +92,8 @@ internal sealed class CommandHandler : IDisposable
         _dataManager = dataManager;
         _clientState = clientState;
         _configuration = configuration;
+        _questData = questData;
+        _territoryData = territoryData;
 
         _clientState.Logout += OnLogout;
         _commandManager.AddHandler("/qst", new(ProcessCommand)
@@ -248,6 +256,26 @@ internal sealed class CommandHandler : IDisposable
                 _configuration.Advanced.Debug = !_configuration.Advanced.Debug;
                 break;
 
+            case "rewards":
+                ushort rewardsId = 2772;
+                if (parts.Length > 1)
+                    rewardsId = ushort.Parse(parts[1], CultureInfo.InvariantCulture);
+                if (_questData.TryGetQuestInfo(new QuestId(rewardsId), out var qInfo) &&
+                    qInfo is QuestInfo questInfo &&
+                    questInfo.ItemRewards.Concat(questInfo.TripleTriadCardRewards).Select(x => x.ToString()) is var rewards &&
+                    rewards.ToArray().Length != 0)
+                    _chatGui.Print($"{string.Join(',', rewards)}", MessageTag, TagColor);
+                else
+                    _chatGui.Print("no results", MessageTag, TagColor);
+                break;
+
+            case "tname":
+                if (parts.Length == 1)
+                    break;
+                var tnameId = uint.Parse(parts[1], CultureInfo.InvariantCulture);
+                _chatGui.Print($"{TerritoryData.GetNameAndId(tnameId)}");
+                break;
+
             //case "abandon-quest":
             //    if (parts.Length > 1)
             //        _questController.AbandonQuest(parts[1]);
@@ -397,15 +425,19 @@ internal sealed class CommandHandler : IDisposable
     {
         if (arguments.Length >= 1 && ElementId.TryFromString(arguments[0], out ElementId? questId) && questId != null)
         {
-            if (_questFunctions.IsQuestLocked(questId))
-                _chatGui.PrintError(_LF("Quest {0} is locked.", questId), MessageTag, TagColor);
+            (var isLocked, string[]? reasons) = _questFunctions.IsQuestLocked(questId);
+            if (isLocked)
+                _chatGui.PrintError(_LF("Quest {0} is locked.", questId) + (reasons != null ? string.Join(',',reasons) : ""),
+                    MessageTag, TagColor);
             else if (_questRegistry.TryGetQuest(questId, out Quest? quest))
             {
                 _questController.SetNextQuest(quest);
-                _chatGui.Print(_LF("Set next quest to {0} ({1}).", questId, quest.Info.Name), MessageTag, TagColor);
+                _chatGui.Print(_LF("Set next quest to {0} ({1}).", questId, quest.Info.Name) + (reasons != null ? string.Join(',',reasons) : ""),
+                    MessageTag, TagColor);
             }
             else
-                _chatGui.PrintError(_LF("Unknown quest {0}.", questId), MessageTag, TagColor);
+                _chatGui.PrintError(_LF("Unknown quest {0}.", questId) + (reasons != null ? string.Join(',',reasons) : ""),
+                    MessageTag, TagColor);
         }
         else
         {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Dalamud.Plugin.Services;
-using ECommons.MathHelpers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Questionable.Controller.Steps.Interactions;
@@ -32,7 +31,7 @@ internal sealed class TaskCreator
     {
         List<ITask> newTasks;
 
-        if (!configuration.Advanced.Debug && quest.Root.Disabled && sequenceNumber.InRange(1, 2))
+        if (!configuration.Advanced.Debug && quest.Root.Disabled && sequenceNumber.Equals(1))
         {
             var reason = (quest.Root.Comment ?? "<no reason specified>").Split('\n', 2)[0];
             _chatGui.PrintError(_LF("The quest '{0}' has been marked as Disabled for the following reason: {1}", quest.Info.Name, reason),
@@ -45,7 +44,9 @@ internal sealed class TaskCreator
 
         if (sequence == null)
         {
-            if (!quest.Root.Disabled)
+            if (!quest.Root.Disabled &&
+                quest.FindSequence((byte)(sequenceNumber - 1)) is { } prevSequence &&
+                !prevSequence.Steps.Any(_step => _step is { InteractionType: EInteractionType.Duty or EInteractionType.SinglePlayerDuty }))
             {
                 _chatGui.PrintError(
                     _LF("Path for quest '{0}' ({1}) does not contain sequence {2}, please report this: https://github.com/PunishXIV/Questionable/discussions/20", quest.Info.Name, quest.Id, sequenceNumber),
@@ -100,6 +101,25 @@ internal sealed class TaskCreator
                         newTasks.FirstOrDefault(),
                         newTasks.Count);
                 }
+            }
+
+            WaitAtEnd.WaitForTerritory? waitForTerritory = newTasks
+                .Where(y => y is WaitAtEnd.WaitForTerritory)
+                .Cast<WaitAtEnd.WaitForTerritory>()
+                .FirstOrDefault();
+            if (waitForTerritory != null &&
+                _clientState.TerritoryType == waitForTerritory.TerritoryId &&
+                waitForTerritory is not { TerritoryId: 212 or 351 })
+            {
+                // if we're at the territory we're meant to be in, (unless it's waking sands or rising stones), can probably move to the next step
+                int index = newTasks.IndexOf(waitForTerritory);
+                _logger.LogWarning(
+                        "Skipping {SkippedTaskCount} out of {TotalCount} tasks, we are already in TargetTerritoryId:{TerritoryId}",
+                        index + 1, newTasks.Count, waitForTerritory.TerritoryId);
+                newTasks.RemoveRange(0, index + 1);
+                _logger.LogInformation("Next actual task: {NextTask}, total tasks left: {RemainingTaskCount}",
+                    newTasks.FirstOrDefault(),
+                    newTasks.Count);
             }
         }
 

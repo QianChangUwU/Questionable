@@ -6,7 +6,9 @@ using System.Text;
 using Dalamud.Game.Text;
 using Dalamud.Memory;
 using Dalamud.Plugin.Services;
+using ECommons;
 using ECommons.ExcelServices;
+using ECommons.Throttlers;
 using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
@@ -14,16 +16,19 @@ using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 using FFXIVClientStructs.FFXIV.Component.GUI;
+using Lumina;
 using Lumina.Excel.Sheets;
+using Microsoft.Extensions.Logging;
 using Questionable.Controller;
 using Questionable.Data;
 using Questionable.Model;
 using Questionable.Model.Common;
 using Questionable.Model.Questing;
 using Questionable.Utils;
+using static Questionable.Utils.CacheUtils;
+using static Questionable.Utils.LocalizeShortcut;
 using GrandCompany = FFXIVClientStructs.FFXIV.Client.UI.Agent.GrandCompany;
 using Quest = Questionable.Model.Quest;
-using static Questionable.Utils.LocalizeShortcut;
 
 namespace Questionable.Functions;
 
@@ -234,7 +239,7 @@ internal sealed unsafe class QuestFunctions
             return new(firstTrackedQuest, firstTrackedSequence, msqQuest.State);
         }
 
-        ElementId? priorityQuest = GetNextPriorityQuestsThatCanBeAccepted()
+        ElementId? priorityQuest = NextPriorityQuestsThatCanBeAccepted
             .Where(x => x.IsAvailable)
             .Select(x => x.QuestId)
             .FirstOrDefault();
@@ -407,7 +412,9 @@ internal sealed unsafe class QuestFunctions
             return null;
     }
 
-    public List<PriorityQuestInfo> GetNextPriorityQuestsThatCanBeAccepted()
+    private CachedValue<List<PriorityQuestInfo>> _nextPriorityQuests = new(ttlSeconds: 2);
+    public List<PriorityQuestInfo> NextPriorityQuestsThatCanBeAccepted => _nextPriorityQuests.Get(GetNextPriorityQuestsThatCanBeAccepted);
+    private List<PriorityQuestInfo> GetNextPriorityQuestsThatCanBeAccepted()
     {
         // ideally, we'd also be able to afford *some* teleports
         // this implicitly makes sure we're not starting one of the lv1 class quests if we can't afford to teleport back
@@ -579,9 +586,6 @@ internal sealed unsafe class QuestFunctions
                 return false;
         }
 
-        if (IsQuestLocked(questId))
-            return false;
-
         if (!ignoreLevel)
         {
             // if we're not at a high enough level to continue, we also ignore it
@@ -589,6 +593,9 @@ internal sealed unsafe class QuestFunctions
             if (currentLevel != 0 && quest != null && quest.Info.Level > currentLevel)
                 return false;
         }
+
+        if (IsQuestLocked(questId) is (bool isLocked, var _))
+            return !isLocked;
 
         return true;
     }
@@ -634,34 +641,34 @@ internal sealed unsafe class QuestFunctions
 
     public bool IsQuestComplete(UnlockLinkId unlockLinkId) => UIState.Instance()->IsUnlockLinkUnlocked(unlockLinkId.Value);
 
-    public bool IsQuestLocked(ElementId elementId, ElementId? extraCompletedQuest = null)
+    public (bool,string[]?) IsQuestLocked(ElementId elementId, ElementId? extraCompletedQuest = null)
     {
         if (elementId is QuestId questId)
             return IsQuestLocked(questId, extraCompletedQuest);
         else if (elementId is SatisfactionSupplyNpcId satisfactionSupplyNpcId)
-            return IsQuestLocked(satisfactionSupplyNpcId);
+            return (IsQuestLocked(satisfactionSupplyNpcId),null);
         else if (elementId is AlliedSocietyDailyId alliedSocietyDailyId)
-            return IsQuestLocked(alliedSocietyDailyId);
+            return (IsQuestLocked(alliedSocietyDailyId),null);
         else if (elementId is UnlockLinkId unlockLinkId)
-            return IsQuestLocked(unlockLinkId);
+            return (IsQuestLocked(unlockLinkId),null);
         else
             throw new ArgumentOutOfRangeException(nameof(elementId));
     }
 
-    private bool IsQuestLocked(QuestId questId, ElementId? extraCompletedQuest = null)
+    private (bool,string[]) IsQuestLocked(QuestId questId, ElementId? extraCompletedQuest = null)
     {
-        if (IsQuestUnobtainable(questId, extraCompletedQuest))
-            return true;
+        Dictionary<string,bool> lockedReason = [];
+        lockedReason.Add("Unobtainable", IsQuestUnobtainable(questId, extraCompletedQuest));
 
         QuestInfo questInfo = (QuestInfo)questData.GetQuestInfo(questId);
-        if (questInfo.GrandCompany != GrandCompany.None && questInfo.GrandCompany != GetGrandCompany())
-            return true;
+        if (questInfo.GrandCompany != GrandCompany.None)
+            lockedReason.Add("Grand company mismatch", questInfo.GrandCompany != GetGrandCompany());
 
         if (questInfo.AlliedSociety != EAlliedSociety.None)
             if (questInfo.IsRepeatable)
-                return !IsDailyAlliedSocietyQuestAndAvailableToday(questId);
+                lockedReason.Add("Daily society quest is not available today", !IsDailyAlliedSocietyQuestAndAvailableToday(questId));
             else
-                return !IsAlliedSocietyStoryQuestAvailable(questId);
+                lockedReason.Add("Society story quest is not available", !IsAlliedSocietyStoryQuestAvailable(questId));
 
         if (questInfo.IsMoogleDeliveryQuest)
         {
@@ -671,19 +678,19 @@ internal sealed unsafe class QuestFunctions
                 extraQuestInfo is QuestInfo { IsMoogleDeliveryQuest: true })
                 currentDeliveryLevel++;
 
-            if (questInfo.MoogleDeliveryLevel > currentDeliveryLevel)
-                return true;
+            lockedReason.Add("Moogle quest delivery level is too low", questInfo.MoogleDeliveryLevel > currentDeliveryLevel);
         }
 
         // "an ill-conceived venture" requires to have retainers unlocked
         if ((new ushort[]{ 1432,1433,1434 }).Contains(questId.Value))
         {
             var retainerManager = RetainerManager.Instance();
-            if (retainerManager->MaxRetainerEntitlement == 0)
-                return true;
+            lockedReason.Add("Retainers are not unlocked", retainerManager->MaxRetainerEntitlement == 0);
         }
 
-        return !HasCompletedPreviousQuests(questInfo, extraCompletedQuest) || !HasCompletedPreviousInstances(questInfo);
+        lockedReason.Add("Prev quests not completed", !HasCompletedPreviousQuests(questInfo, extraCompletedQuest));
+        lockedReason.Add("Prev instances not completed", !HasCompletedPreviousInstances(questInfo));
+        return (lockedReason.Values.Any(x => x),lockedReason.Keys.ToArray());
     }
 
     private bool IsQuestLocked(SatisfactionSupplyNpcId satisfactionSupplyNpcId)
@@ -866,9 +873,12 @@ internal sealed unsafe class QuestFunctions
     private static bool HasCompletedPreviousInstances(QuestInfo questInfo)
     {
         if (questInfo.PreviousInstanceContent.Count == 0)
+        {
             return true;
+        }
 
         int completedInstances = questInfo.PreviousInstanceContent.Count(x => UIState.IsInstanceContentCompleted(x));
+
         if (questInfo.PreviousInstanceContentJoin == EQuestJoin.All &&
             questInfo.PreviousInstanceContent.Count == completedInstances)
             return true;
