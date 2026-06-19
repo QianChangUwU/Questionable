@@ -328,6 +328,7 @@ public sealed class QuestionablePlugin : IDalamudPlugin
         serviceCollection.AddSingleton<ICombatModule, BossModModule>();
         serviceCollection.AddSingleton<ICombatModule, WrathComboModule>();
         serviceCollection.AddSingleton<ICombatModule, RotationSolverRebornModule>();
+        serviceCollection.AddSingleton<ICombatModule, AeAssistModule>();
     }
 
     private static void AddWindows(ServiceCollection serviceCollection)
