@@ -22,7 +22,7 @@ internal sealed class AeAssistModule
             return false;
 
         bool isLoaded = pluginInterface.InstalledPlugins.Any(x =>
-            x.InternalName == "AEAssist" && x.IsLoaded);
+            x.InternalName == "AEAssistV3" && x.IsLoaded);
         if (!isLoaded)
             logger.LogWarning("AE Assist is selected but not loaded");
 

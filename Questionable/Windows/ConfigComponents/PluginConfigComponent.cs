@@ -93,7 +93,7 @@ internal sealed class PluginConfigComponent
             {
                 Configuration.ECombatModule.AeAssist,
                 new("AE Assist",
-                    "AEAssist",
+                    "AEAssistV3",
                     string.Empty,
                     null,
                     null,
@@ -369,12 +369,16 @@ internal sealed class PluginConfigComponent
                     color?.Dispose();
                 }
             }
-            else
+            else if (plugin.WebsiteUri != null || plugin.DalamudRepositoryUri != null)
             {
-                if (ImGuiComponentsLocal.IconButtonWithText(FontAwesomeIcon.Globe, _L("Open Website")))
-                    Util.OpenLink(plugin.WebsiteUri.ToString());
+                if (plugin.WebsiteUri != null)
+                {
+                    if (ImGuiComponentsLocal.IconButtonWithText(FontAwesomeIcon.Globe, _L("Open Website")))
+                        Util.OpenLink(plugin.WebsiteUri.ToString());
 
-                ImGui.SameLine();
+                    ImGui.SameLine();
+                }
+
                 if (plugin.DalamudRepositoryUri != null)
                 {
                     if (ImGuiComponentsLocal.IconButtonWithText(FontAwesomeIcon.Code, _L("Open Repository")))
