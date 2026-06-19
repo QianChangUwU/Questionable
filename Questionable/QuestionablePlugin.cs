@@ -400,6 +400,7 @@ public sealed class QuestionablePlugin : IDalamudPlugin
         serviceProvider.GetRequiredService<QuestRegistry>().Reload();
         serviceProvider.GetRequiredService<GatheringPointRegistry>().Reload();
         serviceProvider.GetRequiredService<SinglePlayerDutyConfigComponent>().Reload();
+        serviceProvider.GetRequiredService<DalamudInitializer>();
         serviceProvider.GetRequiredService<CommandHandler>();
         serviceProvider.GetRequiredService<ContextMenuController>();
         serviceProvider.GetRequiredService<CraftworksSupplyController>();
@@ -413,7 +414,6 @@ public sealed class QuestionablePlugin : IDalamudPlugin
         serviceProvider.GetRequiredService<GrandCompanyExchangeController>();
         serviceProvider.GetRequiredService<ChocoboNamingController>();
         serviceProvider.GetRequiredService<QuestionableIpc>();
-        serviceProvider.GetRequiredService<DalamudInitializer>();
         serviceProvider.GetRequiredService<TextAdvanceIpc>();
         serviceProvider.GetRequiredService<YesAlreadyIpc>();
 
