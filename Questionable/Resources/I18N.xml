@@ -4193,4 +4193,49 @@
     <Key>Will target Eline first (other NPCs later), and move to some -other- group of NPCs; only re-targets once they're at 1 HP (for Eline) or die</Key>
     <Value lang="zh-cn">会先锁定艾琳（之后再打其他NPC），并移动到另一组NPC处；只有在目标剩1HP（艾琳）或死亡时才会重新锁定</Value>
   </Entry>
+  <!-- Upstream additions from v15.301.0.22 merge -->
+  <Entry>
+    <Key>AcceptQuest territory {0} has no aetheryte and no teleport shortcut is set</Key>
+    <Value lang="zh-cn">AcceptQuest 区域 {0} 没有以太之光，且未设置传送捷径</Value>
+  </Entry>
+  <Entry>
+    <Key>Automates crafting</Key>
+    <Value lang="zh-cn">自动化制作</Value>
+  </Entry>
+  <Entry>
+    <Key>Automatically accepts and turns in quests, skips cutscenes\r\nand dialogue.</Key>
+    <Value lang="zh-cn">自动接受/提交任务，跳过过场动画和对话。</Value>
+  </Entry>
+  <Entry>
+    <Key>Automatically completes active time maneuvers in\r\nsingle player instances, trials and raids</Key>
+    <Value lang="zh-cn">在单人副本、讨伐战及团队副本中自动完成动态演练</Value>
+  </Entry>
+  <Entry>
+    <Key>Automatically completes active time maneuvers in\r\nsingle player instances, trials and raids"</Key>
+    <Value lang="zh-cn">自动完成单人副本、讨伐歼灭战、大型任务的动态演练。</Value>
+  </Entry>
+  <Entry>
+    <Key>Automaton is a collection of automation-related tweaks.</Key>
+    <Value lang="zh-cn">Automaton 是一系列自动化相关功能的合集。</Value>
+  </Entry>
+  <Entry>
+    <Key>Gear manager</Key>
+    <Value lang="zh-cn">装备管理器</Value>
+  </Entry>
+  <Entry>
+    <Key>Pandora's Box is a collection of tweaks.</Key>
+    <Value lang="zh-cn">Pandora's Box 是一组便捷功能合集。</Value>
+  </Entry>
+  <Entry>
+    <Key>Sends a configurable out-of-game notification if a quest\r\nrequires manual actions.</Key>
+    <Value lang="zh-cn">当任务需要手动操作时，发送可配置的桌面通知。</Value>
+  </Entry>
+  <Entry>
+    <Key>vnavmesh handles the navigation within a zone, moving\r\nyour character to the next quest-related objective.</Key>
+    <Value lang="zh-cn">vnavmesh 会处理区域内的导航，将\r\n你的角色移动到下一个与任务相关的目标。</Value>
+  </Entry>
+  <Entry>
+    <Key>vnavmesh was not able to find a path. Attempting to land, then trying again.</Key>
+    <Value lang="zh-cn">vnavmesh 无法找到路径。准备着陆后重试尝试。</Value>
+  </Entry>
 </I18N>
