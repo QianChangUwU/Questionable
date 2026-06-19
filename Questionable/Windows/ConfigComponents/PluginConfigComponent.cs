@@ -89,6 +89,15 @@ internal sealed class PluginConfigComponent
                     new(
                         "https://raw.githubusercontent.com/FFXIV-CombatReborn/CombatRebornRepo/main/pluginmaster.json"),
                     "/rsr")
+            },
+            {
+                Configuration.ECombatModule.AeAssist,
+                new("AE Assist",
+                    "AEAssist",
+                    string.Empty,
+                    null,
+                    null,
+                    null)
             }
         }.AsReadOnly();
     private readonly CombatController _combatController = combatController;
@@ -225,6 +234,8 @@ internal sealed class PluginConfigComponent
                 {
                     allRequiredInstalled &=
                         DrawCombatPlugin(Configuration.ECombatModule.RotationSolverReborn, checklistPadding);
+                    allRequiredInstalled &=
+                        DrawCombatPlugin(Configuration.ECombatModule.AeAssist, checklistPadding);
                 }
             }
         }
