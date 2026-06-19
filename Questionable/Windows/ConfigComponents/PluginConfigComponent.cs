@@ -95,9 +95,9 @@ internal sealed class PluginConfigComponent
                 new("AE Assist",
                     "AEAssist",
                     string.Empty,
-                    new("https://github.com/NevermoreAFK/AEAssistCN"),
                     null,
-                    "/ae")
+                    null,
+                    null)
             }
         }.AsReadOnly();
     private readonly CombatController _combatController = combatController;
