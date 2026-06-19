@@ -103,7 +103,9 @@ public sealed class QuestionablePlugin : IDalamudPlugin
                 pluginInterface.ConfigFile.CopyTo(Path.ChangeExtension(pluginInterface.ConfigFile.FullName, ".json.bak"), true);
                 savedConfig?.Version = Configuration.PluginConfigVersion;
             }
-            serviceCollection.AddSingleton(savedConfig ?? new Configuration());
+            var configuration = savedConfig ?? new Configuration();
+            serviceCollection.AddSingleton(configuration);
+            Questionable.Utils.LocalizeShortcut.Initialize(configuration);
 
             AddBasicFunctionsAndData(serviceCollection);
             AddTaskFactories(serviceCollection);
@@ -377,6 +379,8 @@ public sealed class QuestionablePlugin : IDalamudPlugin
         serviceCollection.AddSingleton<IQuestValidator, NextQuestValidator>();
         serviceCollection.AddSingleton<IQuestValidator, CompletionFlagsValidator>();
         serviceCollection.AddSingleton<IQuestValidator, AethernetShortcutValidator>();
+        serviceCollection.AddSingleton<IAetheryteTerritoryProvider>(sp => sp.GetRequiredService<AetheryteData>());
+        serviceCollection.AddSingleton<IQuestValidator, AcceptQuestTerritoryValidator>();
         serviceCollection.AddSingleton<IQuestValidator, DialogueChoiceValidator>();
         serviceCollection.AddSingleton<IQuestValidator, ClassQuestShouldHaveShortcutValidator>();
         serviceCollection.AddSingleton<IQuestValidator, SinglePlayerInstanceValidator>();
