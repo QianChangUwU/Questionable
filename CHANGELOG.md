@@ -3,6 +3,7 @@
 - Feature: "Stuck?" button is now more visible when QST is running -alydev
 - Feature: Troubleshooting info now includes player job/level/position/territory(location)
   - Bug fix: i broke the button, but it's working again now
+- Bug fix: qst is now less insistant on attuning to all gridania shards -alydev
 - Merge upstream v15.301.0.5 → downstream 15.301.0.501
 - Chore: switch from Dalamud.NET.Sdk to Dalamud.CN.NET.Sdk - downstream 502
 - Fix: restore zh-cn translations for 37 missing job names (lost during upstream merge) - downstream 504
