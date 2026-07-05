@@ -4245,14 +4245,17 @@
   <Entry>
     <!-- Found in: Functions\QuestFunctions.cs -->
     <Key>Daily unavailable</Key>
+    <Value lang="zh-cn">每日不可用</Value>
   </Entry>
   <Entry>
     <!-- Found in: Functions\QuestFunctions.cs -->
     <Key>Society rep</Key>
+    <Value lang="zh-cn">部族声望</Value>
   </Entry>
   <Entry>
     <!-- Found in: Functions\QuestFunctions.cs -->
     <Key>Carrier level</Key>
+    <Value lang="zh-cn">邮差等级</Value>
   </Entry>
   <Entry>
     <!-- Found in: Functions\QuestFunctions.cs -->
@@ -4322,5 +4325,124 @@
   <Entry>
     <!-- Found in: Windows\Utils\ItemBlacklistSelector.cs -->
     <Key>Showing first {0} matches — refine your search.</Key>
+  </Entry>
+  <!-- Allied society tribe names -->
+  <Entry>
+    <Key>Amaljaa</Key>
+    <Value lang="zh-cn">蜥蜴人族</Value>
+  </Entry>
+  <Entry>
+    <Key>Sylphs</Key>
+    <Value lang="zh-cn">妖精族</Value>
+  </Entry>
+  <Entry>
+    <Key>Kobolds</Key>
+    <Value lang="zh-cn">灰党</Value>
+  </Entry>
+  <Entry>
+    <Key>Sahagin</Key>
+    <Value lang="zh-cn">鱼人族</Value>
+  </Entry>
+  <Entry>
+    <Key>Ixal</Key>
+    <Value lang="zh-cn">鸟人族</Value>
+  </Entry>
+  <Entry>
+    <Key>VanuVanu</Key>
+    <Value lang="zh-cn">瓦努族</Value>
+  </Entry>
+  <Entry>
+    <Key>Vath</Key>
+    <Value lang="zh-cn">骨颌族</Value>
+  </Entry>
+  <Entry>
+    <Key>Moogles</Key>
+    <Value lang="zh-cn">莫古力族</Value>
+  </Entry>
+  <Entry>
+    <Key>Kojin</Key>
+    <Value lang="zh-cn">甲人族</Value>
+  </Entry>
+  <Entry>
+    <Key>Ananta</Key>
+    <Value lang="zh-cn">阿难陀族</Value>
+  </Entry>
+  <Entry>
+    <Key>Namazu</Key>
+    <Value lang="zh-cn">鲶鱼精族</Value>
+  </Entry>
+  <Entry>
+    <Key>Pixies</Key>
+    <Value lang="zh-cn">仙子族</Value>
+  </Entry>
+  <Entry>
+    <Key>Qitari</Key>
+    <Value lang="zh-cn">奇塔利族</Value>
+  </Entry>
+  <Entry>
+    <Key>Dwarves</Key>
+    <Value lang="zh-cn">矮人族</Value>
+  </Entry>
+  <Entry>
+    <Key>Arkasodara</Key>
+    <Value lang="zh-cn">阿输陀族</Value>
+  </Entry>
+  <Entry>
+    <Key>Omicrons</Key>
+    <Value lang="zh-cn">欧米克隆族</Value>
+  </Entry>
+  <Entry>
+    <Key>Loporrits</Key>
+    <Value lang="zh-cn">兔兔族</Value>
+  </Entry>
+  <Entry>
+    <Key>Pelupelu</Key>
+    <Value lang="zh-cn">佩鲁佩鲁族</Value>
+  </Entry>
+  <Entry>
+    <Key>MamoolJa</Key>
+    <Value lang="zh-cn">马穆尔族</Value>
+  </Entry>
+  <Entry>
+    <Key>YokHuy</Key>
+    <Value lang="zh-cn">优克厚重族</Value>
+  </Entry>
+  <!-- Allied society rank names -->
+  <Entry>
+    <Key>Neutral</Key>
+    <Value lang="zh-cn">中立</Value>
+  </Entry>
+  <Entry>
+    <Key>Recognized</Key>
+    <Value lang="zh-cn">认可</Value>
+  </Entry>
+  <Entry>
+    <Key>Friendly</Key>
+    <Value lang="zh-cn">友好</Value>
+  </Entry>
+  <Entry>
+    <Key>Trusted</Key>
+    <Value lang="zh-cn">信任</Value>
+  </Entry>
+  <Entry>
+    <Key>Respected</Key>
+    <Value lang="zh-cn">尊敬</Value>
+  </Entry>
+  <Entry>
+    <Key>Honored</Key>
+    <Value lang="zh-cn">名誉</Value>
+  </Entry>
+  <Entry>
+    <Key>Sworn</Key>
+    <Value lang="zh-cn">宣誓</Value>
+  </Entry>
+  <Entry>
+    <Key>Allied</Key>
+    <Value lang="zh-cn">同盟</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\QuestComponents\QuestTooltipComponent.cs -->
+    <Key> (maxed)</Key>
+    <Value lang="zh-cn">（已满）</Value>
   </Entry>
 </I18N>

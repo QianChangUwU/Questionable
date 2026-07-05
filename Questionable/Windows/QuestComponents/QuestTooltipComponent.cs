@@ -100,10 +100,10 @@ internal sealed class QuestTooltipComponent
         }
 
         if (questInfo.AlliedSociety != EAlliedSociety.None)
-            ImGui.Text(_LF("Society: {0}", questInfo.AlliedSociety));
+            ImGui.Text(_LF("Society: {0}", _L(questInfo.AlliedSociety.ToString())));
 
         if (questInfo is QuestInfo qInfo && qInfo.AlliedSocietyRank != EAlliedSocietyRank.None)
-            ImGui.Text(_LF("Rank: {0}{1}", qInfo.AlliedSocietyRank, (!qInfo.IsRepeatable ? " (maxed)" : "")));
+            ImGui.Text(_LF("Rank: {0}{1}", _L(qInfo.AlliedSocietyRank.ToString()), (!qInfo.IsRepeatable ? _L(" (maxed)") : "")));
 
         DrawQuestUnlocks(questInfo, 0, showItemRewards);
     }

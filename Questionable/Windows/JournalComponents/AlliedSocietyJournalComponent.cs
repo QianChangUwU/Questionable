@@ -111,7 +111,7 @@ internal sealed class AlliedSocietyJournalComponent
             (EAlliedSocietyRank rank, ushort currentRep, ushort neededRep) = questFunctions.GetAlliedSocietyRankAndRep(alliedSociety);
 
             string rep = neededRep != 0 ? $"({rank} {currentRep}/{neededRep}) " : "";
-            string label = $"{rep}{alliedSociety}###AlliedSociety{(int)alliedSociety}";
+            string label = $"{rep}{_L(alliedSociety.ToString())}###AlliedSociety{(int)alliedSociety}";
             bool isOpen;
 
             using (ImRaii.Disabled(quests.Count == 0))
@@ -159,7 +159,7 @@ internal sealed class AlliedSocietyJournalComponent
                     if (questsByRank.Count == 0)
                         continue;
 
-                    ImGui.Text($"{(EAlliedSocietyRank)i}");
+                    ImGui.Text(_L(((EAlliedSocietyRank)i).ToString()));
                     questJournalUtils.ShowQuestGroupContextMenu($"DrawAlliedSocietyQuests{alliedSociety}/{(EAlliedSocietyRank)i}", questsByRank);
                     foreach (IQuestInfo quest in questsByRank)
                         DrawQuest((QuestInfo)quest, addPending, neededRep != 0);
