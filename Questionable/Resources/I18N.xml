@@ -4337,7 +4337,7 @@
   </Entry>
   <Entry>
     <Key>Kobolds</Key>
-    <Value lang="zh-cn">灰党</Value>
+    <Value lang="zh-cn">地灵族</Value>
   </Entry>
   <Entry>
     <Key>Sahagin</Key>
@@ -4385,11 +4385,11 @@
   </Entry>
   <Entry>
     <Key>Arkasodara</Key>
-    <Value lang="zh-cn">阿输陀族</Value>
+    <Value lang="zh-cn">悌阳象族</Value>
   </Entry>
   <Entry>
     <Key>Omicrons</Key>
-    <Value lang="zh-cn">欧米克隆族</Value>
+    <Value lang="zh-cn">奥密克戎族</Value>
   </Entry>
   <Entry>
     <Key>Loporrits</Key>
@@ -4401,11 +4401,11 @@
   </Entry>
   <Entry>
     <Key>MamoolJa</Key>
-    <Value lang="zh-cn">马穆尔族</Value>
+    <Value lang="zh-cn">尤卡巨人族</Value>
   </Entry>
   <Entry>
     <Key>YokHuy</Key>
-    <Value lang="zh-cn">优克厚重族</Value>
+    <Value lang="zh-cn">辉鳞族</Value>
   </Entry>
   <!-- Allied society rank names -->
   <Entry>
@@ -4414,7 +4414,7 @@
   </Entry>
   <Entry>
     <Key>Recognized</Key>
-    <Value lang="zh-cn">认可</Value>
+    <Value lang="zh-cn">承认</Value>
   </Entry>
   <Entry>
     <Key>Friendly</Key>
@@ -4422,7 +4422,7 @@
   </Entry>
   <Entry>
     <Key>Trusted</Key>
-    <Value lang="zh-cn">信任</Value>
+    <Value lang="zh-cn">信赖</Value>
   </Entry>
   <Entry>
     <Key>Respected</Key>
@@ -4434,11 +4434,11 @@
   </Entry>
   <Entry>
     <Key>Sworn</Key>
-    <Value lang="zh-cn">宣誓</Value>
+    <Value lang="zh-cn">誓约</Value>
   </Entry>
   <Entry>
     <Key>Allied</Key>
-    <Value lang="zh-cn">同盟</Value>
+    <Value lang="zh-cn">盟友</Value>
   </Entry>
   <Entry>
     <!-- Found in: Windows\QuestComponents\QuestTooltipComponent.cs -->
