@@ -32,12 +32,8 @@ internal sealed class QuestJournalComponent
     IDalamudPluginInterface pluginInterface,
     QuestJournalUtils questJournalUtils,
     QuestValidator questValidator,
-    MovementController movementController,
-    AetheryteFunctions aetheryteFunctions,
-    AetheryteData aetheryteData,
     QuestController questController,
-    RedoUtil redoUtil,
-    IGameGui gameGui)
+    RedoUtil redoUtil)
 {
     private readonly Dictionary<JournalData.Category, JournalCounts> _categoryCounts = [];
     private readonly Dictionary<JournalData.Genre, JournalCounts> _genreCounts = [];
@@ -195,9 +191,9 @@ internal sealed class QuestJournalComponent
             {
                 lastCheckedLong = "\n" + _LF("Last checked: {0}", quest.Root.LastChecked);
                 int since = (int)quest.Root.LastChecked.Since(DateTime.Now)!.Value.TotalDays;
-                if (since < 7)
+                if (since >= 0 && since < 7)
                     lastChecked = $"{since}d";
-                else
+                else if (since >= 7)
                     lastChecked = $"{since / 7}w";
             }
             RedoIndex redoIndex = redoUtil.GetChapter(quest.Id.Value);
@@ -221,28 +217,7 @@ internal sealed class QuestJournalComponent
             questTooltipComponent.Draw(questInfo);
 
         if (ImGui.IsItemClicked())
-        {
-            var location = questInfo.IssuerLocation;
-            Svc.Log.Debug(location.ToString() ?? "SheetLevel()");
-            var mapLink = new MapLinkPayload(
-                location.Territory.RowId,
-                location.Map.RowId,
-                location.Game.X,
-                location.Game.Z
-            );
-            bool openedMap = gameGui.OpenMapWithMapLink(mapLink);
-            if (location.Territory.RowId.Equals(Svc.ClientState.TerritoryType))
-                movementController.NavigateTo(EMovementType.None, questInfo.IssuerDataId, location.Position, new()
-                {
-                    Fly = GameFunctions.IsFlyingUnlocked(location.Territory.RowId) ? true : false,
-                    Sprint = true,
-                    StopDistance = 20f,
-                    VerticalStopDistance = 5f,
-                });
-            else
-                if (aetheryteData.NearestAetheryteTo(location.Territory.RowId, location.Position) is { } aetheryte)
-                    aetheryteFunctions.TeleportAetheryte(aetheryte);
-        }
+            questJournalUtils.MoveToQuestLocation(questInfo);
 
         questJournalUtils.ShowContextMenu(questInfo, quest, nameof(QuestJournalComponent));
 
@@ -305,16 +280,16 @@ internal sealed class QuestJournalComponent
 
         ImGui.TableNextColumn();
         (Vector4 color, FontAwesomeIcon icon, string text) = uiUtils.GetQuestStyle(questInfo.QuestId);
-        uiUtils.ChecklistItem(text, color, icon);
+        uiUtils.ChecklistItem(text.Split(',',1)[0], color, icon);
     }
 
-    private static void DrawCount(int count, int total)
+    internal static void DrawCount(int count, int total)
     {
         string len = 9999.ToString(CultureInfo.CurrentCulture);
         ImGui.PushFont(UiBuilder.MonoFont);
 
         if (total == 0)
-            ImGui.TextColored(ImGuiColors.DalamudGrey, $"{"-".PadLeft(len.Length)} / {"-".PadLeft(len.Length)}");
+            ImGui.TextColored(ImGuiColors.DalamudGrey, $"{" ".PadLeft(len.Length)} - {" ".PadLeft(len.Length)}");
         else
         {
             string text =

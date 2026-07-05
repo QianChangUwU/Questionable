@@ -104,6 +104,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
     private readonly SinglePlayerDutyConfigComponent _singlePlayerDutyConfigComponent;
     private readonly TaskCreator _taskCreator;
     private readonly IToastGui _toastGui;
+    private readonly ICommandManager _commandManager;
     private EAutomationType _automationType;
     private DateTime _lastAutoRefresh = DateTime.MinValue;
 
@@ -164,6 +165,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
         InterruptHandler interruptHandler,
         IDataManager dataManager,
         IGameGuiAdapter gameGui,
+        ICommandManager commandManager,
         SinglePlayerDutyConfigComponent singlePlayerDutyConfigComponent,
         AlliedSocietyQuestFunctions alliedSocietyQuestFunctions)
         : base(chatGui, condition, serviceProvider, interruptHandler, dataManager, logger)
@@ -190,6 +192,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
         _alliedSocietyQuestFunctions = alliedSocietyQuestFunctions;
         _logger = logger;
         _highlightObject = highlightObject;
+        _commandManager = commandManager;
 
         _condition.ConditionChange += OnConditionChange;
         _toastGui.Toast += OnNormalToast;
@@ -273,6 +276,14 @@ internal sealed class QuestController : MiniTaskController<QuestController>
         }
     }
 
+    public bool IsQuestingStopped
+    {
+        get
+        {
+            return AutomationType == EAutomationType.Manual && !IsRunning && !IsQuestWindowOpen;
+        }
+    }
+
     public event AutomationTypeChangedEventHandler? AutomationTypeChanged;
 
     public void Reload()
@@ -324,7 +335,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
             }
         }
 
-        if (AutomationType == EAutomationType.Manual && !IsRunning && !IsQuestWindowOpen)
+        if (IsQuestingStopped)
             return;
 
         UpdateCurrentQuest();
@@ -553,6 +564,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
                     _chatGui.Print(_LF("Completed quest '{0}', which is configured as a stopping point.", StartedQuest.Quest.Info.Name), CommandHandler.MessageTag, CommandHandler.TagColor);
                     StartedQuest = null;
                     Stop($"Stopping point [{questId}] reached");
+                    _configuration.Stop.QuestsToStopAfter.Remove(questId);
                     return;
                 }
 
@@ -637,7 +649,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
                         TryStopOnQuestAccepted(quest.Id);
 
                         StartedQuest = new(quest, currentSequence);
-                        if (_configuration.Advanced.Debug && _configuration.Advanced.OpenEditor && 
+                        if (_configuration.Advanced.Debug && _configuration.Advanced.OpenEditor &&
                             (quest.Root.LastChecked.Date == null || (quest.Root.LastChecked.Since(DateTime.Now) is { } since && since.TotalDays > 30)))
                         {
                             (bool success, string msg) = QuestRegistry.OpenEditor(StartedQuest.Quest.Info);
@@ -852,6 +864,11 @@ internal sealed class QuestController : MiniTaskController<QuestController>
         if (IsRunning || AutomationType != EAutomationType.Manual)
         {
             ClearTasksInternal();
+            if (_configuration.Stop is { RunCommandAfterStop: true } stop)
+            {
+                if (stop.CommandAfterStop.StartsWith('/'))
+                    _commandManager.ProcessCommand(stop.CommandAfterStop);
+            }
             _logger.LogInformation("Stopping automatic questing");
             AutomationType = EAutomationType.Manual;
             NextQuest = null;
@@ -1043,14 +1060,15 @@ internal sealed class QuestController : MiniTaskController<QuestController>
             return;
         }
 
-        _logger.LogInformation("Retrying current step for quest {QuestId} (sequence {Sequence}, step {Step})",
-            CurrentQuest.Quest.Id, CurrentQuest.Sequence, CurrentQuest.Step);
+        _logger.LogInformation("Retrying current step [{QuestId}, {Sequence}, {Step}]",
+                    CurrentQuest?.Quest.Id, CurrentQuest?.Sequence, CurrentQuest?.Step);
         CheckNextTasks("RetryStep");
     }
 
     public void Start(string label)
     {
         using IDisposable? scope = _logger.BeginScope($"Q/{label}");
+        RedeemRewardItems.ResetAttemptedItems();
         AutomationType = EAutomationType.Automatic;
         ExecuteNextStep();
     }
@@ -1058,6 +1076,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
     public void StartGatheringQuest(string label)
     {
         using IDisposable? scope = _logger.BeginScope($"GQ/{label}");
+        RedeemRewardItems.ResetAttemptedItems();
         AutomationType = EAutomationType.GatheringOnly;
         ExecuteNextStep();
     }
@@ -1065,6 +1084,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
     public void StartSingleQuest(string label)
     {
         using IDisposable? scope = _logger.BeginScope($"SQ/{label}");
+        RedeemRewardItems.ResetAttemptedItems();
         AutomationType = EAutomationType.SingleQuestA;
         ExecuteNextStep();
     }
@@ -1072,6 +1092,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
     public void StartSingleStep(string label)
     {
         using IDisposable? scope = _logger.BeginScope($"SS/{label}");
+        RedeemRewardItems.ResetAttemptedItems();
         AutomationType = EAutomationType.Manual;
         ExecuteNextStep();
     }
@@ -1132,7 +1153,8 @@ internal sealed class QuestController : MiniTaskController<QuestController>
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Failed to create tasks");
+            _logger.LogError(e, "Failed to create tasks [{QuestId}, {Sequence}, {Step}]",
+                    CurrentQuest?.Quest.Id, CurrentQuest?.Sequence, CurrentQuest?.Step);
             _chatGui.PrintError(_L("Failed to start next task sequence, please check /xllog for details."), CommandHandler.MessageTag, CommandHandler.TagColor);
             Stop("Tasks failed to create");
         }

@@ -15,6 +15,7 @@ using Dalamud.Plugin.Services;
 using ECommons.Throttlers;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Questionable.Controller.NavigationOverrides;
 using Questionable.Controller.Steps.Movement;
@@ -25,6 +26,7 @@ using Questionable.Model;
 using Questionable.Model.Common;
 using Questionable.Model.Common.Converter;
 using Questionable.Model.Questing;
+using Questionable.Utils;
 using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Controller;
 
@@ -40,6 +42,7 @@ internal sealed class MovementController
     AetheryteData aetheryteData,
     ICommandManager commandManager,
     IChatGui chatGui,
+    IServiceProvider serviceProvider,
     ILogger<MovementController> logger) : IDisposable
 {
     public const float DefaultVerticalInteractionDistance = 1.95f;
@@ -162,9 +165,9 @@ internal sealed class MovementController
                 }
 
                 navPoints = Destination.PartialRoute.Concat(navPoints).ToList();
-                logger.LogInformation("Navigating via route: [{Route}]",
-                    string.Join(" → ",
-                        pathfindResult.Select(x => x.ToString("G", CultureInfo.InvariantCulture))));
+                logger.LogInformation("Navigating via route (XZ:{Distance}) [{Route}]",
+                    navPoints.First().DistanceTo_XZ(navPoints.Last()),
+                    string.Join(" → ", pathfindResult.Select(x => x.ToString("G", CultureInfo.InvariantCulture))));
 
                 navmeshIpc.MoveTo(navPoints, Destination.IsFlying);
                 MovementStartedAt = DateTime.Now;
@@ -179,6 +182,13 @@ internal sealed class MovementController
                 ResetPathfinding();
                 throw new PathfindingFailedException(error);
             }
+        }
+
+        if (serviceProvider.GetRequiredService<QuestController>().IsQuestingStopped)
+        {
+            if (EzThrottler.Throttle("qstwouldhavejumpedin", 5000))
+                logger.LogDebug("Questionable would have jumped in here to do something, but decided against it.");
+            return;
         }
 
         if (IsPathRunning && Destination != null)

@@ -107,6 +107,11 @@
           "description": "The data id of the NPC/Object/Aetheryte/Aether Current",
           "exclusiveMinimum": 0
         },
+        "MacroId": {
+          "type": "integer",
+          "description": "The ID of the macro to insert",
+          "exclusiveMinimum": 0
+        },
         "Position": {
           "$ref": "https://qstxiv.github.io/schema/common-vector3.json"
         },
@@ -173,7 +178,9 @@
             "Instruction",
             "AcceptQuest",
             "CompleteQuest",
-            "InitiateLeve"
+            "InitiateLeve",
+            "Fish",
+            "Macro"
           ]
         },
         "Disabled": {
@@ -1654,6 +1661,11 @@
                     "type": "boolean",
                     "description": "Indicates that this dungeon is included in the 'Skip certain optional dungeons and raids' option"
                   },
+                  "CanUnsync": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "When false, Questionable will not run this duty unsynced even if 'Run content unsynced where safe' is enabled"
+                  },
                   "$": {
                     "type": "string"
                   }
@@ -1890,6 +1902,55 @@
           "if": {
             "properties": {
               "InteractionType": {
+                "const": "Fish"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "ItemsToGather": {
+                "type": "array",
+                "description": "The items to gather from the fishing spot.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "ItemId": {
+                      "type": "number"
+                    },
+                    "ItemCount": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "Collectability": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1000
+                    }
+                  },
+                  "required": [
+                    "ItemId",
+                    "ItemCount"
+                  ]
+                }
+              }
+            },
+            "if": {
+              "required": [
+                "CompletionQuestVariablesFlags"
+              ]
+            },
+            "then": {},
+            "else": {
+              "required": [
+                "ItemsToGather"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "InteractionType": {
                 "anyOf": [
                   {
                     "const": "WaitForManualProgress"
@@ -1952,6 +2013,20 @@
             },
             "required": [
               "TargetClass"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "InteractionType": {
+                "const": "Macro"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "MacroId"
             ]
           }
         }
