@@ -16,19 +16,19 @@ internal static class ImGuiComponentsLocal
                    [CallerFilePath] string file = "",
                  [CallerLineNumber] int line = 0)
     {
-        return IconButton(icon, null, null, null, null, file, line, id);
+        return IconButton(icon, defaultColor: null, activeColor: null, hoveredColor: null, size: null, file, line, id);
     }
     internal static bool IconButton(FontAwesomeIcon icon,
                    [CallerFilePath] string file = "",
                  [CallerLineNumber] int line = 0)
     {
-        return IconButton(icon, null, null, null, null, file, line);
+        return IconButton(icon, defaultColor: null, activeColor: null, hoveredColor: null, size: null, file, line);
     }
     internal static bool IconButton(FontAwesomeIcon icon, Vector2 size,
                    [CallerFilePath] string file = "",
                  [CallerLineNumber] int line = 0)
     {
-        return IconButton(icon, null, null, null, size, file, line);
+        return IconButton(icon, defaultColor: null, activeColor: null, hoveredColor: null, size, file, line);
     }
     internal static bool IconButton(FontAwesomeIcon icon,
                                     Vector4? defaultColor,
@@ -52,7 +52,7 @@ internal static class ImGuiComponentsLocal
                            [CallerFilePath] string file = "",
                          [CallerLineNumber] int line = 0)
     {
-        return IconButtonWithText(icon, text, null, null, null, size, file, line);
+        return IconButtonWithText(icon, text, defaultColor: null, activeColor: null, hoveredColor: null, size, file, line);
     }
 
     internal static bool IconButtonWithText(FontAwesomeIcon icon,

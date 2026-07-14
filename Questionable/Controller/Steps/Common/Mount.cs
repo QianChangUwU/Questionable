@@ -70,7 +70,7 @@ internal static class Mount
             {
                 Vector3 playerPosition = objectTable[0]?.Position ?? Vector3.Zero;
                 float distance = System.Numerics.Vector3.Distance(playerPosition, task.Position.GetValueOrDefault());
-                if (task.TerritoryId == clientState.TerritoryType && distance < 50f && !Conditions.Instance()->Diving)
+                if (task.TerritoryId == clientState.TerritoryType && distance < 50f && !condition[ConditionFlag.Diving])
                 {
                     logger.Log(logLevel, "Not using mount, as we're close to the target");
                     logger.LogDebug("Returning 'DontMount'");
@@ -91,11 +91,9 @@ internal static class Mount
                 logger.LogDebug("Returning 'Mount'");
                 return MountResult.Mount;
             }
-            else
-            {
-                logger.LogDebug("Returning 'WhenOutOfCombat'");
-                return MountResult.WhenOutOfCombat;
-            }
+
+            logger.LogDebug("Returning 'WhenOutOfCombat'");
+            return MountResult.WhenOutOfCombat;
         }
     }
 
@@ -112,7 +110,7 @@ internal static class Mount
         protected override bool Start()
         {
             _mountTriggered = false;
-            return mountEvaluator.EvaluateMountState(Task, false, ref _retryAt) == MountResult.Mount;
+            return mountEvaluator.EvaluateMountState(Task, dryRun: false, ref _retryAt) == MountResult.Mount;
         }
 
         public override ETaskResult Update()

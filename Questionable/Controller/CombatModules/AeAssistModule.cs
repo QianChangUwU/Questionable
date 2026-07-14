@@ -3,6 +3,7 @@ using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Plugin;
 using Microsoft.Extensions.Logging;
 using Questionable.Functions;
+using Questionable.Model.Common;
 
 namespace Questionable.Controller.CombatModules;
 
@@ -18,7 +19,7 @@ internal sealed class AeAssistModule
 
     public bool CanHandleFight(CombatController.CombatData combatData)
     {
-        if (configuration.General.CombatModule != Configuration.ECombatModule.AeAssist)
+        if (configuration.General.CombatModule != ECombatModule.AeAssist)
             return false;
 
         bool isLoaded = pluginInterface.InstalledPlugins.Any(x =>
