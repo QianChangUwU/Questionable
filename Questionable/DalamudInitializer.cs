@@ -1,18 +1,6 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using Dalamud.Game.Gui.Toast;
+﻿using Dalamud.Game.Gui.Toast;
 using Dalamud.Game.Text.SeStringHandling;
-using Dalamud.Interface.Windowing;
-using Dalamud.Plugin;
-using Dalamud.Plugin.Services;
-using ECommons.DalamudServices;
 using I18N.DotNet;
-using Microsoft.Extensions.Logging;
-using Questionable.Controller;
-using Questionable.Controller.Utils;
-using Questionable.Windows;
-using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable;
 
 internal sealed class DalamudInitializer : IDisposable
@@ -46,6 +34,7 @@ internal sealed class DalamudInitializer : IDisposable
         QuestValidationWindow questValidationWindow,
         JournalProgressWindow journalProgressWindow,
         PriorityWindow priorityWindow,
+        PathEditorWindow pathEditorWindow,
         IChatGui chatGui,
         IToastGui toastGui,
         Configuration configuration,
@@ -77,6 +66,7 @@ internal sealed class DalamudInitializer : IDisposable
         _windowSystem.AddWindow(questValidationWindow);
         _windowSystem.AddWindow(journalProgressWindow);
         _windowSystem.AddWindow(priorityWindow);
+        _windowSystem.AddWindow(pathEditorWindow);
 
         _pluginInterface.UiBuilder.Draw += _windowSystem.Draw;
         _pluginInterface.UiBuilder.OpenMainUi += ToggleQuestWindow;

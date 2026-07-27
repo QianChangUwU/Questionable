@@ -1,10 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Numerics;
-using Dalamud.Plugin.Services;
-using Microsoft.Extensions.Logging;
-namespace Questionable.Controller.NavigationOverrides;
+﻿namespace Questionable.Controller.NavigationOverrides;
 
 internal sealed class MovementOverrideController(IClientState clientState, ILogger<MovementOverrideController> logger)
 {
@@ -112,7 +106,7 @@ internal sealed class MovementOverrideController(IClientState clientState, ILogg
                 if (alternateLocation != null)
                 {
                     _logger.LogInformation("Fudging navmesh point from {Original} to {Replacement} in blacklisted area",
-                        navPoints[i].ToString("G", CultureInfo.InvariantCulture),
+                        navPoints[i].ToString("G5", CultureInfo.InvariantCulture),
                         alternateLocation);
 
                     navPoints[i] = alternateLocation.Point;

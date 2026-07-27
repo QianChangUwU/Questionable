@@ -1,14 +1,7 @@
-﻿using System.Globalization;
-using System.Linq;
-using System.Numerics;
-using Dalamud.Game.ClientState.Objects.Enums;
+﻿using Dalamud.Game.ClientState.Objects.Enums;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.Text.SeStringHandling;
-using Dalamud.Plugin.Services;
-using Microsoft.Extensions.Logging;
 using Questionable.Controller.Steps.Movement;
-using Questionable.Functions;
-using Questionable.Model;
 using Questionable.Model.Gathering;
 using Questionable.Model.Questing;
 namespace Questionable.Controller.Steps.Gathering;
@@ -48,12 +41,12 @@ internal static class MoveToLandingLocation
                     return false;
 
                 location = Task.GatheringNode.Locations.Single(x =>
-                    Vector3.Distance(x.Position, gameObject.Position) < 0.1f);
+                    Vector3.Distance(x.Position, gameObject.Position) < 1f);
             }
 
             (Vector3 target, int degrees, float range) = GatheringMath.CalculateLandingLocation(location);
             logger.LogInformation("Preliminary landing location: {Location}, with degrees = {Degrees}, range = {Range}",
-                target.ToString("G", CultureInfo.InvariantCulture), degrees, range);
+                target.ToString("G5", CultureInfo.InvariantCulture), degrees, range);
 
             bool fly = Task.FlyBetweenNodes && GameFunctions.IsFlyingUnlocked(Task.TerritoryId);
             _moveTask = new MoveTask(Task.TerritoryId, target, Mount: null, 0.25f,

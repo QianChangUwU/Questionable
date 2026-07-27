@@ -1,13 +1,7 @@
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using Dalamud.Plugin.Services;
 using ECommons.ExcelServices;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using Lumina.Excel.Sheets;
-using Microsoft.Extensions.Logging;
-using Questionable.Data;
-using Questionable.Functions;
 using Questionable.Model.Gathering;
 using Questionable.Model.Questing;
 
@@ -88,6 +82,13 @@ internal sealed class TravelDestinationResolver(
     public bool TryFindWarp(ushort targetTerritoryId, string actualPrompt, [NotNullWhen(true)] out uint? warpId,
         [NotNullWhen(true)] out string? warpText)
     {
+        // Override for island sanc, this is not good and should be cleaner
+        if (targetTerritoryId == 1055)
+        {
+            warpId = 131497;
+            warpText = actualPrompt;
+            return true;
+        }
         IEnumerable<Warp> warps = dataManager.GetExcelSheet<Warp>()
             .Where(x => x.RowId > 0 && x.TerritoryType.RowId == targetTerritoryId);
         foreach (Warp entry in warps)

@@ -1,25 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Text;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface;
-using Dalamud.Interface.Colors;
 using Dalamud.Interface.Components;
 using Dalamud.Interface.Utility.Raii;
-using Dalamud.Plugin;
-using Dalamud.Plugin.Services;
 using Dalamud.Utility;
 using Lumina.Excel.Sheets;
-using Questionable.Controller;
-using Questionable.Data;
-using Questionable.External;
-using Questionable.Model;
 using Questionable.Model.Common;
 using Questionable.Model.Questing;
-using Questionable.Utils;
-using static Questionable.Utils.LocalizeShortcut;
+using Questionable.Windows.Common.Ui;
 namespace Questionable.Windows.ConfigComponents;
 
 internal sealed class DutyConfigComponent : ConfigComponent
@@ -30,6 +18,7 @@ internal sealed class DutyConfigComponent : ConfigComponent
     private bool runInstancedContentWithAutoDuty;
 
     private readonly QuestRegistry _questRegistry;
+    private Vector2 Size;
 
     public DutyConfigComponent(
         IDalamudPluginInterface pluginInterface,
@@ -71,6 +60,8 @@ internal sealed class DutyConfigComponent : ConfigComponent
         using ImRaii.TabItemDisposable tab = ImRaii.TabItem(_L("Duties") + "###Duties");
         if (!tab)
             return;
+        Size = ImGui.GetWindowContentRegionMax();
+        var wrap = ImRaii.TextWrapPos(Size.X + 10);
 
         runInstancedContentWithAutoDuty = Configuration.Duties.RunInstancedContentWithAutoDuty;
         if (ImGui.Checkbox(_L("Run instanced content with AutoDuty and BossMod"), ref runInstancedContentWithAutoDuty))
@@ -97,7 +88,7 @@ internal sealed class DutyConfigComponent : ConfigComponent
                 "a duty's required item level, Questionable will ask AutoDuty to run it solo as an Unrestricted Party.") +
                 _L("This now does not include Trials, which are likely to have extra complexity or mechanics making them infeasible to complete as an Unrestricted Party."));
             ImGui.SameLine();
-            ImGui.TextColored(ImGuiColors.DalamudRed, _L("Experimental feature"));
+            ImGui.TextColored(QstTheme.Danger, _L("Experimental feature"));
         }
 
         ImGui.Separator();
@@ -122,15 +113,16 @@ internal sealed class DutyConfigComponent : ConfigComponent
 
             DrawEnableAllButton();
             ImGui.SameLine();
-            DrawClipboardButtons();
-            ImGui.SameLine();
             DrawResetButton();
+            if (Size.X > 500)
+                ImGui.SameLine();
+            DrawClipboardButtons();
         }
     }
 
     private void DrawConfigTable()
     {
-        using ImRaii.ChildDisposable child = ImRaii.Child("DutyConfiguration", new(650, 400), border: true);
+        using ImRaii.ChildDisposable child = ImRaii.Child("DutyConfiguration", new(ImGui.GetWindowContentRegionMax().X - 5, 300), border: true);
         if (!child)
             return;
 
@@ -212,7 +204,7 @@ internal sealed class DutyConfigComponent : ConfigComponent
         if (runInstancedContentWithAutoDuty && !_autoDutyIpc.HasPath(dutyInfo.CfcId))
         {
             ImGuiComponents.HelpMarker(_L("This duty is not supported by AutoDuty"),
-                FontAwesomeIcon.Times, ImGuiColors.DalamudRed);
+                FontAwesomeIcon.Times, QstTheme.Danger);
         }
         else if (dutyOptions.Notes.Count > 0)
             DrawNotes(dutyOptions.Enabled, dutyOptions.Notes);

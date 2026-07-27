@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Questionable.Model.Questing;
+﻿using Questionable.Model.Questing;
 namespace Questionable.Domain;
 
 internal sealed class Quest
@@ -17,6 +15,8 @@ internal sealed class Quest
     public required QuestRoot Root { get; init; }
     public required IQuestInfo Info { get; init; }
     public required ESource Source { get; init; }
+
+    public QuestInfo GetQuestInfo() => (QuestInfo)Info;
 
     public QuestSequence? FindSequence(byte currentSequence) => Root.QuestSequence.SingleOrDefault(seq => seq.Sequence == currentSequence);
 

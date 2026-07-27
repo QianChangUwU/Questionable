@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Dalamud.Game.Text;
 using Dalamud.Memory;
-using Dalamud.Plugin.Services;
-using ECommons;
 using ECommons.ExcelServices;
 using FFXIVClientStructs.FFXIV.Application.Network.WorkDefinitions;
 using FFXIVClientStructs.FFXIV.Client.Game;
@@ -15,15 +10,10 @@ using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Client.UI.Arrays;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using Lumina.Excel.Sheets;
-using Questionable.Controller;
-using Questionable.Data;
-using Questionable.Domain;
-using Questionable.Model;
 using Questionable.Model.Common;
 using Questionable.Model.Questing;
-using Questionable.Utils;
+using static Questionable.Domain.QuestInfo;
 using static Questionable.Utils.CacheUtils;
-using static Questionable.Utils.LocalizeShortcut;
 using GrandCompany = FFXIVClientStructs.FFXIV.Client.UI.Agent.GrandCompany;
 using Quest = Questionable.Domain.Quest;
 
@@ -109,9 +99,9 @@ internal sealed unsafe class QuestFunctions
             // quests that use white wolf gate, finish 'broadening horizons' to unlock it
             if (!aetheryteFunctions.IsAetheryteUnlocked(EAetheryteLocation.GridaniaBlueBadgerGate))
             {
-                chatGui.PrintError(_L("This quest uses the White Wolf Gate, which requires that you unlock all aethernet shards in Gridania.\n" +
-                               "This should have happened as part of the quest \"Close To Home\" if starting in Gridania, or \"The Ul'dahn/Lominsan Envoy\" for the other cities.\n" +
-                               "Please unlock the aethernet shards, or complete the current quest sequence manually before continuing."),
+                chatGui.PrintError(_L("This quest uses the White Wolf Gate, which requires that you unlock all aethernet shards in Gridania.\n") +
+                                   _L("This should have happened as part of the quest \"Close To Home\" if starting in Gridania, or \"The Ul'dahn/Lominsan Envoy\" for the other cities.\n") +
+                                   _L("Please unlock the aethernet shards, or complete the current quest sequence manually before continuing."),
                                CommandHandler.MessageTag, CommandHandler.TagColor);
                 throw new RequiredTeleportLockedException("Required aethernet shard not unlocked");
             }
@@ -668,7 +658,10 @@ internal sealed unsafe class QuestFunctions
 
         QuestInfo questInfo = (QuestInfo)questData.GetQuestInfo(questId);
         if (questInfo.GrandCompany != GrandCompany.None)
+        {
             lockedReason.Add(_L("GC"), questInfo.GrandCompany != GetGrandCompany());
+            lockedReason.Add(_L("Rank"), questInfo.GrandCompanyRank > GetGrandCompanyRank());
+        }
 
         lockedReason.Add(_L("Level"), playerState->CurrentLevel < questInfo.Level);
         if (questInfo.AlliedSociety != EAlliedSociety.None)
@@ -914,6 +907,7 @@ internal sealed unsafe class QuestFunctions
     }
 
     public GrandCompany GetGrandCompany() => (GrandCompany)PlayerState.Instance()->GrandCompany;
+    public EGrandCompanyRank GetGrandCompanyRank() => (EGrandCompanyRank)PlayerState.Instance()->GetGrandCompanyRank();
 
     public bool IsMainScenarioQuestComplete() => IsQuestComplete(questData.LastMainScenarioQuestId);
 }

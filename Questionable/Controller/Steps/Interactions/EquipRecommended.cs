@@ -1,13 +1,8 @@
-﻿using System;
-using Dalamud.Game.ClientState.Conditions;
-using Dalamud.Plugin.Services;
-using ECommons.DalamudServices;
+﻿using Dalamud.Game.ClientState.Conditions;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using FFXIVClientStructs.Interop;
-using Questionable.Domain;
-using Questionable.External;
 using Questionable.Model.Common;
 using Questionable.Model.Questing;
 using static Questionable.Utils.LocalizeShortcut;
@@ -89,7 +84,7 @@ internal static class EquipRecommended
                         {
                             chatGui.Print(_L("Equipping recommended gear."), CommandHandler.MessageTag, CommandHandler.TagColor);
                             recommendedEquipModule->EquipRecommendedGear();
-                            _continueAt = DateTime.Now.AddSeconds(1);
+                            _continueAt = DateTime.Now.AddSeconds(0.25);
                         }
 
                         _checkedOrTriggeredEquipmentUpdate = true;
@@ -106,7 +101,7 @@ internal static class EquipRecommended
                         {
                             stylist.UpdateGearset();
                             _checkedOrTriggeredEquipmentUpdate = true;
-                            _continueAt = DateTime.Now.AddSeconds(1);
+                            _continueAt = DateTime.Now.AddSeconds(0.25);
                             return ETaskResult.StillRunning;
                         }
                     }

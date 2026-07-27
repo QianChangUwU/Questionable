@@ -1,31 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Linq;
-using System.Numerics;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.ClientState.Objects.Enums;
 using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Plugin.Ipc.Exceptions;
-using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Questionable.Controller.NavigationOverrides;
 using Questionable.Controller.Steps.Movement;
-using Questionable.Data;
-using Questionable.External;
-using Questionable.Functions;
 using Questionable.Model.Common;
 using Questionable.Model.Common.Converter;
 using Questionable.Model.Questing;
-using Questionable.Utils;
-using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Controller;
 
 // TODO: refactor — heavy nesting (33 lines indented ≥6 levels, max indent 8 levels).
@@ -166,7 +150,7 @@ internal sealed class MovementController
                 navPoints = Destination.PartialRoute.Concat(navPoints).ToList();
                 logger.LogInformation("Navigating via route (XZ:{Distance}) [{Route}]",
                     navPoints[0].DistanceTo_XZ(navPoints[^1]),
-                    string.Join(" → ", pathfindResult.Select(x => x.ToString("G", CultureInfo.InvariantCulture))));
+                    string.Join(" → ", pathfindResult.Select(x => x.ToString("G5", CultureInfo.InvariantCulture))));
 
                 navmeshIpc.MoveTo(navPoints, Destination.IsFlying);
                 MovementStartedAt = DateTime.Now;
@@ -348,7 +332,7 @@ internal sealed class MovementController
         {
             startPosition = startPosition with { Y = startPosition.Y + 1f };
             logger.LogInformation("Using modified start position for flying pathfinding: {StartPosition}",
-                startPosition.ToString("G", CultureInfo.InvariantCulture));
+                startPosition.ToString("G5", CultureInfo.InvariantCulture));
         }
         else if (fly)
             // other positions have a (lesser) chance of starting from underground too, in which case pathfinding takes

@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using Dalamud.Plugin;
 using Dalamud.Plugin.Ipc;
-using Dalamud.Plugin.Services;
-using Questionable.Data;
 using Questionable.Model.Questing;
-using static Questionable.Utils.LocalizeShortcut;
+using static Questionable.External.IPCUtils;
 namespace Questionable.External;
 
 internal sealed class BossModIpc
@@ -44,8 +38,15 @@ internal sealed class BossModIpc
 
     private bool _soloDutyZoneConfigured;
     private bool _enableQuestBattlesOverridden;
+    private bool _bossmodRebornDetected;
 
     public bool IsSupported() => IpcInvoke.SafeFunc(() => _getPreset.HasFunction, fallback: false);
+    public bool BossModRebornDetected()
+    {
+        if (EzThrottler.Throttle("BossModRebornDetected", miliseconds: 1000))
+            _bossmodRebornDetected = IPCSubscriber.IsInstalled("BossModReborn");
+        return _bossmodRebornDetected;
+    }
 
     public PresetDefinition AddPreset(EPreset preset) => AddPreset(PresetDefinitions[preset]);
     public PresetDefinition AddPreset(PresetDefinition definition)

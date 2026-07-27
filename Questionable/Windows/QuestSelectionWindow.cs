@@ -1,27 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Interface;
-using Dalamud.Interface.Colors;
 using Dalamud.Interface.Utility.Raii;
-using Dalamud.Interface.Windowing;
-using Dalamud.Plugin;
-using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.UI;
-using Questionable.Controller;
-using Questionable.Controller.GameUi;
-using Questionable.Data;
-using Questionable.Domain;
-using Questionable.Functions;
+using Questionable.AutoGen;
 using Questionable.Model.Questing;
-using Questionable.Utils;
 using Questionable.Windows.Common;
-using Questionable.Windows.QuestComponents;
-using static Questionable.Utils.LocalizeShortcut;
+using Questionable.Windows.Common.Ui;
 namespace Questionable.Windows;
 
 internal sealed class QuestSelectionWindow : LWindow
@@ -38,6 +24,7 @@ internal sealed class QuestSelectionWindow : LWindow
     private readonly QuestTooltipComponent _questTooltipComponent;
     private readonly TerritoryData _territoryData;
     private readonly UiUtils _uiUtils;
+    private readonly DraftQuestPathService _draftQuestPathService;
     private List<IQuestInfo> _offeredQuests = [];
     private bool _onlyAvailableQuests = true;
 
@@ -54,6 +41,7 @@ internal sealed class QuestSelectionWindow : LWindow
         TerritoryData territoryData,
         IClientState clientState,
         UiUtils uiUtils,
+        DraftQuestPathService draftQuestPathService,
         QuestTooltipComponent questTooltipComponent)
         : base(_L("Quest Selection") + "{WindowId}")
     {
@@ -67,6 +55,7 @@ internal sealed class QuestSelectionWindow : LWindow
         _territoryData = territoryData;
         _clientState = clientState;
         _uiUtils = uiUtils;
+        _draftQuestPathService = draftQuestPathService;
         _questTooltipComponent = questTooltipComponent;
 
         Size = new Vector2(500, 200);
@@ -184,7 +173,7 @@ internal sealed class QuestSelectionWindow : LWindow
                     if (isKnownQuest)
                         ImGui.TextColored(color, icon.ToIconString());
                     else
-                        ImGui.TextColored(ImGuiColors.DalamudGrey, icon.ToIconString());
+                        ImGui.TextColored(QstTheme.TextMuted, icon.ToIconString());
                 }
 
                 if (ImGui.IsItemHovered())
@@ -198,7 +187,7 @@ internal sealed class QuestSelectionWindow : LWindow
                 if (knownQuest != null && knownQuest.Root.Disabled)
                 {
                     using IDisposable _ = _pluginInterface.UiBuilder.IconFontFixedWidthHandle.Push();
-                    ImGui.TextColored(ImGuiColors.DalamudOrange, FontAwesomeIcon.Ban.ToIconString());
+                    ImGui.TextColored(QstTheme.Accent, FontAwesomeIcon.Ban.ToIconString());
                     ImGui.SameLine();
                 }
 
@@ -228,6 +217,8 @@ internal sealed class QuestSelectionWindow : LWindow
                 ImGui.SameLine();
                 if (ImGuiComponentsLocal.IconButton(FontAwesomeIcon.Edit))
                     (bool success, string filename) = QuestRegistry.OpenEditor(quest);
+                if (ImGui.IsItemClicked(ImGuiMouseButton.Right))
+                    _draftQuestPathService.GenerateDraft(quest);
                 ImGui.SameLine();
 
                 if (knownQuest != null &&

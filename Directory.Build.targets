@@ -3,8 +3,8 @@
 <!-- Version scheme: A.B.C.(D*100+E)
              A.B.C.D = upstream version from PunishXIV/Questionable
              E = downstream patch counter (01~99), reset per upstream release
-             Current: upstream 15.306.0.8 + downstream 01 -->
-        <Version>15.306.0.0801</Version>
+             Current: upstream 15.306.1.4 + downstream 01 -->
+        <Version>15.306.1.0401</Version>
     </PropertyGroup>
 
     <PropertyGroup>

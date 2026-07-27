@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
 using Dalamud.Bindings.ImGui;
+using Dalamud.Interface;
 using Dalamud.Interface.Utility.Raii;
 using Questionable.Controller;
+using Questionable.Windows.Common.Ui;
 using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Windows.QuestComponents;
 
@@ -14,28 +15,42 @@ internal sealed class RemainingTasksComponent(
     {
         if (configuration.General.HideRemainingTasks)
             return;
+
         IList<string> gatheringTasks = gatheringController.GetRemainingTaskNames();
-        if (gatheringTasks.Count > 0)
+        bool isGathering = gatheringTasks.Count > 0;
+        IList<string> tasks = isGathering ? gatheringTasks : questController.GetRemainingTaskNames();
+        if (tasks.Count == 0)
+            return;
+
+        if (!QstWidgets.SectionHeader(_L("Remaining Tasks"), "RemainingTasks", count: tasks.Count))
+            return;
+
+        using (ImRaii.PushFont(UiBuilder.MonoFont))
         {
-            ImGui.Separator();
-            using (ImRaii.Disabled())
+            for (int i = 0; i < tasks.Count; i++)
             {
-                foreach (string task in gatheringTasks)
-                    ImGui.TextUnformatted(_LF("G: {0}", task));
-            }
-        }
-        else
-        {
-            IList<string> remainingTasks = questController.GetRemainingTaskNames();
-            if (remainingTasks.Count > 0)
-            {
-                ImGui.Separator();
-                using (ImRaii.Disabled())
+                string task = isGathering ? $"G: {tasks[i]}" : tasks[i];
+                if (i == 0 && questController.IsRunning)
+                    ImGui.TextColored(QstTheme.Accent, Truncate(task));
+                else
                 {
-                    foreach (string task in remainingTasks)
-                        ImGui.TextUnformatted(task);
+                    using ImRaii.DisabledDisposable _ = ImRaii.Disabled();
+                    ImGui.TextUnformatted(Truncate(task));
                 }
+
+                if (task.Length > MaxTaskLength && ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
+                    ImGui.SetTooltip(task);
             }
         }
+    }
+
+    private const int MaxTaskLength = 44;
+
+    private static string Truncate(string text)
+    {
+        if (text.Length <= MaxTaskLength)
+            return text;
+
+        return text[..(MaxTaskLength - 3)].TrimEnd() + "...";
     }
 }

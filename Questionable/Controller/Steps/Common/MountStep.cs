@@ -1,17 +1,16 @@
-﻿using System;
-using Dalamud.Game.ClientState.Conditions;
+﻿using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.ClientState.Objects.SubKinds;
-using Dalamud.Plugin.Services;
-using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
-using FFXIVClientStructs.FFXIV.Common.Math;
-using Microsoft.Extensions.Logging;
-using Questionable.Data;
-using Questionable.Functions;
 namespace Questionable.Controller.Steps.Common;
 
-internal static class Mount
+internal static class MountStep
 {
+    /// <summary>
+    ///     Distance to the destination below which mounting is not worth the cast. Applies when a step has not
+    ///     forced the issue with <c>Mount</c>/<c>Fly</c>, i.e. <see cref="EMountIf.AwayFromPosition"/>.
+    /// </summary>
+    public const float MountDistance = 50f;
+
     public enum EMountIf
     {
         Always,
@@ -70,7 +69,8 @@ internal static class Mount
             {
                 Vector3 playerPosition = objectTable[0]?.Position ?? Vector3.Zero;
                 float distance = System.Numerics.Vector3.Distance(playerPosition, task.Position.GetValueOrDefault());
-                if (task.TerritoryId == clientState.TerritoryType && distance < 50f && !condition[ConditionFlag.Diving])
+                if (task.TerritoryId == clientState.TerritoryType && distance < MountDistance &&
+                    !condition[ConditionFlag.Diving])
                 {
                     logger.Log(logLevel, "Not using mount, as we're close to the target");
                     logger.LogDebug("Returning 'DontMount'");

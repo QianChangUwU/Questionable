@@ -1,23 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Numerics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface;
-using Dalamud.Interface.Colors;
 using Dalamud.Interface.Components;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
-using Dalamud.Plugin;
-using Dalamud.Plugin.Services;
 using Dalamud.Utility;
 using ECommons.ImGuiMethods;
-using Questionable.Controller;
-using Questionable.External;
 using Questionable.Model.Common;
-using Questionable.Utils;
-using static Questionable.Utils.LocalizeShortcut;
+using Questionable.Windows.Common.Ui;
 namespace Questionable.Windows.ConfigComponents;
 
 internal sealed class PluginConfigComponent
@@ -30,27 +20,11 @@ internal sealed class PluginConfigComponent
     AutomatonIpc automatonIpc,
     PandorasBoxIpc pandorasBoxIpc) : ConfigComponent(pluginInterface, configuration)
 {
-    private static readonly IReadOnlyList<PluginInfo> RequiredPlugins =
-    [
-        new("vnavmesh",
-            "vnavmesh",
-            _L("vnavmesh handles the navigation within a zone, moving\nyour character to the next quest-related objective."),
-            new("https://github.com/awgil/ffxiv_navmesh/"),
-            new("https://puni.sh/api/repository/veyn"),
-            "/vnav"),
-        new("Lifestream",
-            "Lifestream",
-            _L("Used to travel to aethernet shards in cities."),
-            new("https://github.com/NightmareXIV/Lifestream"),
-            new("https://github.com/NightmareXIV/MyDalamudPlugins/raw/main/pluginmaster.json"),
-            "/lifestream"),
-        new("TextAdvance",
-            "TextAdvance",
-            _L("Automatically accepts and turns in quests, skips cutscenes and dialogue."),
-            new("https://github.com/NightmareXIV/TextAdvance"),
-            new("https://github.com/NightmareXIV/MyDalamudPlugins/raw/main/pluginmaster.json"),
-            "/at c")
-    ];
+    private readonly IDalamudPluginInterface _pluginInterface = pluginInterface;
+    private readonly Configuration _configuration = configuration;
+    private readonly CombatController _combatController = combatController;
+    private readonly UiUtils _uiUtils = uiUtils;
+    private readonly ICommandManager _commandManager = commandManager;
 
     private static readonly ReadOnlyDictionary<ECombatModule, PluginInfo> CombatPlugins =
         new Dictionary<ECombatModule, PluginInfo>
@@ -59,7 +33,7 @@ internal sealed class PluginConfigComponent
                 ECombatModule.BossMod,
                 new("Boss Mod (VBM)",
                     "BossMod",
-                    string.Empty,
+                    "Automates all kinds of combat and interaction in overworld and duty content",
                     new("https://github.com/awgil/ffxiv_bossmod"),
                     new("https://puni.sh/api/repository/veyn"),
                     "/vbm")
@@ -93,11 +67,29 @@ internal sealed class PluginConfigComponent
                     null)
             }
         }.AsReadOnly();
-    private readonly CombatController _combatController = combatController;
-    private readonly ICommandManager _commandManager = commandManager;
 
-    private readonly Configuration _configuration = configuration;
-    private readonly IDalamudPluginInterface _pluginInterface = pluginInterface;
+    private static readonly IReadOnlyList<PluginInfo> RequiredPlugins =
+    [
+        new("vnavmesh",
+            "vnavmesh",
+            _L("vnavmesh handles the navigation within a zone, moving your character to the next quest-related objective."),
+            new("https://github.com/awgil/ffxiv_navmesh/"),
+            new("https://puni.sh/api/repository/veyn"),
+            "/vnav"),
+        new("Lifestream",
+            "Lifestream",
+            _L("Used to travel to aethernet shards in cities."),
+            new("https://github.com/NightmareXIV/Lifestream"),
+            new("https://github.com/NightmareXIV/MyDalamudPlugins/raw/main/pluginmaster.json"),
+            "/lifestream"),
+        new("TextAdvance",
+            "TextAdvance",
+            _L("Automatically accepts and turns in quests, skips cutscenes and dialogue."),
+            new("https://github.com/NightmareXIV/TextAdvance"),
+            new("https://github.com/NightmareXIV/MyDalamudPlugins/raw/main/pluginmaster.json"),
+            "/at c"),
+        //CombatPlugins[ECombatModule.BossMod]
+    ];
 
     private readonly IReadOnlyList<PluginInfo> _recommendedPlugins =
     [
@@ -160,7 +152,6 @@ internal sealed class PluginConfigComponent
             new("https://github.com/NightmareXIV/MyDalamudPlugins/raw/main/pluginmaster.json"),
             "/stylist c"),
     ];
-    private readonly UiUtils _uiUtils = uiUtils;
 
     public override void DrawTab()
     {
@@ -175,10 +166,10 @@ internal sealed class PluginConfigComponent
         ImGui.Spacing();
 
         if (allRequiredInstalled)
-            ImGui.TextColored(ImGuiColors.ParsedGreen, _L("All required plugins are installed."));
+            ImGui.TextColored(QstTheme.Success, _L("All required plugins are installed."));
         else
         {
-            ImGui.TextColored(ImGuiColors.DalamudRed,
+            ImGui.TextColored(QstTheme.Danger,
                 _L("Required plugins are missing, Questionable will not work properly."));
         }
     }
@@ -194,7 +185,7 @@ internal sealed class PluginConfigComponent
 
         allRequiredInstalled = true;
         ImGui.SetNextItemOpen(isOpen: true, ImGuiCond.Once);
-        if (ImGui.CollapsingHeader(_L("Required plugins:")))
+        if (QstWidgets.SectionHeader(_L("Required plugins:"), "RequiredPlugins", defaultOpen: false))
         {
             using (ImRaii.PushIndent())
             {
@@ -203,13 +194,13 @@ internal sealed class PluginConfigComponent
             }
         }
 
-        if (ImGui.CollapsingHeader(_L("Rotation/Automation plugins: (Recommended: BossMod (VBM) )")))
+        if (QstWidgets.SectionHeader(_L("Rotation/Automation plugins:"), "RotationPlugins", defaultOpen: false))
         {
             using (ImRaii.Disabled(_combatController.IsRunning))
             {
                 using (ImRaii.PushIndent())
                 {
-                    if (ImGui.RadioButton(_L("No rotation/combat plugin (combat must be done manually)"),
+                    if (ImGui.RadioButton(_L("No rotation/combat plugin\n(combat must be done manually)"),
                         _configuration.General.CombatModule == ECombatModule.None))
                     {
                         _configuration.General.CombatModule = ECombatModule.None;
@@ -217,12 +208,12 @@ internal sealed class PluginConfigComponent
                     }
 
                     allRequiredInstalled &= DrawCombatPlugin(ECombatModule.BossMod, checklistPadding);
-                    allRequiredInstalled &= DrawCombatPlugin(ECombatModule.WrathCombo, checklistPadding);
                 }
 
-                ImGui.Text(_L("The following rotation/combat plugin(s) are provided for compatibility and testing purposes:"));
+                ImGui.TextWrapped(_L("The following rotation/combat plugin(s) are provided for compatibility and testing purposes:"));
                 using (ImRaii.PushIndent())
                 {
+                    allRequiredInstalled &= DrawCombatPlugin(ECombatModule.WrathCombo, checklistPadding);
                     allRequiredInstalled &=
                         DrawCombatPlugin(ECombatModule.RotationSolverReborn, checklistPadding);
                     allRequiredInstalled &=
@@ -231,7 +222,7 @@ internal sealed class PluginConfigComponent
             }
         }
 
-        if (ImGui.CollapsingHeader(_L("Recommended/niche plugins:")))
+        if (QstWidgets.SectionHeader(_L("Recommended/niche plugins:"), "NichePlugins", defaultOpen: false))
         {
             using (ImRaii.PushIndent())
             {
@@ -307,7 +298,7 @@ internal sealed class PluginConfigComponent
             ImGui.SameLine(0);
             using (_pluginInterface.UiBuilder.IconFontFixedWidthHandle.Push())
             {
-                Vector4 iconColor = isInstalled ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed;
+                Vector4 iconColor = isInstalled ? QstTheme.Success : QstTheme.Danger;
                 FontAwesomeIcon icon = isInstalled ? FontAwesomeIcon.Check : FontAwesomeIcon.Times;
 
                 ImGui.AlignTextToFramePadding();
@@ -315,17 +306,17 @@ internal sealed class PluginConfigComponent
             }
             AddConfigClickable(installedPlugin, plugin);
 
-            DrawPluginDetails(plugin, checklistPadding, isInstalled);
+            DrawPluginDetails(plugin, checklistPadding, isInstalled, blurb: false);
             return isInstalled || _configuration.General.CombatModule != combatModule;
         }
     }
 
-    private void DrawPluginDetails(PluginInfo plugin, float checklistPadding, bool isInstalled)
+    private void DrawPluginDetails(PluginInfo plugin, float checklistPadding, bool isInstalled, bool blurb = true)
     {
         using (ImRaii.PushIndent(checklistPadding))
         {
-            if (!string.IsNullOrEmpty(plugin.Details))
-                ImGui.TextUnformatted(plugin.Details);
+            if (!string.IsNullOrEmpty(plugin.Details) && blurb)
+                ImGui.TextWrapped(plugin.Details);
 
             bool allDetailsOk = true;
             if (plugin.DetailsToCheck != null)
@@ -340,7 +331,7 @@ internal sealed class PluginConfigComponent
                     {
                         using (ImRaii.PushIndent(checklistPadding))
                         {
-                            ImGui.TextUnformatted(detail.Details);
+                            ImGui.TextWrapped(detail.Details);
                         }
                     }
                 }
@@ -354,7 +345,7 @@ internal sealed class PluginConfigComponent
                 {
                     ImRaii.ColorDisposable? color = null;
                     if (!allDetailsOk)
-                        color = ImRaii.PushColor(ImGuiCol.Text, ImGuiColors.DalamudOrange);
+                        color = ImRaii.PushColor(ImGuiCol.Text, QstTheme.Accent);
                     if (ImGuiComponentsLocal.IconButton(FontAwesomeIcon.Cog))
                         _commandManager.ProcessCommand(plugin.ConfigCommand);
                     color?.Dispose();
@@ -393,7 +384,7 @@ internal sealed class PluginConfigComponent
                 logo.Handle,
                 new(size.Scale(), size.Scale()),
                 2,
-                isInstalled ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed,
+                isInstalled ? QstTheme.Success : QstTheme.Danger,
                 isActive ? Vector4.One : new(0.5f, 0.5f, 0.5f, 1f)
             );
         }

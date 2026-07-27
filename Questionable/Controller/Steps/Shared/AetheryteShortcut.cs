@@ -1,29 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using Dalamud.Game.ClientState.Conditions;
-using Dalamud.Plugin.Services;
+﻿using Dalamud.Game.ClientState.Conditions;
 using FFXIVClientStructs.FFXIV.Client.Game;
-using Microsoft.Extensions.Logging;
 using Questionable.Controller.Steps.Common;
 using Questionable.Controller.Steps.Interactions;
 using Questionable.Controller.Steps.Movement;
-using Questionable.Controller.Utils;
-using Questionable.Data;
-using Questionable.Domain;
-using Questionable.Extensions;
-using Questionable.Functions;
 using Questionable.Model.Common;
 using Questionable.Model.Questing;
-using Questionable.Utils;
 namespace Questionable.Controller.Steps.Shared;
 
 // TODO: refactor — heavy nesting (95 lines indented ≥6 levels, max indent 10 levels). Top priority.
 internal static class AetheryteShortcut
 {
     public static HashSet<uint> Territories = [212, 351, 128, 131, 133, 419];
-    internal sealed class Factory(AetheryteData aetheryteData, IClientState clientState, IObjectTable objectTable)
+    internal sealed class Factory(AetheryteData aetheryteData, IClientState clientState, IObjectTable objectTable, ExtraConditionUtils extraConditionUtils)
         : ITaskFactory
     {
         public IEnumerable<ITask> CreateAllTasks(Quest quest, QuestSequence sequence, QuestStep step)
@@ -33,7 +21,7 @@ internal static class AetheryteShortcut
                 if (step.TerritoryId == 1) // unused territory ID, used to disable auto teleports as a gross hack
                     yield break;
                 bool matchesCondition(EExtraSkipCondition condition, Vector3 position) =>
-                    ExtraConditionUtils.MatchesExtraCondition(condition, position, step.TerritoryId);
+                    extraConditionUtils.MatchesExtraCondition(condition, position, step.TerritoryId);
                 // Scion quest hubs
                 if (step.TerritoryId == 212) // Waking Sands
                 {
@@ -121,13 +109,13 @@ internal static class AetheryteShortcut
                         yield return new AethernetShortcut.Task(teleportDest, aethernetDest);
                     }
                 }
-                yield return new WaitAtEnd.WaitDelay(TimeSpan.FromSeconds(1));
+                yield return new WaitAtEnd.WaitDelay();
             }
             else
             {
                 yield return new Task(step, quest.Id, step.AetheryteShortcut.Value,
                     aetheryteData.TerritoryIds[step.AetheryteShortcut.Value]);
-                yield return new WaitAtEnd.WaitDelay(TimeSpan.FromSeconds(1));
+                yield return new WaitAtEnd.WaitDelay();
 
                 if (MoveAwayFromAetheryteExecutor.AppliesTo(step.AetheryteShortcut.Value) &&
                     step.AethernetShortcut?.From != step.AetheryteShortcut.Value)

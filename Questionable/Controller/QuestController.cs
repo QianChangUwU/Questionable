@@ -1,28 +1,17 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Numerics;
-using System.Threading;
+﻿using System.Diagnostics.CodeAnalysis;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.ClientState.Keys;
 using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.Gui.Toast;
 using Dalamud.Game.Text.SeStringHandling;
-using Dalamud.Plugin.Services;
 using ECommons.ExcelServices;
 using ECommons.GameFunctions;
 using ECommons.UIHelpers.AddonMasterImplementations;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Component.GUI;
-using Microsoft.Extensions.Logging;
-using Questionable.Controller.Steps;
 using Questionable.Controller.Steps.Interactions;
 using Questionable.Controller.Steps.Shared;
-using Questionable.Controller.Utils;
-using Questionable.Data;
-using Questionable.Domain;
-using Questionable.Functions;
 using Questionable.Model.Common;
 using Questionable.Model.Questing;
 using Questionable.Utils;
@@ -105,6 +94,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
     private readonly QuestPriorityManager _priorityManager;
     private readonly QuestProgressTracker _tracker;
     private readonly SinglePlayerDutyConfigComponent _singlePlayerDutyConfigComponent;
+    private readonly StopConditionComponent _stopConditionComponent;
     private readonly TaskCreator _taskCreator;
     private readonly IToastGui _toastGui;
     private readonly ICommandManager _commandManager;
@@ -170,6 +160,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
         IGameGuiAdapter gameGui,
         ICommandManager commandManager,
         SinglePlayerDutyConfigComponent singlePlayerDutyConfigComponent,
+        StopConditionComponent stopConditionComponent,
         AlliedSocietyQuestFunctions alliedSocietyQuestFunctions)
         : base(chatGui, condition, serviceProvider, interruptHandler, dataManager, logger)
     {
@@ -192,6 +183,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
         _configuration = configuration;
         _taskCreator = taskCreator;
         _singlePlayerDutyConfigComponent = singlePlayerDutyConfigComponent;
+        _stopConditionComponent = stopConditionComponent;
         _alliedSocietyQuestFunctions = alliedSocietyQuestFunctions;
         _logger = logger;
         _highlightObject = highlightObject;
@@ -412,7 +404,15 @@ internal sealed class QuestController : MiniTaskController<QuestController>
 
         //CheckAutoRefreshCondition();
 
-        UpdateCurrentTask();
+        try
+        {
+            UpdateCurrentTask();
+        }
+        catch (Exception ex)
+        {
+            if (EzThrottler.Throttle(ex.Message))
+                throw;
+        }
     }
 
     private void CheckAutoRefreshCondition()
@@ -565,7 +565,8 @@ internal sealed class QuestController : MiniTaskController<QuestController>
                     _chatGui.Print(_LF("Completed quest '{0}', which is configured as a stopping point.", StartedQuest.Quest.Info.Name), CommandHandler.MessageTag, CommandHandler.TagColor);
                     StartedQuest = null;
                     Stop($"Stopping point [{questId}] reached");
-                    _configuration.Stop.QuestsToStopAfter.Remove(questId);
+                    if (_configuration.Stop.RemoveWhenCompleteConditionMet)
+                        _configuration.Stop.QuestsToStopAfter.Remove(questId);
                     return;
                 }
 
@@ -866,7 +867,8 @@ internal sealed class QuestController : MiniTaskController<QuestController>
         if (IsRunning || AutomationType != EAutomationType.Manual)
         {
             ClearTasksInternal();
-            if (_configuration.Stop is { RunCommandAfterStop: true } stop)
+            if (AutomationType is EAutomationType.Automatic && _configuration.Stop is { RunCommandAfterStop: true } stop &&
+                !_stopConditionComponent.commandExceptions.Any(e => label.Equals(e, StringComparison.OrdinalIgnoreCase)))
             {
                 if (stop.CommandAfterStop.StartsWith('/'))
                     _commandManager.ProcessCommand(stop.CommandAfterStop);

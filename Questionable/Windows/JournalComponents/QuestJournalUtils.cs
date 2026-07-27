@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
 using Dalamud.Interface;
 using Dalamud.Interface.Utility.Raii;
-using Dalamud.Plugin;
-using Dalamud.Plugin.Services;
-using ECommons.DalamudServices;
-using Questionable.Controller;
-using Questionable.Data;
-using Questionable.Domain;
-using Questionable.Functions;
 using Questionable.Model.Common;
 using Questionable.Model.Questing;
-using Questionable.Utils;
-using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Windows.JournalComponents;
 
 internal sealed class QuestJournalUtils
@@ -29,7 +17,9 @@ internal sealed class QuestJournalUtils
     AetheryteData aetheryteData,
     AetheryteFunctions aetheryteFunctions,
     MovementController movementController,
-    IGameGui gameGui)
+    IGameGui gameGui,
+    PathEditorWindow pathEditorWindow,
+    AutoGen.DraftQuestPathService draftQuestPathService)
 {
     public void ShowContextMenu(IQuestInfo questInfo, Quest? quest, string label)
     {
@@ -148,8 +138,20 @@ internal sealed class QuestJournalUtils
 
         using (ImRaii.PushIndent())
         {
+            if (ImGui.MenuItem(_L("Open in Path Editor")))
+                pathEditorWindow.Open(questInfo.QuestId);
+
             if (ImGui.MenuItem(_L("Edit quest path")))
                 (bool success, string filename) = QuestRegistry.OpenEditor(questInfo);
+
+            // Only offered while the quest has no path at all; once the draft is written and the registry
+            // reloads, the quest is known and the entry disappears on its own.
+            if (draftQuestPathService.CanGenerateDrafts &&
+                ImGui.MenuItem(_L("Generate draft path")))
+            {
+                draftQuestPathService.GenerateDraft(questInfo);
+            }
+
             if (ImGui.MenuItem(_L("Sim quest")))
                 questController.SimulateQuest(questInfo, 0, 0);
         }

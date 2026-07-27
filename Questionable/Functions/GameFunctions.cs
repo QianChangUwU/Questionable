@@ -1,12 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Numerics;
+﻿using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.ClientState.Objects.Types;
-using Dalamud.Plugin.Services;
-using ECommons.DalamudServices;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.Control;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
@@ -14,12 +9,8 @@ using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using Lumina.Excel.Sheets;
-using Microsoft.Extensions.Logging;
 using Questionable.Controller.Steps.Interactions;
-using Questionable.Controller.Utils;
-using Questionable.Domain;
 using Questionable.Model.Questing;
-using Questionable.Utils;
 using Action = Lumina.Excel.Sheets.Action;
 using BattleChara = FFXIVClientStructs.FFXIV.Client.Game.Character.BattleChara;
 using ContentFinderCondition = Lumina.Excel.Sheets.ContentFinderCondition;
@@ -383,9 +374,9 @@ internal sealed unsafe partial class GameFunctions
         return false;
     }
 
-    public void OpenDutyFinder(uint contentFinderConditionId)
+    public void OpenDutyFinder(uint contentFinderConditionId = 0, uint contentId = 0)
     {
-        if (_contentFinderConditionToContentId.TryGetValue(contentFinderConditionId, out uint contentId))
+        if (contentId != 0 || _contentFinderConditionToContentId.TryGetValue(contentFinderConditionId, out contentId))
         {
             if (UIState.IsInstanceContentUnlocked(contentId))
                 AgentContentsFinder.Instance()->OpenRegularDuty(contentFinderConditionId);
@@ -462,7 +453,7 @@ internal sealed unsafe partial class GameFunctions
                condition[ConditionFlag.Occupied33] || condition[ConditionFlag.Occupied38] ||
                condition[ConditionFlag.Occupied39] || condition[ConditionFlag.OccupiedInEvent] ||
                condition[ConditionFlag.OccupiedInQuestEvent] || condition[ConditionFlag.OccupiedInCutSceneEvent] ||
-               condition[ConditionFlag.WatchingCutscene] || //condition[ConditionFlag.WatchingCutscene78] ||
+               //condition[ConditionFlag.WatchingCutscene] || //condition[ConditionFlag.WatchingCutscene78] ||
                condition[ConditionFlag.Casting] || condition[ConditionFlag.MountOrOrnamentTransition] ||
                condition[ConditionFlag.BetweenAreas] || condition[ConditionFlag.BetweenAreas51] ||
                condition[ConditionFlag.Jumping61] || condition[ConditionFlag.ExecutingGatheringAction] ||

@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface;
-using Dalamud.Interface.Colors;
 using Dalamud.Interface.Components;
 using Dalamud.Interface.Utility.Raii;
 using Lumina.Excel.Sheets;
-using Questionable.Controller;
-using Questionable.Data;
-using Questionable.Domain;
-using Questionable.Functions;
 using Questionable.Model.Questing;
-using Questionable.Utils;
-using Questionable.Windows.QuestComponents;
-using Questionable.Windows.Utils;
-using static Questionable.Utils.LocalizeShortcut;
+using Questionable.Windows.Common.Ui;
 namespace Questionable.Windows.JournalComponents;
 
 internal sealed class RedoComponent
@@ -33,6 +22,7 @@ internal sealed class RedoComponent
     private bool _hideDone;
     private readonly Dictionary<QuestRedoChapterUI, (int Supported, int Completed, int Total)> _redoCount = [];
     private Domain.Quest? _unlockQuest;
+    private string _filter = "";
     public void DrawRedoChapters()
     {
         using ImRaii.TabItemDisposable tab = ImRaii.TabItem(_L("New Game+"));
@@ -70,7 +60,7 @@ internal sealed class RedoComponent
         {
             ImGui.SameLine();
             if (ImGuiComponentsLocal.IconButton(_hideDone ? FontAwesomeIcon.ChevronRight : FontAwesomeIcon.ChevronDown,
-                _hideDone ? ImGuiColors.DalamudOrange : null))
+                _hideDone ? QstTheme.Accent : null))
             {
                 _hideDone = !_hideDone;
             }
@@ -78,14 +68,16 @@ internal sealed class RedoComponent
                 ImGui.SetTooltip(_L("Hide chapters that have been completely checked"));
         }
         ImGui.SameLine();
-        ImGuiComponents.HelpMarker(_L("Quests marked with orange need to be reported as working\n" +
-                                   "or not via the LastChecked system. Ask Aly for more details!"),
-                                   FontAwesomeIcon.InfoCircle, ImGuiColors.DalamudOrange);
+        ImGuiComponents.HelpMarker(_L("Quests marked with orange need to be reported as working or not via the LastChecked system. Ask Aly for more details!"),
+                                   FontAwesomeIcon.InfoCircle, QstTheme.Accent);
         ImGui.SameLine();
         ImGui.Text(_L("Active:"));
         ImGui.SameLine();
         redoUtil.TryGetActiveRedoChapter(out var questRedoChapter);
         ImGui.Text(questRedoChapter?.ChapterName.ToString() ?? _L("None"));
+        ImGui.SameLine();
+        ImGui.SetNextItemWidth(230 * ImGui.GetIO().FontGlobalScale);
+        _ = ImGui.InputTextWithHint("###RedoComponentFilter", _L("Filter NG+ categories"), ref _filter, maxLength: 20);
 
         using ImRaii.TableDisposable table = ImRaii.Table("RedoTable", 3, ImGuiTableFlags.NoSavedSettings);
         if (!table)
@@ -104,6 +96,10 @@ internal sealed class RedoComponent
             chapterName = chapterName.Length > 0 ? chapterName : _L("???");
             string? categoryName = redoCache.ChapterUi.UITab.Value.Text.ToString();
             categoryName = categoryName != null && categoryName.Length > 0 ? $"{categoryName}: " : "";
+            if (!_filter.IsNullOrEmpty() &&
+                !chapterName.Contains(_filter, StringComparison.InvariantCultureIgnoreCase) &&
+                !categoryName.Contains(_filter, StringComparison.InvariantCultureIgnoreCase))
+                continue;
 
             bool showAnyway = false;
             var checkQuests = redoCache.Quests.Select(q =>
@@ -126,7 +122,7 @@ internal sealed class RedoComponent
             ImGui.TableNextColumn();
             ImRaii.ColorDisposable? disposable = null;
             if (checkQuests.Length > 0)
-                disposable = ImRaii.PushColor(ImGuiCol.Text, ImGuiColors.DalamudOrange);
+                disposable = ImRaii.PushColor(ImGuiCol.Text, QstTheme.Accent);
             bool open = ImGui.TreeNodeEx($"{chapter.RowId}", ImGuiTreeNodeFlags.SpanFullWidth, $"{categoryName}{chapterName}");
             disposable?.Dispose();
             if (checkQuests.Length > 0 && checkQuests[0] != null && ImGui.IsItemHovered())
@@ -135,7 +131,7 @@ internal sealed class RedoComponent
                 var index = redoUtil.GetChapter(checkQuests[0]!.Id.Value);
                 ImGui.Text(_LF("({0}) Unchecked: #{1}{2} ({3}/{4})",
                     chapter.RowId, index.SimplifiedIndex, (checkQuests.Length > 1 ? "+" : ""), checkQuests.Length, redoCache.Quests.Count));
-                using var __ = ImRaii.PushColor(ImGuiCol.Text, ImGuiColors.DalamudOrange);
+                using var __ = ImRaii.PushColor(ImGuiCol.Text, QstTheme.Accent);
                 ImGui.Text(string.Join('\n', checkQuests.Select(q => $"{q?.Info.SimplifiedName} ({q?.Id})")));
             }
 
@@ -177,7 +173,7 @@ internal sealed class RedoComponent
                         ImGui.TreeNodeEx($"{q.Name} ({(ushort)q.RowId})",
                             ImGuiTreeNodeFlags.Leaf | ImGuiTreeNodeFlags.NoTreePushOnOpen | ImGuiTreeNodeFlags.SpanFullWidth);
                         ImGui.TableNextColumn();
-                        if (uiUtils.ChecklistItem("", ImGuiColors.DalamudGrey, FontAwesomeIcon.Minus))
+                        if (uiUtils.ChecklistItem("", QstTheme.TextMuted, FontAwesomeIcon.Minus))
                             ImGui.SetTooltip(_L("This quest is not supported."));
                         ImGui.TableNextColumn();
                     }

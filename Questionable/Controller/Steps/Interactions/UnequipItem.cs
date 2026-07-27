@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Dalamud.Game.Text.SeStringHandling;
-using Dalamud.Plugin.Services;
+﻿using Dalamud.Game.Text.SeStringHandling;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using Lumina.Excel.Sheets;
-using Microsoft.Extensions.Logging;
-using Questionable.Data;
-using Questionable.Functions;
 using Questionable.Model.Questing;
 using Quest = Questionable.Domain.Quest;
 
@@ -158,7 +152,7 @@ internal static class UnequipItem
             }
         }
 
-        private static unsafe bool TryFindFirstEmptySlot(InventoryContainer* container, out ushort slot)
+        internal static unsafe bool TryFindFirstEmptySlot(InventoryContainer* container, out ushort slot)
         {
             for (ushort i = 0; i < container->Size; i++)
             {

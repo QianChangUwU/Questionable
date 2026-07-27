@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using Dalamud.Plugin.Services;
 using ECommons.ExcelServices;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using Lumina.Excel.Sheets;
-using Questionable.Domain;
 using Questionable.Model.Common;
 using Questionable.Model.Questing;
-using static Questionable.Utils.LocalizeShortcut;
 using Quest = Lumina.Excel.Sheets.Quest;
 
 namespace Questionable.Data;
@@ -151,6 +145,9 @@ internal sealed class QuestData
 
         // white wolf gate
         AddPreviousQuest(new(803), new(802));
+
+        // unlocking LB to use material supplier for craft mats
+        //AddPreviousQuest(new(142), new(1212));
 
         // "In order to undertake this quest" [...]
         const int mountaintopDiplomacy = 1619;
