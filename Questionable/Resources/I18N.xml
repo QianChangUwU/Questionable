@@ -1946,15 +1946,9 @@
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-<<<<<<< HEAD
-    <Key>vnavmesh handles the navigation within a zone, moving\nyour character to the next quest-related objective.</Key>
-    <Value lang="zh-cn">vnavmesh 会自动寻路去到下一个任务目标点。</Value>
-    <Value lang="ja-jp">vnavmeshはゾーン内のナビゲーションを処理し、\nキャラクターを次のクエスト関連の目標に移動させます。</Value>
-=======
     <Key>vnavmesh handles the navigation within a zone, moving your character to the next quest-related objective.</Key>
+    <Value lang="zh-cn">vnavmesh 会自动寻路去到下一个任务目标点。</Value>
     <Value lang="ja-jp">vnavmeshはゾーン内のナビゲーションを処理し、キャラクターを次のクエスト関連の目標に移動させます。</Value>
-    <Value lang="zh-cn">vnavmesh 会处理区域内的导航，将你的角色移动到下一个与任务相关的目标。</Value>
->>>>>>> upstream/new-main
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
@@ -1964,12 +1958,7 @@
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-<<<<<<< HEAD
-    <Key>Automatically accepts and turns in quests, skips cutscenes\nand dialogue.</Key>
-=======
     <Key>Automatically accepts and turns in quests, skips cutscenes and dialogue.</Key>
-    <Value lang="ja-jp">クエストの自動受注・納品、カットシーンとセリフのスキップを行います。</Value>
->>>>>>> upstream/new-main
     <Value lang="zh-cn">自动接受/提交任务，跳过过场动画和对话。</Value>
     <Value lang="ja-jp">クエストの自動受注・納品、カットシーンとセリフのスキップを行います。</Value>
   </Entry>
