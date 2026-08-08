@@ -229,6 +229,7 @@ internal sealed class Configuration : IPluginConfiguration
         public string Language { get; set; } = "en";
         public bool HideRemainingTasks { get; set; }
         public bool ClaimMail { get; set; }
+        public bool SameJobThroughoutQuest { get; set; }
     }
 
     internal sealed class StopConfiguration
@@ -275,6 +276,8 @@ internal sealed class Configuration : IPluginConfiguration
         public XivChatType ChatType { get; set; } = XivChatType.Debug;
         public bool ShowTrayMessage { get; set; }
         public bool FlashTaskbar { get; set; }
+        public bool NotifyOnStopCondition { get; set; }
+        public bool NotifyOnCriticalFailure { get; set; } = true;
     }
 
     internal sealed class AdvancedConfiguration

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface;
 using Dalamud.Interface.Utility.Raii;
@@ -27,6 +28,8 @@ internal sealed class QuestWindow : LWindow, IPersistableWindowConfig
     private readonly TerritoryData _territoryData;
     private readonly BossModIpc _bossModIpc;
 
+    private bool _wasRunning;
+
     public QuestWindow(IDalamudPluginInterface pluginInterface,
         QuestController questController,
         IClientState clientState,
@@ -45,7 +48,7 @@ internal sealed class QuestWindow : LWindow, IPersistableWindowConfig
         ConfigWindow configWindow,
         BossModIpc bossModIpc)
         : base((configuration.Advanced.Debug ? "(!) " : "") + $"QST v{PluginVersion.ToString(4)}###Questionable",
-            ImGuiWindowFlags.AlwaysAutoResize)
+            ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoFocusOnAppearing | ImGuiWindowFlags.NoCollapse)
     {
         _pluginInterface = pluginInterface;
         _questController = questController;
@@ -66,11 +69,24 @@ internal sealed class QuestWindow : LWindow, IPersistableWindowConfig
 
         SizeConstraints = new WindowSizeConstraints
         {
-            MinimumSize = new(300, 30),
+            MinimumSize = new(320, 30),
             MaximumSize = default
         };
         RespectCloseHotkey = false;
+        ShowCloseButton = false;
         AllowClickthrough = false;
+
+        TitleBarButtons.Add(new()
+        {
+            Icon = FontAwesomeIcon.Times,
+            Priority = int.MinValue,
+            IconOffset = new(1.5f, 1),
+            Click = _ =>
+            {
+                IsOpen = false;
+            },
+            AvailableClickthrough = true
+        });
 
         _minimizeButton = new()
         {
@@ -84,7 +100,7 @@ internal sealed class QuestWindow : LWindow, IPersistableWindowConfig
             },
             AvailableClickthrough = true
         };
-        TitleBarButtons.Insert(0, _minimizeButton);
+        TitleBarButtons.Add(_minimizeButton);
 
         TitleBarButtons.Add(new()
         {
@@ -99,7 +115,20 @@ internal sealed class QuestWindow : LWindow, IPersistableWindowConfig
             }
         });
 
-        _activeQuestComponent.Reload += OnReload;
+        if (!_configuration.General.HideSponsorButton)
+            TitleBarButtons.Add(new()
+            {
+                Icon = FontAwesomeIcon.Heart,
+                IconOffset = new(1.5f, 1),
+                Click = _ => Process.Start(new ProcessStartInfo { FileName = "https://github.com/sponsors/alydevs", UseShellExecute = true }),
+                Priority = int.MinValue,
+                ShowTooltip = () =>
+                {
+                    using ImRaii.TooltipDisposable _ = ImRaii.Tooltip();
+                    ImGui.Text(_L("Sponsor QST development"));
+                }
+            });
+
         _quickAccessButtonsComponent.Reload += OnReload;
         _questController.IsQuestWindowOpenFunction = () => IsOpen;
     }
@@ -111,17 +140,11 @@ internal sealed class QuestWindow : LWindow, IPersistableWindowConfig
 
     public override void PreOpenCheck()
     {
-        if (_questController.IsRunning)
-        {
+        bool isRunning = _questController.IsRunning;
+
+        if (isRunning && !_wasRunning)
             IsOpen = true;
-            Flags |= ImGuiWindowFlags.NoCollapse;
-            ShowCloseButton = false;
-        }
-        else
-        {
-            Flags &= ~ImGuiWindowFlags.NoCollapse;
-            ShowCloseButton = true;
-        }
+        _wasRunning = isRunning;
     }
 
     public override bool DrawConditions()
@@ -155,7 +178,7 @@ internal sealed class QuestWindow : LWindow, IPersistableWindowConfig
             if (notice.Length != 0)
             {
                 ImGui.TextColored(QstTheme.Danger, _L("Notice"));
-                ImGui.TextWrapped(_L(notice));
+                ImGui.TextWrapped(notice);
                 ImGui.Separator();
             }
 
@@ -182,7 +205,9 @@ internal sealed class QuestWindow : LWindow, IPersistableWindowConfig
                 if (QstWidgets.SectionHeader(_L("Path Tools"), "PathTools", defaultOpen: false))
                     _creationUtilsComponent.Draw();
 
-                _remainingTasksComponent.Draw();
+                if (!_configuration.General.HideRemainingTasks &&
+                        QstWidgets.SectionHeader(_L("Remaining Tasks"), "RemainingTasks", count: _remainingTasksComponent.Tasks.Count))
+                    _remainingTasksComponent.Draw();
             }
         }
         catch (Exception e)

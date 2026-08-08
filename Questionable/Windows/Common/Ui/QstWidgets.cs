@@ -1,10 +1,8 @@
-using System.Globalization;
 using System.Runtime.CompilerServices;
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
-using Questionable.Utils;
 
 namespace Questionable.Windows.Common.Ui;
 
@@ -43,6 +41,12 @@ internal static class QstWidgets
         return open;
     }
 
+    public static void BulletTextWrapped(string text)
+    {
+        ImGui.Bullet();
+        ImGui.TextWrapped(text);
+    }
+
     // Status pill in the window title bar.
     public static void TitleBarPill(string text, Vector4 color, string windowTitle)
     {
@@ -58,14 +62,14 @@ internal static class QstWidgets
         float width = padding.X * 2f + dotRadius * 2f + 4f * scale + textSize.X;
 
         string visibleTitle = windowTitle.Split("###")[0];
-        float titleStart = ImGui.GetFontSize() + ImGui.GetStyle().FramePadding.X
-                           + ImGui.GetStyle().ItemInnerSpacing.X;
+        float titleStart = ImGui.GetFontSize() + ImGui.GetStyle().FramePadding.X;
+        //+ ImGui.GetStyle().ItemInnerSpacing.X;
         Vector2 topLeft = new(
-            windowPos.X + titleStart + ImGui.CalcTextSize(visibleTitle).X + 8f * scale,
+            windowPos.X + titleStart + ImGui.CalcTextSize(visibleTitle).X - 3f * scale,
             windowPos.Y + (frameHeight - height) / 2f);
 
         ImDrawListPtr drawList = ImGui.GetWindowDrawList();
-        drawList.PushClipRect(windowPos, windowPos + new Vector2(windowWidth, frameHeight), false);
+        drawList.PushClipRect(windowPos, windowPos + new Vector2(windowWidth, frameHeight), intersectWithCurrentClipRect: false);
         drawList.AddRectFilled(topLeft, topLeft + new Vector2(width, height),
             QstTheme.ToU32(QstTheme.WithAlpha(color, 0.15f)), height / 2f);
         drawList.AddCircleFilled(new Vector2(topLeft.X + padding.X + dotRadius, topLeft.Y + height / 2f),
@@ -133,19 +137,23 @@ internal static class QstWidgets
     }
 
     // Icon button with a tooltip and an optional count badge.
-    public static bool RailButton(FontAwesomeIcon icon, string tooltip, Vector4? tint = null,
-        bool enabled = true, string? countBadge = null, Vector4? badgeColor = null,
+    public static bool RailButton(FontAwesomeIcon icon, string label, string? tooltip = null, Vector4? tint = null,
+        bool enabled = true, string? countBadge = null, Vector4? badgeColor = null, bool showLabel = false,
         [CallerFilePath] string file = "", [CallerLineNumber] int line = 0)
     {
         float size = ImGui.GetFrameHeight();
         bool clicked;
         using (ImRaii.Disabled(!enabled))
         {
-            clicked = ImGuiComponentsLocal.IconButton(icon, tint, activeColor: null, hoveredColor: null,
-                new Vector2(size, size), file, line);
+            if (showLabel)
+                clicked = ImGuiComponentsLocal.IconButtonWithText(icon, label, tint, activeColor: null, hoveredColor: null,
+                    file: file, line: line);
+            else
+                clicked = ImGuiComponentsLocal.IconButton(icon, tint, activeColor: null, hoveredColor: null,
+                    new Vector2(size, size), file, line);
         }
 
-        if (countBadge != null)
+        if (!showLabel && countBadge != null)
         {
             Vector2 max = ImGui.GetItemRectMax();
             Vector2 badgeSize = ImGui.CalcTextSize(countBadge);
@@ -155,8 +163,14 @@ internal static class QstWidgets
 
         if (ImGui.IsItemHovered(ImGuiHoveredFlags.AllowWhenDisabled))
         {
-            using ImRaii.TooltipDisposable _ = ImRaii.Tooltip();
-            ImGui.TextUnformatted(tooltip);
+            if (showLabel && tooltip?.Length != 0)
+                ImGui.SetTooltip(tooltip);
+            else
+            {
+                if (tooltip?.Length != 0)
+                    tooltip = $"\n{tooltip}";
+                ImGui.SetTooltip($"{label}{tooltip}");
+            }
         }
 
         return clicked && enabled;

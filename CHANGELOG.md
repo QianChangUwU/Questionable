@@ -13,3 +13,5 @@
   - The Edit button now has a tooltip showing how it works. If quests stop working, right click this button and delete all quest paths in that folder first to see if that fixes it.
 - Fix: path data bundle URL now points to downstream repo - downstream 503
 - L10n: ja-jp translations for new strings -fuuga
+- bug fix: fixed title bar button overlapping hitboxes -alydev
+- Merge upstream v15.306.1.4 → 15.306.1.48 - downstream 4801

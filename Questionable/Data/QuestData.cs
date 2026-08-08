@@ -59,6 +59,49 @@ internal sealed class QuestData
                 { 1192, [5174, 5176, 5178, 5179] }
             }
             .ToImmutableDictionary(x => x.Key, x => x.Value.Select(y => new QuestId(y)).ToImmutableList());
+    public static readonly IReadOnlyList<ElementId> DeliveryMoogleQuests = (
+        (ushort[])[
+            // postmoogle quests
+            1481, 1483, 1482, 1484, 1531, 1532, 1533, 1485, 33, 1571, 36, 1573, 1570, 1576, 1577, 241, 242, 1574, 1572, 1575, 243, 244, 240, 496, 362,
+            // prereqs
+            // fungal frolic chain
+            804, 805, 807,
+            // aesthetician
+            1210,
+            // hildibrand 1 (picks up following quest, may not be ideal)
+            1204
+        ]).FromNumericListOfQuests();
+    public static readonly IReadOnlyList<ElementId> CollaborationQuests = (
+        (ushort[])[
+            1153, 1154, 1155, 1556, // ffxiii 2013
+            1287, // ffxi 2014
+            1288, // dqx
+            2141, // yokai
+            2206, // ffxi 2015
+            3158, 3159, 3160, // ffxv
+            4796, 4797, 4798, // ffxvi
+            4801, // fall guys
+        ]).FromNumericListOfQuests();
+    /// <summary>
+    /// if any of these quests are done, all citystate aethernet locations are attuned
+    /// </summary>
+    public static readonly Dictionary<EAetheryteLocation, (char Letter, ushort[] QuestIds)> AethernetUnlockQuests = new()
+    {
+        [EAetheryteLocation.Gridania] = ('g', [85, 12, 124, 546, 528]),
+        [EAetheryteLocation.Limsa] = ('l', [108, 109, 507, 528]),
+        [EAetheryteLocation.Uldah] = ('u', [568, 569, 570, 546, 507]),
+        [EAetheryteLocation.Ishgard] = ('i', [1580]),
+        [EAetheryteLocation.Idyllshire] = ('y', [1656]),
+        [EAetheryteLocation.RhalgrsReach] = ('r', [2448]),
+        [EAetheryteLocation.Kugane] = ('k', [2475]),
+        [EAetheryteLocation.DomanEnclave] = ('d', [3026]),
+        [EAetheryteLocation.Crystarium] = ('c', [3282]),
+        [EAetheryteLocation.Eulmore] = ('e', [3289]),
+        [EAetheryteLocation.OldSharlayan] = ('s', [4359]),
+        [EAetheryteLocation.RadzAtHan] = ('z', [4418]),
+        [EAetheryteLocation.Tuliyollal] = ('t', [4878]),
+        [EAetheryteLocation.SolutionNine] = ('n', [4937]),
+    };
 
     private static readonly IReadOnlyList<uint> TankRoleQuestChapters = [136, 154, 178];
     private static readonly IReadOnlyList<uint> HealerRoleQuestChapters = [137, 155, 179];
@@ -135,8 +178,8 @@ internal sealed class QuestData
                     return [new(x, 0, classJobUtils)];
                 }));
 
-        quests.Add(new UnlockLinkQuestInfo(new(506), _L("Patch 7.2 Fantasia"), 1052475));
-        quests.Add(new UnlockLinkQuestInfo(new(568), _L("Patch 7.3 Fantasia"), 1052475));
+        quests.Add(new UnlockLinkQuestInfo(new(506), _L("Patch 7.2 Fantasia"), issuerDataId: 1052475));
+        quests.Add(new UnlockLinkQuestInfo(new(568), _L("Patch 7.3 Fantasia"), issuerDataId: 1052475));
 
         _quests = quests.ToDictionary(x => x.QuestId, x => x);
 
@@ -219,6 +262,7 @@ internal sealed class QuestData
         AddPreviousQuest(new(5000), new(4908));
         AddPreviousQuest(new(5001), new(4912));
         AddPreviousQuest(new(5443), new(434));
+        AddPreviousQuest(new(3242), new(3654));
 
         // "In order to proceed with this quest" [...]
         /* my little chocobo
@@ -441,14 +485,12 @@ internal sealed class QuestData
 
     public List<QuestId> GetLockedClassQuests()
     {
-        Job startingClass;
+        Job startingClass = Job.ADV;
         unsafe
         {
             PlayerState* playerState = PlayerState.Instance();
             if (playerState != null)
                 startingClass = (Job)playerState->FirstClass;
-            else
-                startingClass = Job.ADV;
         }
 
         if (startingClass == Job.ADV)

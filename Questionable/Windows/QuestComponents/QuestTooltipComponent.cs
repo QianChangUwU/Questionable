@@ -6,8 +6,8 @@ using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using Questionable.Model.Common;
 using Questionable.Model.Questing;
-using static Questionable.Domain.QuestInfo;
 using Questionable.Windows.Common.Ui;
+using static Questionable.Domain.QuestInfo;
 namespace Questionable.Windows.QuestComponents;
 
 internal sealed class QuestTooltipComponent
@@ -193,7 +193,7 @@ internal sealed class QuestTooltipComponent
 
         if (questInfo is QuestInfo actualQuestInfo)
         {
-            if (actualQuestInfo.MoogleDeliveryLevel > 0)
+            if (actualQuestInfo.MoogleDeliveryLevel > 0 || actualQuestInfo.IsMoogleDeliveryQuest)
                 ImGui.Text(_LF("Requires Carrier Level {0}", actualQuestInfo.MoogleDeliveryLevel));
 
 

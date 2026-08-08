@@ -4,7 +4,7 @@ namespace Questionable.Data;
 
 internal sealed class JournalData
 {
-    public JournalData(IDataManager dataManager, QuestData questData)
+    public JournalData(IDataManager dataManager, QuestData questData, QuestRegistry questRegistry)
     {
         List<Genre> genres = dataManager.GetExcelSheet<JournalGenre>()
             .Where(x => x.RowId > 0 && x.Icon > 0)
@@ -14,17 +14,17 @@ internal sealed class JournalData
         QuestRedo limsaStart = dataManager.GetExcelSheet<QuestRedo>().GetRow(1);
         QuestRedo gridaniaStart = dataManager.GetExcelSheet<QuestRedo>().GetRow(2);
         QuestRedo uldahStart = dataManager.GetExcelSheet<QuestRedo>().GetRow(3);
-        Genre genreLimsa = new(uint.MaxValue - 3, _L("Starting in Limsa Lominsa"), 1,
+        Genre genreLimsa = new(GenreStartingInLimsa, _L("Starting in Limsa Lominsa"), 1,
             new uint[] { 108, 109 }.Concat(limsaStart.QuestRedoParam.Select(x => x.Quest.RowId))
                 .Where(x => x != 0)
                 .Select(x => questData.GetQuestInfo(QuestId.FromRowId(x)))
                 .ToList());
-        Genre genreGridania = new(uint.MaxValue - 2, _L("Starting in Gridania"), 1,
+        Genre genreGridania = new(GenreStartingInGridania, _L("Starting in Gridania"), 1,
             new uint[] { 85, 123, 124 }.Concat(gridaniaStart.QuestRedoParam.Select(x => x.Quest.RowId))
                 .Where(x => x != 0)
                 .Select(x => questData.GetQuestInfo(QuestId.FromRowId(x)))
                 .ToList());
-        Genre genreUldah = new(uint.MaxValue - 1, _L("Starting in Ul'dah"), 1,
+        Genre genreUldah = new(GenreStartingInUldah, _L("Starting in Ul'dah"), 1,
             new uint[] { 568, 569, 570 }.Concat(uldahStart.QuestRedoParam.Select(x => x.Quest.RowId))
                 .Where(x => x != 0)
                 .Select(x => questData.GetQuestInfo(QuestId.FromRowId(x)))
@@ -35,6 +35,27 @@ internal sealed class JournalData
             .RemoveAll(x =>
                 genreLimsa.Quests.Contains(x) || genreGridania.Quests.Contains(x) || genreUldah.Quests.Contains(x));
 
+        Genre instantGenre = new(GenreInstantQuests, _L("Instant Quests"), CategorySpecialQuests,
+            questRegistry.AllQuests
+                     .Where(x => x.Info is QuestInfo qInfo && qInfo.CompletesInstantly)
+                     .Select(x => x.Info)
+                     .OrderBy(x => x.QuestId.Value)
+                     .ToList()
+        );
+        genres = genres.Append(instantGenre).ToList();
+
+        Genre collabQuests = genres.Where(g => g.Id.Equals(GenreCollaborationQuests)).Single();
+        collabQuests.Quests.Add(((ushort[])[
+            1153, 1154, 1155, 1556, // ffxiii 2013
+            1287, // ffxi 2014
+            1288, // dqx
+            2141, // yokai
+            2206, // ffxi 2015
+            3158, 3159, 3160, // ffxv
+            4796, 4797, 4798, // ffxvi
+            4801, // fall guys
+        ]).FromNumericListOfQuests().Select(q => questData.GetQuestInfo(q)).ToArray());
+
         Genres = genres.ToList();
         Categories = dataManager.GetExcelSheet<JournalCategory>()
             .Where(x => x.RowId > 0)
@@ -44,6 +65,12 @@ internal sealed class JournalData
             .Select(x => new Section(x, Categories.Where(y => y.SectionId == x.RowId).ToList()))
             .ToList();
     }
+    public const uint GenreStartingInUldah = uint.MaxValue - 1;
+    public const uint GenreStartingInGridania = uint.MaxValue - 2;
+    public const uint GenreStartingInLimsa = uint.MaxValue - 3;
+    public const uint GenreInstantQuests = uint.MaxValue - 4;
+    public const uint GenreCollaborationQuests = 252;
+    public const uint CategorySpecialQuests = 98;
 
     public List<Genre> Genres { get; }
     public List<Category> Categories { get; }
