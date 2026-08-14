@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 - Bug fix: avoid overriding aethernet shortcuts if they're set -alydev
 - Merge upstream v15.301.0.5 → downstream 15.301.0.501
 - Chore: switch from Dalamud.NET.Sdk to Dalamud.CN.NET.Sdk - downstream 502
@@ -18,3 +17,5 @@
 - Merge upstream v15.306.1.4 → 15.306.1.48 - downstream 4801
 - Change: qst used to log warnings when in loading screen with no quests active. it doesn't do that anymore -alydev
 - Merge upstream v15.306.1.48 → 15.306.1.54 - downstream 5401
+- Feature: fishing storyline done -alydev
+- Merge upstream v15.306.1.54 → 15.306.1.56 - downstream 5601
