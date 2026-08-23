@@ -10,4 +10,6 @@ public enum EItemRewardType
     Coffer,
     UnlockLink,
     Duty,
+    RecipeBook,
+    FolkloreBook,
 }

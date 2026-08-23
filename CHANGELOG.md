@@ -1,21 +1,5 @@
-- Bug fix: avoid overriding aethernet shortcuts if they're set -alydev
-- Merge upstream v15.301.0.5 → downstream 15.301.0.501
-- Chore: switch from Dalamud.NET.Sdk to Dalamud.CN.NET.Sdk - downstream 502
-- Fix: restore zh-cn translations for 37 missing job names (lost during upstream merge) - downstream 504
-- Fix: I18N.xml raw string literal keys use \n instead of \r\n (translation match fix) - downstream 503
-- Feature: retry path data bundle download if failed -alydev
-- Feature: Language selection -alydev
-  - Chinese (Simplified) translation -ShadyWhite
-  - Japanese translation -fuuga
-  - 详见插件设置
-- Feature: Open Editor feature -alydev
-  - This currently opens the quest path JSON in your default text editor, or generates a new quest path JSON for the current quest. A GUI quest editor will be included Soon :tm:
-  - The Edit button now has a tooltip showing how it works. If quests stop working, right click this button and delete all quest paths in that folder first to see if that fixes it.
-- Fix: path data bundle URL now points to downstream repo - downstream 503
-- L10n: ja-jp translations for new strings -fuuga
-- bug fix: fixed title bar button overlapping hitboxes -alydev
-- Merge upstream v15.306.1.4 → 15.306.1.48 - downstream 4801
-- Change: qst used to log warnings when in loading screen with no quests active. it doesn't do that anymore -alydev
-- Merge upstream v15.306.1.48 → 15.306.1.54 - downstream 5401
-- Feature: fishing storyline done -alydev
 - Merge upstream v15.306.1.54 → 15.306.1.56 - downstream 5601
+- Feature: fishing storyline done -alydev
+- Change: Disabled unverified translations -alydev
+  - If you are able to confirm the accuracy of translations for Japanese, Simplified Chinese or Korean, please let us know.
+- Merge upstream v15.306.1.56 → 15.306.3.6 - downstream 0601

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Dalamud.Bindings.ImGui;
+using ECommons.Automation.NeoTaskManager.Tasks;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using FFXIVClientStructs.FFXIV.Client.Game.UI;
 using Lumina.Excel.Sheets;
@@ -35,6 +36,7 @@ internal sealed class CommandHandler : IDisposable
     private readonly QuestData _questData;
     private readonly TerritoryData _territoryData;
     private readonly ITargetManager _targetManager;
+    private readonly ILogger<CommandHandler> _logger;
 
     private IReadOnlyList<uint> _previouslyUnlockedUnlockLinks = [];
 
@@ -59,7 +61,8 @@ internal sealed class CommandHandler : IDisposable
         IClientState clientState,
         Configuration configuration,
         QuestData questData,
-        TerritoryData territoryData)
+        TerritoryData territoryData,
+        ILogger<CommandHandler> logger)
     {
         _commandManager = commandManager;
         _chatGui = chatGui;
@@ -82,6 +85,7 @@ internal sealed class CommandHandler : IDisposable
         _configuration = configuration;
         _questData = questData;
         _territoryData = territoryData;
+        _logger = logger;
 
         _clientState.Logout += OnLogout;
         _commandManager.AddHandler("/qst", new(ProcessCommand)
@@ -148,6 +152,7 @@ internal sealed class CommandHandler : IDisposable
                 _chatGui.Print(_L("/qst mountid - prints information about your current mount"), MessageTag, TagColor);
                 _chatGui.Print(_L("/qst handle-interrupt - makes Questionable handle queued interrupts immediately (useful if you manually start combat)"), MessageTag, TagColor);
                 _chatGui.Print(_L("/qst clearlog - clears QuestCompletionLog.json"), MessageTag, TagColor);
+                _chatGui.Print(_L("/qst redeem - Redeem all reward items in inventory"), MessageTag, TagColor);
                 break;
 
             case "c":
@@ -268,6 +273,34 @@ internal sealed class CommandHandler : IDisposable
             case "titlebarpill":
                 _configuration.General.TitleBarPillCenter = !_configuration.General.TitleBarPillCenter;
                 _configuration.Save();
+                break;
+
+            case "redeem":
+                bool dry = false;
+                if (parts.Length > 1 && parts[1].EqualsIgnoreCaseAny("dry"))
+                    dry = true;
+                if (_questController.IsRunning)
+                {
+                    _chatGui.PrintError("Busy!", MessageTag, TagColor);
+                    break;
+                }
+                RedeemRewardItems.ResetAttemptedItems();
+                // yields UnmountTask followed by redeem tasks
+                var tasks = RedeemRewardItems.CreateRedeemTasks(_questData, _dataManager, overrideConfig: true);
+                if (tasks.Count == 0)
+                {
+                    _chatGui.Print("Nothing to redeem.", MessageTag, TagColor);
+                    break;
+                }
+                if (!dry)
+                    foreach (ITask task in tasks)
+                        _questController.UnsafeEnqueueManualTask(task);
+                _chatGui.Print($"Redeeming {tasks.Count - 1} item{(tasks.Count != 2 ? "s" : "")}", MessageTag, TagColor);
+                if (dry)
+                    foreach (ITask task in tasks)
+                        if (task is RedeemRewardItems.Task redeemTask)
+                            _chatGui.Print(redeemTask.ItemReward.Name, MessageTag, TagColor);
+                _logger.LogInformation("Tasks created by /qst redeem: {Tasks}", string.Join(", ", tasks.Select(x => x.ToString())));
                 break;
 
             //case "abandon-quest":

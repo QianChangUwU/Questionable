@@ -32,7 +32,8 @@ public sealed class QuestionablePlugin : IDalamudPlugin
         IKeyState keyState,
         IContextMenu contextMenu,
         IToastGui toastGui,
-        IGameInteropProvider gameInteropProvider)
+        IGameInteropProvider gameInteropProvider,
+        ITextureProvider textureProvider)
     {
         ArgumentNullException.ThrowIfNull(pluginInterface);
         ArgumentNullException.ThrowIfNull(chatGui);
@@ -41,7 +42,7 @@ public sealed class QuestionablePlugin : IDalamudPlugin
         PunishLibMain.Init(pluginInterface, "Questionable", new AboutPlugin()
         {
             Developer = "alydev",
-            Sponsor = "https://github.com/sponsors/alydevs"
+            Sponsor = "https://ko-fi.com/alydev"
         });
 
         try
@@ -68,6 +69,7 @@ public sealed class QuestionablePlugin : IDalamudPlugin
             serviceCollection.AddSingleton(contextMenu);
             serviceCollection.AddSingleton(toastGui);
             serviceCollection.AddSingleton(gameInteropProvider);
+            serviceCollection.AddSingleton(textureProvider);
             serviceCollection.AddSingleton(new WindowSystem(nameof(Questionable)));
 
             var savedConfig = (Configuration?)pluginInterface.GetPluginConfig();
