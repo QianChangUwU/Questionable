@@ -3,3 +3,5 @@
 - Change: Disabled unverified translations -alydev
   - If you are able to confirm the accuracy of translations for Japanese, Simplified Chinese or Korean, please let us know.
 - Merge upstream v15.306.1.56 → 15.306.3.6 - downstream 0601
+- Rising 2026 -alydev
+- Merge upstream v15.306.3.6 → 15.306.3.16 - downstream 1601
