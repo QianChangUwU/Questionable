@@ -9,7 +9,6 @@ namespace Questionable.External;
 internal sealed class DailyRoutinesIpc : IDisposable
 {
     private const string PluginName = "DailyRoutines";
-    private const string ModuleName = "AutoTalkSkip";
 
     private readonly IFramework _framework;
     private readonly ILogger<DailyRoutinesIpc> _logger;
@@ -20,8 +19,19 @@ internal sealed class DailyRoutinesIpc : IDisposable
     private readonly ICallGateSubscriber<string, bool, bool> _loadModule;
     private readonly ICallGateSubscriber<string, bool, bool, bool> _unloadModule;
 
-    private bool _wasAutoTalkSkipEnabled;
+    private readonly Dictionary<string, bool> _modulesEnabledByUs = new();
     private bool _autoTalkSkipDisabledByUs;
+    private bool _wasAutoTalkSkipEnabled;
+
+    private static readonly string[] ModulesToEnable =
+    [
+        "AutoSnipeQuestAutoCancelNPCEmote",
+        "IgnoreTransparencyWait",
+        "IgnoreTurnAndLookAtWait",
+        "AutoCutsceneSkip"
+    ];
+
+    private const string AutoTalkSkipModule = "AutoTalkSkip";
 
     public DailyRoutinesIpc(
         IDalamudPluginInterface pluginInterface,
@@ -45,7 +55,7 @@ internal sealed class DailyRoutinesIpc : IDisposable
     public void Dispose()
     {
         _framework.Update -= OnUpdate;
-        RestoreAutoTalkSkip();
+        RestoreModules();
     }
 
     private void OnUpdate(IFramework framework)
@@ -59,82 +69,125 @@ internal sealed class DailyRoutinesIpc : IDisposable
         bool hasActiveQuest = _questController.IsRunning ||
                               _questController.AutomationType != QuestController.EAutomationType.Manual;
 
-        if (hasActiveQuest && !_autoTalkSkipDisabledByUs)
+        if (hasActiveQuest)
         {
-            bool? enabled = IsAutoTalkSkipEnabled();
-            if (enabled == true)
-            {
-                _wasAutoTalkSkipEnabled = true;
-                _autoTalkSkipDisabledByUs = true;
-                UnloadAutoTalkSkip();
-                _chatGui.Print(
-                    _L("DailyRoutines AutoTalkSkip has been temporarily disabled to avoid conflicts with Questionable."),
-                    CommandHandler.MessageTag, CommandHandler.TagColor);
-                _logger.LogInformation("Disabled DailyRoutines AutoTalkSkip module due to Questionable automation");
-            }
+            HandleAutoTalkSkipDisable();
+            HandleHelperModulesEnable();
         }
-        else if (!hasActiveQuest && _autoTalkSkipDisabledByUs)
+        else
         {
-            RestoreAutoTalkSkip();
+            RestoreModules();
         }
     }
 
-    private void RestoreAutoTalkSkip()
+    private void HandleAutoTalkSkipDisable()
     {
-        if (!_autoTalkSkipDisabledByUs || !IPCSubscriber.IsInstalled(PluginName))
+        if (_autoTalkSkipDisabledByUs)
             return;
 
-        if (_wasAutoTalkSkipEnabled)
+        bool? enabled = IsModuleEnabled(AutoTalkSkipModule);
+        if (enabled == true)
         {
-            LoadAutoTalkSkip();
+            _wasAutoTalkSkipEnabled = true;
+            _autoTalkSkipDisabledByUs = true;
+            UnloadModule(AutoTalkSkipModule);
             _chatGui.Print(
-                _L("DailyRoutines AutoTalkSkip has been re-enabled."),
+                _L("DailyRoutines AutoTalkSkip has been temporarily disabled to avoid conflicts with Questionable."),
                 CommandHandler.MessageTag, CommandHandler.TagColor);
-            _logger.LogInformation("Re-enabled DailyRoutines AutoTalkSkip module");
+            _logger.LogInformation("Disabled DailyRoutines AutoTalkSkip module due to Questionable automation");
         }
-
-        _autoTalkSkipDisabledByUs = false;
-        _wasAutoTalkSkipEnabled = false;
     }
 
-    private bool? IsAutoTalkSkipEnabled()
+    private void HandleHelperModulesEnable()
+    {
+        foreach (string module in ModulesToEnable)
+        {
+            if (_modulesEnabledByUs.ContainsKey(module))
+                continue;
+
+            bool? enabled = IsModuleEnabled(module);
+            if (enabled == false)
+            {
+                LoadModule(module);
+                _modulesEnabledByUs[module] = true;
+                _chatGui.Print(
+                    _LF("DailyRoutines {0} has been temporarily enabled for Questionable.", module),
+                    CommandHandler.MessageTag, CommandHandler.TagColor);
+                _logger.LogInformation("Enabled DailyRoutines {Module} module for Questionable automation", module);
+            }
+        }
+    }
+
+    private void RestoreModules()
+    {
+        if (!IPCSubscriber.IsInstalled(PluginName))
+            return;
+
+        if (_autoTalkSkipDisabledByUs)
+        {
+            if (_wasAutoTalkSkipEnabled)
+            {
+                LoadModule(AutoTalkSkipModule);
+                _chatGui.Print(
+                    _L("DailyRoutines AutoTalkSkip has been re-enabled."),
+                    CommandHandler.MessageTag, CommandHandler.TagColor);
+                _logger.LogInformation("Re-enabled DailyRoutines AutoTalkSkip module");
+            }
+
+            _autoTalkSkipDisabledByUs = false;
+            _wasAutoTalkSkipEnabled = false;
+        }
+
+        foreach (string module in _modulesEnabledByUs.Keys)
+        {
+            UnloadModule(module);
+            _chatGui.Print(
+                _LF("DailyRoutines {0} has been disabled.", module),
+                CommandHandler.MessageTag, CommandHandler.TagColor);
+            _logger.LogInformation("Disabled DailyRoutines {Module} module (restoring original state)", module);
+        }
+
+        _modulesEnabledByUs.Clear();
+    }
+
+    private bool? IsModuleEnabled(string module)
     {
         try
         {
             if (!_isModuleEnabled.HasFunction)
                 return null;
-            return _isModuleEnabled.InvokeFunc(ModuleName);
+            return _isModuleEnabled.InvokeFunc(module);
         }
         catch (Exception e)
         {
-            _logger.LogWarning(e, "Failed to check DailyRoutines AutoTalkSkip status");
+            _logger.LogWarning(e, "Failed to check DailyRoutines {Module} status", module);
             return null;
         }
     }
 
-    private void UnloadAutoTalkSkip()
+    private void UnloadModule(string module)
     {
         try
         {
             if (_unloadModule.HasFunction)
-                _unloadModule.InvokeFunc(ModuleName, false, false);
+                _unloadModule.InvokeFunc(module, false, false);
         }
         catch (Exception e)
         {
-            _logger.LogWarning(e, "Failed to disable DailyRoutines AutoTalkSkip");
+            _logger.LogWarning(e, "Failed to disable DailyRoutines {Module}", module);
         }
     }
 
-    private void LoadAutoTalkSkip()
+    private void LoadModule(string module)
     {
         try
         {
             if (_loadModule.HasFunction)
-                _loadModule.InvokeFunc(ModuleName, false);
+                _loadModule.InvokeFunc(module, false);
         }
         catch (Exception e)
         {
-            _logger.LogWarning(e, "Failed to re-enable DailyRoutines AutoTalkSkip");
+            _logger.LogWarning(e, "Failed to enable DailyRoutines {Module}", module);
         }
     }
 }
