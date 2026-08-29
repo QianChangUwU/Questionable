@@ -25,7 +25,8 @@ internal sealed class DailyRoutinesIpc : IDisposable
 
     private static readonly string[] ModulesToEnable =
     [
-        "AutoSnipeQuestAutoCancelNPCEmote",
+        "AutoSnipeQuest",
+        "AutoCancelNPCEmote",
         "IgnoreTransparencyWait",
         "IgnoreTurnAndLookAtWait",
         "AutoCutsceneSkip"
