@@ -6,6 +6,7 @@ using Questionable.Windows.Common.Ui;
 using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Windows.QuestComponents;
 
+[RegisterSingleton]
 internal sealed class RemainingTasksComponent(
     QuestController questController,
     GatheringController gatheringController)

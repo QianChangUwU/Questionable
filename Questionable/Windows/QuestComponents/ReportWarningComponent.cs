@@ -5,6 +5,7 @@ using Questionable.Windows.Common.Ui;
 using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Windows.QuestComponents;
 
+[RegisterSingleton]
 internal sealed class ReportWarningComponent(Configuration configuration)
 {
     private readonly Configuration _configuration = configuration;

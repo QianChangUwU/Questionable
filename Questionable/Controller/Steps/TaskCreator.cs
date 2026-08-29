@@ -4,6 +4,7 @@ using Questionable.Model.Questing;
 using static Questionable.Utils.LocalizeShortcut;
 namespace Questionable.Controller.Steps;
 
+[RegisterSingleton]
 internal sealed class TaskCreator
 (
     IServiceProvider serviceProvider,

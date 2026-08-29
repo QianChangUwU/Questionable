@@ -10,6 +10,7 @@ using Questionable.Windows.Common.Ui;
 using GrandCompany = FFXIVClientStructs.FFXIV.Client.UI.Agent.GrandCompany;
 namespace Questionable.Windows.ConfigComponents;
 
+[RegisterSingleton]
 internal sealed class GeneralConfigComponent : ConfigComponent
 {
     private readonly string[] _grandCompanyNames =

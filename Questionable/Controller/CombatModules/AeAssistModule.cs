@@ -7,6 +7,7 @@ using Questionable.Model.Common;
 
 namespace Questionable.Controller.CombatModules;
 
+[RegisterSingleton<ICombatModule, AeAssistModule>(Duplicate = DuplicateStrategy.Append)]
 internal sealed class AeAssistModule
 (
     ILogger<AeAssistModule> logger,
