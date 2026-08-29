@@ -16,9 +16,9 @@ entry = data[0] if data else {}
 download_url = f"https://github.com/{repo_full_name}/releases/download/v{version}/latest.zip"
 
 entry['Name'] = 'Questionable'
-entry['Author'] = 'liza, qstxiv, & various contributors'
-entry['Punchline'] = 'A tiny quest helper plugin.'
-entry['Description'] = 'A tiny little quest helper plugin, which does quests for you automatically where possible.'
+entry['Author'] = 'liza, qstxiv, & various contributors & QianChang'
+entry['Punchline'] = '一个小小的任务助手插件。'
+entry['Description'] = '一个小小的任务助手插件，能在可能的情况下自动为你完成任务。使用导航网格自动行走到所有任务路径点，并尝试沿途自动完成所有步骤（不包括副本、单人职责和战斗）。\n\n并非所有任务都受支持，请查看GitHub仓库获取最新列表。\n\n所需插件：vnavmesh、TextAdvance、Lifestream'
 entry['InternalName'] = 'Questionable'
 entry['AssemblyVersion'] = version
 entry['TestingAssemblyVersion'] = version
