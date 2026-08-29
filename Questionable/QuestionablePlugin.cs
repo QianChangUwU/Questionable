@@ -168,6 +168,7 @@ public sealed class QuestionablePlugin(
         serviceProvider.GetRequiredService<QuestionableIpc>();
         serviceProvider.GetRequiredService<TextAdvanceIpc>();
         serviceProvider.GetRequiredService<YesAlreadyIpc>();
+        serviceProvider.GetRequiredService<DailyRoutinesIpc>();
 
         pathDataUpdater.CheckForUpdates();
     }
