@@ -986,7 +986,7 @@
   <Entry>
     <!-- Found in: Windows\PriorityWindow.cs -->
     <Key>Job Quests</Key>
-    <Value lang="zh-cn">特职任务</Value>
+    <Value lang="zh-cn">职业任务（1-70级）</Value>
     <Value lang="ja-jp">ジョブクエスト</Value>
     <!--<Value lang="ko">직업 퀘스트</Value>-->
   </Entry>
@@ -6208,5 +6208,15 @@
     <!-- Found in: External\DailyRoutinesIpc.cs -->
     <Key>DailyRoutines {0} has been disabled.</Key>
     <Value lang="zh-cn">已禁用 DailyRoutines 的 {0} 模块。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\PriorityWindow.cs -->
+    <Key>Selecting a preset will override your current priority list and activate the preset. You can save your current list as a preset by entering a name below and selecting Save.</Key>
+    <Value lang="zh-cn">选择预设将覆盖当前优先列表并激活该预设。你可以在下方输入名称并点击保存，将当前列表保存为预设。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\PriorityWindow.cs -->
+    <Key>If you don't have any active MSQ quest and there is no Priority Quest added here, it will always try to pick up the next quest in the MSQ first.</Key>
+    <Value lang="zh-cn">如果你没有正在进行的主线任务，且此处未添加优先任务，插件会优先尝试接取下一个主线任务。</Value>
   </Entry>
 </I18N>
