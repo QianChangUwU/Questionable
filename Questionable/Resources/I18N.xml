@@ -6191,6 +6191,16 @@
   </Entry>
   <Entry>
     <!-- Found in: External\DailyRoutinesIpc.cs -->
+    <Key>DailyRoutines AutoCutsceneSkip has been temporarily disabled to avoid conflicts with Questionable.</Key>
+    <Value lang="zh-cn">已临时禁用 DailyRoutines 的 AutoCutsceneSkip 模块，以避免与 Questionable 冲突。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: External\DailyRoutinesIpc.cs -->
+    <Key>DailyRoutines AutoCutsceneSkip has been re-enabled.</Key>
+    <Value lang="zh-cn">已重新启用 DailyRoutines 的 AutoCutsceneSkip 模块。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: External\DailyRoutinesIpc.cs -->
     <Key>DailyRoutines {0} has been temporarily enabled for Questionable.</Key>
     <Value lang="zh-cn">已临时启用 DailyRoutines 的 {0} 模块以辅助 Questionable。</Value>
   </Entry>

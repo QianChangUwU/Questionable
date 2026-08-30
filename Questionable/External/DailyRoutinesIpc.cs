@@ -22,17 +22,19 @@ internal sealed class DailyRoutinesIpc : IDisposable
     private readonly Dictionary<string, bool> _modulesEnabledByUs = new();
     private bool _autoTalkSkipDisabledByUs;
     private bool _wasAutoTalkSkipEnabled;
+    private bool _autoCutsceneSkipDisabledByUs;
+    private bool _wasAutoCutsceneSkipEnabled;
 
     private static readonly string[] ModulesToEnable =
     [
         "AutoSnipeQuest",
         "AutoCancelNPCEmote",
         "IgnoreTransparencyWait",
-        "IgnoreTurnAndLookAtWait",
-        "AutoCutsceneSkip"
+        "IgnoreTurnAndLookAtWait"
     ];
 
     private const string AutoTalkSkipModule = "AutoTalkSkip";
+    private const string AutoCutsceneSkipModule = "AutoCutsceneSkip";
 
     public DailyRoutinesIpc(
         IDalamudPluginInterface pluginInterface,
@@ -73,6 +75,7 @@ internal sealed class DailyRoutinesIpc : IDisposable
         if (hasActiveQuest)
         {
             HandleAutoTalkSkipDisable();
+            HandleAutoCutsceneSkipDisable();
             HandleHelperModulesEnable();
         }
         else
@@ -96,6 +99,24 @@ internal sealed class DailyRoutinesIpc : IDisposable
                 _L("DailyRoutines AutoTalkSkip has been temporarily disabled to avoid conflicts with Questionable."),
                 CommandHandler.MessageTag, CommandHandler.TagColor);
             _logger.LogInformation("Disabled DailyRoutines AutoTalkSkip module due to Questionable automation");
+        }
+    }
+
+    private void HandleAutoCutsceneSkipDisable()
+    {
+        if (_autoCutsceneSkipDisabledByUs)
+            return;
+
+        bool? enabled = IsModuleEnabled(AutoCutsceneSkipModule);
+        if (enabled == true)
+        {
+            _wasAutoCutsceneSkipEnabled = true;
+            _autoCutsceneSkipDisabledByUs = true;
+            UnloadModule(AutoCutsceneSkipModule);
+            _chatGui.Print(
+                _L("DailyRoutines AutoCutsceneSkip has been temporarily disabled to avoid conflicts with Questionable."),
+                CommandHandler.MessageTag, CommandHandler.TagColor);
+            _logger.LogInformation("Disabled DailyRoutines AutoCutsceneSkip module due to Questionable automation");
         }
     }
 
@@ -137,6 +158,21 @@ internal sealed class DailyRoutinesIpc : IDisposable
 
             _autoTalkSkipDisabledByUs = false;
             _wasAutoTalkSkipEnabled = false;
+        }
+
+        if (_autoCutsceneSkipDisabledByUs)
+        {
+            if (_wasAutoCutsceneSkipEnabled)
+            {
+                LoadModule(AutoCutsceneSkipModule);
+                _chatGui.Print(
+                    _L("DailyRoutines AutoCutsceneSkip has been re-enabled."),
+                    CommandHandler.MessageTag, CommandHandler.TagColor);
+                _logger.LogInformation("Re-enabled DailyRoutines AutoCutsceneSkip module");
+            }
+
+            _autoCutsceneSkipDisabledByUs = false;
+            _wasAutoCutsceneSkipEnabled = false;
         }
 
         foreach (string module in _modulesEnabledByUs.Keys)
