@@ -76,15 +76,30 @@ jobs:
           zip -q -X -j out/paths.zip manifest.json
 
           SHA=$(sha256sum out/paths.zip | cut -d' ' -f1)
-          BUNDLE_URL="https://cn-nb1.rains3.com/qst/paths-${CHANNEL}/paths.zip"
+          S3_URL="https://cn-nb1.rains3.com/qst/paths-${CHANNEL}/paths.zip"
+          GH_URL="https://github.com/${{ github.repository }}/releases/download/paths-${CHANNEL}/paths.zip"
 
+          # RainYun S3 manifest (primary)
           cat > out/manifest-${CHANNEL}.json <<EOF
           {
             "schemaVersion": 1,
             "dataVersion": ${{ steps.meta.outputs.data_version }},
             "minPluginDataFormat": ${{ steps.meta.outputs.min_format }},
             "maxPluginDataFormat": null,
-            "bundleUrl": "$BUNDLE_URL",
+            "bundleUrl": "$S3_URL",
+            "bundleSha256": "$SHA",
+            "generatedAt": "$GENERATED_AT"
+          }
+          EOF
+
+          # GitHub Release manifest (fallback)
+          cat > out/manifest-${CHANNEL}-gh.json <<EOF
+          {
+            "schemaVersion": 1,
+            "dataVersion": ${{ steps.meta.outputs.data_version }},
+            "minPluginDataFormat": ${{ steps.meta.outputs.min_format }},
+            "maxPluginDataFormat": null,
+            "bundleUrl": "$GH_URL",
             "bundleSha256": "$SHA",
             "generatedAt": "$GENERATED_AT"
           }
@@ -100,6 +115,8 @@ jobs:
           aws configure set default.region us-east-1
 
       - name: Upload to RainYun S3
+        continue-on-error: true
+        id: s3_upload
         run: |
           CHANNEL=${{ steps.channel.outputs.channel }}
           aws s3 cp out/manifest-${CHANNEL}.json \
@@ -107,6 +124,16 @@ jobs:
             --endpoint-url https://cn-nb1.rains3.com --acl public-read
           aws s3 cp out/paths.zip \
             s3://qst/paths-${CHANNEL}/paths.zip \
+            --endpoint-url https://cn-nb1.rains3.com --acl public-read
+
+      - name: Fallback - upload GitHub manifest to S3
+        if: steps.s3_upload.outcome == 'failure'
+        continue-on-error: true
+        run: |
+          CHANNEL=${{ steps.channel.outputs.channel }}
+          cp out/manifest-${CHANNEL}-gh.json out/manifest-${CHANNEL}.json
+          aws s3 cp out/manifest-${CHANNEL}.json \
+            s3://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json \
             --endpoint-url https://cn-nb1.rains3.com --acl public-read
 
       - name: Publish path bundle release (backup)
@@ -123,7 +150,7 @@ jobs:
             Updated automatically when path data changes. This does not trigger a plugin release.
           files: |
             out/paths.zip
-            out/manifest-${{ steps.channel.outputs.channel }}.json
+            out/manifest-${{ steps.channel.outputs.channel }}-gh.json
           draft: false
           prerelease: ${{ steps.channel.outputs.channel == 'testing' }}
           make_latest: false
