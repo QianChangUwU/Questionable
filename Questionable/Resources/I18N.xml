@@ -449,6 +449,12 @@
   </Entry>
   <Entry>
     <!-- Found in: Data\JobExtensions.cs -->
+    <Key>Beastmaster</Key>
+    <Value lang="zh-cn">驯兽师</Value>
+    <Value lang="ja-jp">魔獣使い</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Data\JobExtensions.cs -->
     <Key>Paladin</Key>
     <Value lang="zh-cn">骑士</Value>
   </Entry>

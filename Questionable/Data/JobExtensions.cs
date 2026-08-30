@@ -122,6 +122,7 @@ internal static class JobExtensions
             Job.SGE => _L("Sage"),
             Job.VPR => _L("Viper"),
             Job.PCT => _L("Pictomancer"),
+            Job.BST => _L("Beastmaster"),
             var _ => classJob.ToString()
         };
     }
