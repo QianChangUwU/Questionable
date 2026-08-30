@@ -36,6 +36,19 @@ internal sealed class DailyRoutinesIpc : IDisposable
     private const string AutoTalkSkipModule = "AutoTalkSkip";
     private const string AutoCutsceneSkipModule = "AutoCutsceneSkip";
 
+    private static readonly Dictionary<string, string> ModuleDisplayNames = new()
+    {
+        { "AutoTalkSkip", "自动跳过对话" },
+        { "AutoCutsceneSkip", "自动跳过过场动画" },
+        { "AutoSnipeQuest", "自动完成观察任务" },
+        { "AutoCancelNPCEmote", "自动取消NPC情感动作播放" },
+        { "IgnoreTransparencyWait", "自动取消NPC淡入淡出等待" },
+        { "IgnoreTurnAndLookAtWait", "自动取消NPC转身及视线调整等待" }
+    };
+
+    private static string GetModuleDisplayName(string module) =>
+        ModuleDisplayNames.TryGetValue(module, out string? name) ? name : module;
+
     public DailyRoutinesIpc(
         IDalamudPluginInterface pluginInterface,
         IFramework framework,
@@ -133,7 +146,7 @@ internal sealed class DailyRoutinesIpc : IDisposable
                 LoadModule(module);
                 _modulesEnabledByUs[module] = true;
                 _chatGui.Print(
-                    _LF("DailyRoutines {0} has been temporarily enabled for Questionable.", module),
+                    _LF("DailyRoutines {0} has been temporarily enabled for Questionable.", GetModuleDisplayName(module)),
                     CommandHandler.MessageTag, CommandHandler.TagColor);
                 _logger.LogInformation("Enabled DailyRoutines {Module} module for Questionable automation", module);
             }
@@ -179,7 +192,7 @@ internal sealed class DailyRoutinesIpc : IDisposable
         {
             UnloadModule(module);
             _chatGui.Print(
-                _LF("DailyRoutines {0} has been disabled.", module),
+                _LF("DailyRoutines {0} has been disabled.", GetModuleDisplayName(module)),
                 CommandHandler.MessageTag, CommandHandler.TagColor);
             _logger.LogInformation("Disabled DailyRoutines {Module} module (restoring original state)", module);
         }

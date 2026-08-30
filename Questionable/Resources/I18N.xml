@@ -6182,22 +6182,22 @@
   <Entry>
     <!-- Found in: External\DailyRoutinesIpc.cs -->
     <Key>DailyRoutines AutoTalkSkip has been temporarily disabled to avoid conflicts with Questionable.</Key>
-    <Value lang="zh-cn">已临时禁用 DailyRoutines 的 AutoTalkSkip 模块，以避免与 Questionable 冲突。</Value>
+    <Value lang="zh-cn">已临时禁用 DailyRoutines 的「自动跳过对话」模块，以避免与 Questionable 冲突。</Value>
   </Entry>
   <Entry>
     <!-- Found in: External\DailyRoutinesIpc.cs -->
     <Key>DailyRoutines AutoTalkSkip has been re-enabled.</Key>
-    <Value lang="zh-cn">已重新启用 DailyRoutines 的 AutoTalkSkip 模块。</Value>
+    <Value lang="zh-cn">已重新启用 DailyRoutines 的「自动跳过对话」模块。</Value>
   </Entry>
   <Entry>
     <!-- Found in: External\DailyRoutinesIpc.cs -->
     <Key>DailyRoutines AutoCutsceneSkip has been temporarily disabled to avoid conflicts with Questionable.</Key>
-    <Value lang="zh-cn">已临时禁用 DailyRoutines 的 AutoCutsceneSkip 模块，以避免与 Questionable 冲突。</Value>
+    <Value lang="zh-cn">已临时禁用 DailyRoutines 的「自动跳过过场动画」模块，以避免与 Questionable 冲突。</Value>
   </Entry>
   <Entry>
     <!-- Found in: External\DailyRoutinesIpc.cs -->
     <Key>DailyRoutines AutoCutsceneSkip has been re-enabled.</Key>
-    <Value lang="zh-cn">已重新启用 DailyRoutines 的 AutoCutsceneSkip 模块。</Value>
+    <Value lang="zh-cn">已重新启用 DailyRoutines 的「自动跳过过场动画」模块。</Value>
   </Entry>
   <Entry>
     <!-- Found in: External\DailyRoutinesIpc.cs -->
