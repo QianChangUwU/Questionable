@@ -59,6 +59,15 @@ internal sealed class DalamudInitializer : IDisposable
         _logger = logger;
         SetupI18N(_configuration.General.Language);
 
+        oneTimeSetupWindow.WindowName = _L("Questionable Setup") + "###QuestionableOneTimeSetup";
+        debugOverlay.WindowName = _L("Questionable Debug Overlay") + "###QuestionableDebugOverlay";
+        questSelectionWindow.WindowName = _L("Quest Selection") + "{WindowId}";
+        questValidationWindow.WindowName = _L("Quest Validation") + "###QuestionableValidator";
+        journalProgressWindow.WindowName = _L("Journal Progress") + "###QuestionableJournalProgress";
+        priorityWindow.WindowName = _L("Priority Quests") + "###QuestionableQuestPriority";
+        pathEditorWindow.WindowName = _L("Path Editor") + "###QuestionablePathEditor";
+        configWindow.WindowName = _L("Config - Questionable") + "###QuestionableConfig";
+
         _windowSystem.AddWindow(oneTimeSetupWindow);
         _windowSystem.AddWindow(questWindow);
         _windowSystem.AddWindow(configWindow);
