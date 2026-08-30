@@ -13,8 +13,10 @@ namespace Questionable.Windows.ConfigComponents;
 [RegisterSingleton]
 internal sealed class GeneralConfigComponent : ConfigComponent
 {
-    private readonly string[] _grandCompanyNames =
-        [_L("None (manually pick quest)"), _L("Maelstrom"), _L("Twin Adder"), _L("Immortal Flames")];
+    private static string[] GrandCompanyNames =>
+    [
+        _L("None (manually pick quest)"), _L("Maelstrom"), _L("Twin Adder"), _L("Immortal Flames")
+    ];
 
     private readonly QuestRegistry _questRegistry;
     private readonly TerritoryData _territoryData;
@@ -123,8 +125,8 @@ internal sealed class GeneralConfigComponent : ConfigComponent
 
             int grandCompany = (int)Configuration.General.GrandCompany;
             ImGui.SetNextItemWidth(size.X / 2);
-            if (ImGui.Combo(_L("Preferred Grand Company"), ref grandCompany, _grandCompanyNames,
-                _grandCompanyNames.Length))
+            if (ImGui.Combo(_L("Preferred Grand Company"), ref grandCompany, GrandCompanyNames,
+                GrandCompanyNames.Length))
             {
                 Configuration.General.GrandCompany = (GrandCompany)grandCompany;
                 Save();

@@ -44,13 +44,13 @@ internal sealed class PathDataUpdater : IDisposable
     }
 
     public DateTime StatusLastChanged { get; private set; } = DateTime.Now;
-    private string _status = _L("Idle");
+    private string _status = string.Empty;
     /// <summary>Human-readable status for the config UI.</summary>
     public string Status
     {
         get
         {
-            return _status;
+            return string.IsNullOrEmpty(_status) ? _L("Idle") : _status;
         }
         private set
         {

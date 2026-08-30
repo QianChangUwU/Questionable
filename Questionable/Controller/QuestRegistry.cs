@@ -582,7 +582,7 @@ internal sealed class QuestRegistry
         return (true, path);
     }
 
-    public static string OpenEditorDescription = _L("Clicking this button writes the quest path to a file and opens it in your default text editor.") +
+    public static string OpenEditorDescription => _L("Clicking this button writes the quest path to a file and opens it in your default text editor.") +
                _L("After making a change, click Reload Data below.") + "\n" +
                _L("To revert to the official version, delete the file and click Reload Data again.") + "\n" +
                _L("Left click: Open this quest in your default .json text editor\nRight click: Open Quests folder");

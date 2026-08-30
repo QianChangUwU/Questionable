@@ -23,7 +23,7 @@ internal sealed class PriorityWindow : LWindow
     private const string ClipboardPrefix = "qst:priority:";
     private const string LegacyClipboardPrefix = "qst:v1:";
     private const char ClipboardSeparator = ';';
-    private readonly string JobQuestsPresetName = _L("Job Quests");
+    private const string JobQuestsPresetName = "Job Quests";
     private readonly IChatGui _chatGui;
 
     private readonly Configuration _configuration;
@@ -325,7 +325,7 @@ internal sealed class PriorityWindow : LWindow
         Dictionary<string, List<ElementId>> builtInPresets = GetOrCreateBuiltInPresets();
         Dictionary<string, List<string>> userPresets = _configuration.Priority.Presets;
 
-        string preview = _selectedPresetName ?? _L("Select a preset...");
+        string preview = _selectedPresetName != null ? LocalizePresetName(_selectedPresetName) : _L("Select a preset...");
         ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X);
         if (ImGui.BeginCombo("##PresetSelection", preview, ImGuiComboFlags.HeightLarge))
         {
@@ -346,7 +346,7 @@ internal sealed class PriorityWindow : LWindow
             ImGui.TextDisabled(_L("Built-in"));
             foreach (string name in builtInPresets.Keys)
             {
-                if (ImGui.Selectable(name, _selectedPresetName == name))
+                if (ImGui.Selectable(LocalizePresetName(name), _selectedPresetName == name))
                 {
                     _selectedPresetName = name;
                     LoadPreset(name);
@@ -532,6 +532,12 @@ internal sealed class PriorityWindow : LWindow
 
         return _builtInPresets;
     }
+
+    private static string LocalizePresetName(string name) => name switch
+    {
+        JobQuestsPresetName => _L("Job Quests"),
+        _ => name
+    };
 
     private static List<ElementId> GetAetherCurrentQuests(params uint[] territories)
     {
