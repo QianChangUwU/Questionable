@@ -1,9 +1,3 @@
-- Merge upstream v15.306.1.54 → 15.306.1.56 - downstream 5601
-- Feature: fishing storyline done -alydev
-- Change: Disabled unverified translations -alydev
-  - If you are able to confirm the accuracy of translations for Japanese, Simplified Chinese or Korean, please let us know.
-- Merge upstream v15.306.1.56 → 15.306.3.6 - downstream 0601
-- Rising 2026 -alydev
-- Merge upstream v15.306.3.6 → 15.306.3.16 - downstream 1601
-- Feature: Code cleanup -Kage, alydev
 - Merge upstream v15.306.3.16 → 15.306.3.18 - downstream 1801
+- Feature: Priority preset to unlock Level Cap Dungeons roulette -alydev
+- Merge upstream v15.306.3.18 → 15.306.3.19 - downstream 1901
