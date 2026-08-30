@@ -76,7 +76,7 @@ jobs:
           zip -q -X -j out/paths.zip manifest.json
 
           SHA=$(sha256sum out/paths.zip | cut -d' ' -f1)
-          BUNDLE_URL="https://github.com/${{ github.repository }}/releases/download/paths-${CHANNEL}/paths.zip"
+          BUNDLE_URL="https://cn-nb1.rains3.com/qst/paths-${CHANNEL}/paths.zip"
 
           cat > out/manifest-${CHANNEL}.json <<EOF
           {
@@ -93,7 +93,23 @@ jobs:
           echo "Bundle SHA-256: $SHA"
           ls -la out/
 
-      - name: Publish path bundle release
+      - name: Configure AWS CLI for RainYun S3
+        run: |
+          aws configure set aws_access_key_id "${{ secrets.RAINYUN_ACCESS_KEY }}"
+          aws configure set aws_secret_access_key "${{ secrets.RAINYUN_SECRET_KEY }}"
+          aws configure set default.region us-east-1
+
+      - name: Upload to RainYun S3
+        run: |
+          CHANNEL=${{ steps.channel.outputs.channel }}
+          aws s3 cp out/manifest-${CHANNEL}.json \
+            s3://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json \
+            --endpoint-url https://cn-nb1.rains3.com --acl public-read
+          aws s3 cp out/paths.zip \
+            s3://qst/paths-${CHANNEL}/paths.zip \
+            --endpoint-url https://cn-nb1.rains3.com --acl public-read
+
+      - name: Publish path bundle release (backup)
         uses: softprops/action-gh-release@v2
         with:
           tag_name: paths-${{ steps.channel.outputs.channel }}

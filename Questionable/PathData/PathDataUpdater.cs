@@ -11,7 +11,7 @@ namespace Questionable.PathData;
 [RegisterSingleton]
 internal sealed class PathDataUpdater : IDisposable
 {
-    private const string RepositoryUrl = "https://github.com/QianChangUwU/Questionable";
+    private const string S3BaseUrl = "https://cn-nb1.rains3.com/qst";
 
     private readonly IDalamudPluginInterface _pluginInterface;
     private readonly Configuration _configuration;
@@ -134,7 +134,7 @@ internal sealed class PathDataUpdater : IDisposable
         Status = _L("Checking for path updates…");
         using HttpClient http = new() { Timeout = TimeSpan.FromSeconds(30) };
 
-        string manifestUrl = $"{RepositoryUrl}/releases/download/paths-{_channel}/manifest-{_channel}.json";
+        string manifestUrl = $"{S3BaseUrl}/paths-{_channel}/manifest-{_channel}.json";
         _logger.LogDebug($"Requesting path updates from {manifestUrl}");
         PathDataManifest? manifest;
         try
