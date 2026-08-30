@@ -6225,4 +6225,14 @@
     <Key>If you don't have any active MSQ quest and there is no Priority Quest added here, it will always try to pick up the next quest in the MSQ first.</Key>
     <Value lang="zh-cn">如果你没有正在进行的主线任务，且此处未添加优先任务，插件会优先尝试接取下一个主线任务。</Value>
   </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
+    <Key>Path data source</Key>
+    <Value lang="zh-cn">路径数据源</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
+    <Key>国内存储</Key>
+    <Value lang="zh-cn">国内存储</Value>
+  </Entry>
 </I18N>

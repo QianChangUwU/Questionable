@@ -401,6 +401,15 @@ internal sealed class DebugConfigComponent
             ImGui.SameLine();
             ImGuiComponents.HelpMarker(_L("Downloads newer quest/gathering paths without needing a full plugin update."));
 
+            int dataSource = (int)Configuration.PathData.DataSource;
+            ImGui.SetNextItemWidth(200);
+            string[] dataSourceNames = [_L("国内存储"), _L("GitHub")];
+            if (ImGui.Combo(_L("Path data source"), ref dataSource, dataSourceNames, dataSourceNames.Length))
+            {
+                Configuration.PathData.DataSource = (EPathDataSource)dataSource;
+                Save();
+            }
+
             if (ImGui.Button(_L("Check for path updates now")))
                 pathDataUpdater.CheckForUpdatesManually();
 

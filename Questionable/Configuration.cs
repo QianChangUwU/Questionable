@@ -345,6 +345,9 @@ internal sealed class Configuration : IPluginConfiguration
         /// <summary>Whether to automatically download newer quest/gathering path bundles.</summary>
         public bool AutoUpdate { get; set; } = true;
 
+        /// <summary>Source to download path data from.</summary>
+        public EPathDataSource DataSource { get; set; } = EPathDataSource.RainYun;
+
         /// <summary>Data version of the path bundle currently in <c>{ConfigDirectory}/PathData/</c>; 0 if none.</summary>
         public long InstalledDataVersion { get; set; }
 

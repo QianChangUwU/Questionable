@@ -12,6 +12,7 @@ namespace Questionable.PathData;
 internal sealed class PathDataUpdater : IDisposable
 {
     private const string S3BaseUrl = "https://cn-nb1.rains3.com/qst";
+    private const string GitHubBaseUrl = "https://github.com/QianChangUwU/Questionable";
 
     private readonly IDalamudPluginInterface _pluginInterface;
     private readonly Configuration _configuration;
@@ -134,20 +135,45 @@ internal sealed class PathDataUpdater : IDisposable
         Status = _L("Checking for path updates…");
         using HttpClient http = new() { Timeout = TimeSpan.FromSeconds(30) };
 
-        string manifestUrl = $"{S3BaseUrl}/paths-{_channel}/manifest-{_channel}.json";
-        _logger.LogDebug($"Requesting path updates from {manifestUrl}");
+        string s3ManifestUrl = $"{S3BaseUrl}/paths-{_channel}/manifest-{_channel}.json";
+        string ghManifestUrl = $"{GitHubBaseUrl}/releases/download/paths-{_channel}/manifest-{_channel}.json";
+
+        bool useRainYun = _configuration.PathData.DataSource == EPathDataSource.RainYun;
+        string primaryUrl = useRainYun ? s3ManifestUrl : ghManifestUrl;
+        string? fallbackUrl = useRainYun ? ghManifestUrl : null;
+
+        _logger.LogDebug($"Requesting path updates from {primaryUrl}");
         PathDataManifest? manifest;
         try
         {
-            string manifestJson = await http.GetStringAsync(new Uri(manifestUrl)).ConfigureAwait(false);
+            string manifestJson = await http.GetStringAsync(new Uri(primaryUrl)).ConfigureAwait(false);
             manifest = JsonSerializer.Deserialize<PathDataManifest>(manifestJson);
         }
         catch (Exception e)
         {
-            _logger.LogWarning(e, "Failed to fetch the path data manifest; retrying");
-            Status = _L("Update check failed") + $" ({retryCount})";
-            await RetryAfterDelay(retryCount).ConfigureAwait(false);
-            return;
+            if (fallbackUrl != null)
+            {
+                _logger.LogWarning(e, "Failed to fetch manifest from primary source, falling back to GitHub");
+                try
+                {
+                    string manifestJson = await http.GetStringAsync(new Uri(fallbackUrl)).ConfigureAwait(false);
+                    manifest = JsonSerializer.Deserialize<PathDataManifest>(manifestJson);
+                }
+                catch (Exception e2)
+                {
+                    _logger.LogWarning(e2, "Failed to fetch the path data manifest from fallback; retrying");
+                    Status = _L("Update check failed") + $" ({retryCount})";
+                    await RetryAfterDelay(retryCount).ConfigureAwait(false);
+                    return;
+                }
+            }
+            else
+            {
+                _logger.LogWarning(e, "Failed to fetch the path data manifest; retrying");
+                Status = _L("Update check failed") + $" ({retryCount})";
+                await RetryAfterDelay(retryCount).ConfigureAwait(false);
+                return;
+            }
         }
 
         if (manifest == null)

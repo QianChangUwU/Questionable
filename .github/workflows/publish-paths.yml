@@ -150,7 +150,7 @@ jobs:
             Updated automatically when path data changes. This does not trigger a plugin release.
           files: |
             out/paths.zip
-            out/manifest-${{ steps.channel.outputs.channel }}-gh.json
+            out/manifest-${{ steps.channel.outputs.channel }}-gh.json:manifest-${{ steps.channel.outputs.channel }}.json
           draft: false
           prerelease: ${{ steps.channel.outputs.channel == 'testing' }}
           make_latest: false
