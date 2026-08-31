@@ -1,3 +1,3 @@
-- Merge upstream v15.306.3.16 → 15.306.3.18 - downstream 1801
-- Feature: Priority preset to unlock Level Cap Dungeons roulette -alydev
 - Merge upstream v15.306.3.18 → 15.306.3.19 - downstream 1901
+- Bug fix: automatic class switching now filters by... classes you've actually got unlocked. crazy, i know -alydev
+- Merge upstream v15.306.3.19 → 15.306.3.22 - downstream 2201
