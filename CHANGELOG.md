@@ -1,3 +1,3 @@
-- Merge upstream v15.306.3.18 → 15.306.3.19 - downstream 1901
-- Bug fix: automatic class switching now filters by... classes you've actually got unlocked. crazy, i know -alydev
 - Merge upstream v15.306.3.19 → 15.306.3.22 - downstream 2201
+- Bug fix: Post-combat item use was broken by recent internal change, fixed -alydev
+- Merge upstream v15.306.3.22 → 15.306.3.26 - downstream 2601
