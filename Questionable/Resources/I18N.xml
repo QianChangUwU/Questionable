@@ -6290,6 +6290,21 @@
     <Value lang="zh-cn">国内存储</Value>
   </Entry>
   <Entry>
+    <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
+    <Key>GitHub</Key>
+    <Value lang="zh-cn">GitHub</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Questionable\Utils\ImGuiComponentsLocal.cs -->
+    <Key>Search...</Key>
+    <Value lang="zh-cn">搜索...</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Controller\QuestController.cs -->
+    <Key>Failed to start next task sequence, please check /xllog for details.</Key>
+    <Value lang="zh-cn">无法开始下一个任务序列，详情请查看 /xllog。</Value>
+  </Entry>
+  <Entry>
     <!-- Found in: ../Questionable/Controller/CommandHandler.cs -->
     <Key>/qst cleanup - adds every quest you already have open to the priority list, finished ones first</Key>
     <Value lang="ja-jp">/qst cleanup - 受注中のクエストをすべて優先リストに追加します。完了済みのものが優先されます</Value>
