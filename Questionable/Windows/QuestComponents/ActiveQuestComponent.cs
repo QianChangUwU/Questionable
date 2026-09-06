@@ -33,7 +33,6 @@ internal sealed partial class ActiveQuestComponent
     QuickAccessButtonsComponent quickAccessButtonsComponent,
     CreationUtilsComponent creationUtilsComponent,
     ClassJobUtils classJobUtils,
-    QuestJournalUtils questJournalUtils,
     GameIcons gameIcons,
     ILogger<ActiveQuestComponent> logger)
 {
@@ -177,7 +176,10 @@ internal sealed partial class ActiveQuestComponent
                     pathDataUpdater.CheckForUpdatesManually();
                 }
                 if (ImGui.IsItemHovered())
+                {
                     ImGui.SetTooltip(_L("Click to reload quest path data from server"));
+                    ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
+                }
 
                 foreach (IQuestInfo qInfo in GetTrackedQuests())
                 {
@@ -206,6 +208,8 @@ internal sealed partial class ActiveQuestComponent
 
             ImGui.SameLine();
             quickAccessButtonsComponent.DrawPriorityQuestsButton();
+            ImGui.SameLine();
+            quickAccessButtonsComponent.DrawCleanUpButton();
             ImGui.SameLine();
             quickAccessButtonsComponent.DrawJournalProgressButton(showLabel: true);
             ImGui.SameLine();
@@ -299,8 +303,11 @@ internal sealed partial class ActiveQuestComponent
                 {
                     ImGui.SameLine();
                     QstWidgets.Chip($"{acceptedJob}", QstTheme.Accent);
-                    if (ImGui.IsItemClicked())
+                    if (ImGui.IsItemHovered())
+                    {
+                        ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
                         classJobUtils.SwitchClassJob(acceptedJob);
+                    }
                     if (ImGui.IsItemHovered())
                         ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
                 }
@@ -544,6 +551,7 @@ internal sealed partial class ActiveQuestComponent
 
             if (ImGui.IsItemHovered())
             {
+                ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
                 ImGui.SetTooltip(questWork.Tooltip);
                 ImGui.SameLine();
                 using (ImRaii.PushFont(UiBuilder.IconFont))
@@ -606,6 +614,8 @@ internal sealed partial class ActiveQuestComponent
 
         ImGui.SameLine();
         quickAccessButtonsComponent.DrawPriorityQuestsButton();
+        ImGui.SameLine();
+        quickAccessButtonsComponent.DrawCleanUpButton();
         ImGui.SameLine();
         quickAccessButtonsComponent.DrawJournalProgressButton();
         ImGui.SameLine();

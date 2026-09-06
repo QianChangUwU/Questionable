@@ -1,3 +1,3 @@
-- Merge upstream v15.306.3.19 → 15.306.3.22 - downstream 2201
-- Bug fix: Post-combat item use was broken by recent internal change, fixed -alydev
 - Merge upstream v15.306.3.22 → 15.306.3.26 - downstream 2601
+- Bug fix: detect if gear coffer could not be opened because of class requirement and skip it until next accept -alydev
+- Merge upstream v15.306.3.26 → 15.306.3.37 - downstream 3701
