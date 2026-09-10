@@ -50,14 +50,14 @@ internal sealed class PluginConfigComponent
     private readonly HashSet<string> _installingPlugins = [];
     private readonly HashSet<string> _enablingOptions = [];
 
-    private static readonly ReadOnlyDictionary<ECombatModule, PluginInfo> CombatPlugins =
+    private static ReadOnlyDictionary<ECombatModule, PluginInfo> CombatPlugins =>
         new Dictionary<ECombatModule, PluginInfo>
         {
             {
                 ECombatModule.BossMod,
                 new("Boss Mod",
                     "BossMod",
-                    "Automates all kinds of combat and interaction in overworld and duty content",
+                    _L("Automates all kinds of combat and interaction in overworld and duty content"),
                     new("https://github.com/awgil/ffxiv_bossmod"),
                     new("https://puni.sh/api/repository/veyn"),
                     "/vbm")
@@ -93,7 +93,7 @@ internal sealed class PluginConfigComponent
             }
         }.AsReadOnly();
 
-    private static readonly IReadOnlyList<PluginInfo> RequiredPlugins =
+    private static IReadOnlyList<PluginInfo> RequiredPlugins =>
     [
         new("vnavmesh",
             "vnavmesh",
@@ -118,7 +118,7 @@ internal sealed class PluginConfigComponent
         //CombatPlugins[ECombatModule.BossMod]
     ];
 
-    private readonly IReadOnlyList<PluginInfo> _recommendedPlugins =
+    private IReadOnlyList<PluginInfo> RecommendedPlugins =>
     [
         new("Artisan",
             "Artisan",
@@ -186,14 +186,14 @@ internal sealed class PluginConfigComponent
             AlternateRepositoryUrls: NightmareXivRepositoryAlternates),
         new("SelectString",
             "SelectString",
-            "Select items in menus via 0-9 keys rather than mouse",
+            _L("Select items in menus via 0-9 keys rather than mouse"),
             new("https://github.com/NightmareXIV/SelectString"),
             new(NightmareXivRepositoryUrl),
             "/ss",
             AlternateRepositoryUrls: NightmareXivRepositoryAlternates),
         new("QuestMap",
             "QuestMap",
-            "Explore quests and their rewards.",
+            _L("Explore quests and their rewards."),
             new("https://github.com/GemPlugins/QuestMap"),
             null,
             "/quests"),
@@ -275,7 +275,7 @@ internal sealed class PluginConfigComponent
         {
             using (ImRaii.PushIndent())
             {
-                foreach (PluginInfo plugin in _recommendedPlugins)
+                foreach (PluginInfo plugin in RecommendedPlugins)
                     DrawPlugin(plugin, checklistPadding);
             }
         }

@@ -6300,6 +6300,21 @@
     <Value lang="zh-cn">搜索...</Value>
   </Entry>
   <Entry>
+    <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
+    <Key>Automates all kinds of combat and interaction in overworld and duty content</Key>
+    <Value lang="zh-cn">自动化野外与副本中的各类战斗与交互</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
+    <Key>Select items in menus via 0-9 keys rather than mouse</Key>
+    <Value lang="zh-cn">通过 0-9 数字键（而非鼠标）选择菜单中的选项</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
+    <Key>Explore quests and their rewards.</Key>
+    <Value lang="zh-cn">浏览任务及其奖励。</Value>
+  </Entry>
+  <Entry>
     <!-- Found in: Controller\QuestController.cs -->
     <Key>Failed to start next task sequence, please check /xllog for details.</Key>
     <Value lang="zh-cn">无法开始下一个任务序列，详情请查看 /xllog。</Value>
