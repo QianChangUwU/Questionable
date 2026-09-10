@@ -1,3 +1,4 @@
-- Merge upstream v15.306.3.22 → 15.306.3.26 - downstream 2601
-- Bug fix: detect if gear coffer could not be opened because of class requirement and skip it until next accept -alydev
 - Merge upstream v15.306.3.26 → 15.306.3.37 - downstream 3701
+- Change: Override minimum level for Beastmaster quest "Hearts Aligned" to lv16, since the quest expects you to be at that level by the end of it -alydev
+- Change: added EC job placeholder support -alydev
+- Merge upstream v15.306.3.37 → 15.756.0.1 (version bump for patch 7.56) - downstream 0101
