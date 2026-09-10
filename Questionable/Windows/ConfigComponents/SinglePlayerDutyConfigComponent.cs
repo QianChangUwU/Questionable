@@ -20,7 +20,7 @@ internal sealed class SinglePlayerDutyConfigComponent : ConfigComponent
 {
     private const string SinglePlayerDutyClipboardPrefix = "qst:single:";
 
-    private static readonly List<(Job ClassJob, string Name)> RoleQuestCategories =
+    private static List<(Job ClassJob, string Name)> RoleQuestCategories =>
     [
         (Job.PLD, _L("Tank Role Quests")),
         (Job.WHM, _L("Healer Role Quests")),

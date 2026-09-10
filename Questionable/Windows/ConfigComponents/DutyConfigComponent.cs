@@ -136,8 +136,8 @@ internal sealed class DutyConfigComponent : ConfigComponent
         (int enabledCount, int totalCount) = GetDutyCountsForExpansion(expansion);
 
         string headerText = totalCount > 0
-            ? $"{expansion.ToFriendlyString()} ({enabledCount}/{totalCount})"
-            : expansion.ToFriendlyString();
+            ? $"{_L(expansion.ToFriendlyString())} ({enabledCount}/{totalCount})"
+            : _L(expansion.ToFriendlyString());
 
         string expansionKey = expansion.ToString();
         bool wasOpen = Configuration.Duties.ExpansionHeaderStates.GetValueOrDefault(expansionKey, defaultValue: false);
