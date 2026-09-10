@@ -6496,4 +6496,49 @@
     <Key>If the level of your current job is greater than 15 levels above a duty's sync level, or if your average item level is greater than 100 over a duty's required item level, Questionable will ask AutoDuty to run it solo as an Unrestricted Party.</Key>
     <Value lang="zh-cn">如果当前职业等级高于副本同步等级 15 级以上，或你的平均品级高于副本所需品级 100 以上，Questionable 将请求 AutoDuty 以解除限制的方式单人运行该副本。</Value>
   </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigWindow.cs -->
+    <Key>CN adaptation maintained by QianChang</Key>
+    <Value lang="zh-cn">国服适配版 · 由 QianChang 维护</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigWindow.cs -->
+    <Key>Author</Key>
+    <Value lang="zh-cn">作者</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigWindow.cs -->
+    <Key>Upstream</Key>
+    <Value lang="zh-cn">上游</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigWindow.cs -->
+    <Key>Source repository</Key>
+    <Value lang="zh-cn">代码仓库</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigWindow.cs -->
+    <Key>Upstream repository</Key>
+    <Value lang="zh-cn">上游仓库</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigWindow.cs -->
+    <Key>Sponsor upstream</Key>
+    <Value lang="zh-cn">赞助上游</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigWindow.cs -->
+    <Key>Sponsor QianChang (afdian)</Key>
+    <Value lang="zh-cn">赞助 QianChang（爱发电）</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigWindow.cs -->
+    <Key>QianChang's Discord</Key>
+    <Value lang="zh-cn">QianChang 的 Discord</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigWindow.cs -->
+    <Key>Join QianChang's Discord for CN support and updates.</Key>
+    <Value lang="zh-cn">加入 QianChang 的 Discord 获取国服支持与更新。</Value>
+  </Entry>
 </I18N>
