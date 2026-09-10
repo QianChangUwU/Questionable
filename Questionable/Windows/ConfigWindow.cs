@@ -90,44 +90,57 @@ internal sealed class ConfigWindow
     private void DrawAboutTab()
     {
         Version pluginVersion = typeof(QuestionablePlugin).Assembly.GetName().Version!;
-        ImGui.Text($"Questionable v{pluginVersion.ToString(4)}");
-        ImGui.TextColored(QstTheme.Info, _L("CN adaptation maintained by QianChang"));
 
-        ImGui.Spacing();
-        ImGui.Separator();
-        ImGui.TextWrapped(_pluginInterface.Manifest.Description ?? string.Empty);
+        ImGui.Text("Questionable");
+        ImGui.SameLine();
+        QstWidgets.Chip($"v{pluginVersion.ToString(4)}", QstTheme.Info);
+        ImGui.TextColored(QstTheme.TextMuted, _L("CN adaptation maintained by QianChang"));
 
-        ImGui.Spacing();
-        ImGui.Separator();
+        if (QstWidgets.SectionHeader(_L("Description"), "AboutDescription"))
+            ImGui.TextWrapped(_pluginInterface.Manifest.Description ?? string.Empty);
 
-        DrawAboutRow(_L("Author"), "liza, qstxiv, & various contributors & QianChang");
-        DrawAboutRow(_L("Upstream"), "PunishXIV/Questionable (alydev & contributors)");
-        DrawAboutLinkRow(_L("Source repository"), "QianChangUwU/Questionable",
-            "https://github.com/QianChangUwU/Questionable");
-        DrawAboutLinkRow(_L("Upstream repository"), "PunishXIV/Questionable",
-            "https://github.com/PunishXIV/Questionable");
-        DrawAboutLinkRow(_L("Sponsor upstream"), "ko-fi.com/alydev", "https://ko-fi.com/alydev");
-        DrawAboutLinkRow(_L("Sponsor QianChang (afdian)"), "ifdian.net/a/QianChang",
-            "https://ifdian.net/a/QianChang");
-        DrawAboutLinkRow(_L("QianChang's Discord"), "discord.gg/K36BTSGGxN",
-            "https://discord.gg/K36BTSGGxN");
+        if (QstWidgets.SectionHeader(_L("Information"), "AboutInfo"))
+        {
+            DrawAboutRow(_L("Author"), "liza, qstxiv, & various contributors & QianChang");
+            DrawAboutRow(_L("Upstream"), "PunishXIV/Questionable (alydev & contributors)");
+            DrawAboutLinkRow(_L("Source repository"), "QianChangUwU/Questionable",
+                "https://github.com/QianChangUwU/Questionable");
+            DrawAboutLinkRow(_L("Upstream repository"), "PunishXIV/Questionable",
+                "https://github.com/PunishXIV/Questionable");
+        }
 
-        ImGui.Spacing();
-        ImGui.Separator();
-        ImGui.TextWrapped(_L("Required plugins:") + " vnavmesh, TextAdvance, Lifestream");
+        if (QstWidgets.SectionHeader(_L("Support & community"), "AboutSupport"))
+        {
+            if (ImGuiComponentsLocal.IconButtonWithText(FontAwesomeIcon.Heart, _L("Sponsor upstream")))
+                Util.OpenLink("https://ko-fi.com/alydev");
+            ImGui.SameLine();
+            if (ImGuiComponentsLocal.IconButtonWithText(FontAwesomeIcon.Heart, _L("Sponsor QianChang (afdian)")))
+                Util.OpenLink("https://ifdian.net/a/QianChang");
+            ImGui.SameLine();
+            if (ImGuiComponentsLocal.IconButtonWithText(FontAwesomeIcon.Comments, _L("QianChang's Discord")))
+                Util.OpenLink("https://discord.gg/K36BTSGGxN");
+
+            ImGui.TextColored(QstTheme.TextMuted,
+                _L("Join QianChang's Discord for CN support and updates."));
+        }
+
+        if (QstWidgets.SectionHeader(_L("Required plugins:"), "AboutRequired"))
+            ImGui.TextWrapped("vnavmesh · TextAdvance · Lifestream");
     }
 
     private static void DrawAboutRow(string label, string value)
     {
+        float valueOffset = Math.Max(110f, ImGui.CalcTextSize(label).X + 16f);
         ImGui.Text(label);
-        ImGui.SameLine(150f);
+        ImGui.SameLine(valueOffset);
         ImGui.TextWrapped(value);
     }
 
     private static void DrawAboutLinkRow(string label, string display, string url)
     {
+        float valueOffset = Math.Max(110f, ImGui.CalcTextSize(label).X + 16f);
         ImGui.Text(label);
-        ImGui.SameLine(150f);
+        ImGui.SameLine(valueOffset);
         ImGui.TextColored(QstTheme.Accent, display);
         if (ImGui.IsItemHovered())
         {

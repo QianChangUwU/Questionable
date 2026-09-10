@@ -6541,4 +6541,14 @@
     <Key>Join QianChang's Discord for CN support and updates.</Key>
     <Value lang="zh-cn">加入 QianChang 的 Discord 获取国服支持与更新。</Value>
   </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigWindow.cs -->
+    <Key>Description</Key>
+    <Value lang="zh-cn">简介</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigWindow.cs -->
+    <Key>Support &amp; community</Key>
+    <Value lang="zh-cn">支持与社区</Value>
+  </Entry>
 </I18N>
