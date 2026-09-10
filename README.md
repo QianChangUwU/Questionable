@@ -54,7 +54,7 @@
 
 # 安装
 
-### 方法一：通过 Dalamud 插件仓库安装
+### 通过 Dalamud 插件仓库安装
 
 1. 打开游戏内 Dalamud 设置（`/xlsettings`）
 2. 在"自定义插件仓库"中填入：<br>
@@ -62,15 +62,6 @@
 3. 点击 "+" 添加，然后保存关闭
 4. 打开 Dalamud 插件安装器（`/xlplugins`）
 5. 在"所有插件"中搜索 "Questionable" 并安装
-
-### 方法二：手动安装
-
-从 <a href="https://github.com/QianChangUwU/Questionable/releases">Releases</a> 下载最新版本，解压到 <code>%AppData%\XIVLauncherCN\addon\Hooks\dev\</code> 目录下。
-
-</section><br>
-
-<!-- Commands -->
-<section id="commands">
 
 # 命令
 
