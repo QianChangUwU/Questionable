@@ -6431,4 +6431,69 @@
     <Value lang="ja-jp">時間のかかるクエストやブロックされているクエストもキューに追加できます。後で優先リストを確認してください。</Value>
     <Value lang="zh-cn">长任务或被阻塞的任务也被加入队列——稍后请检查优先列表。</Value>
   </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
+    <Key>Install plugin</Key>
+    <Value lang="zh-cn">安装插件</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
+    <Key>Installing...</Key>
+    <Value lang="zh-cn">安装中...</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
+    <Key>Open installer</Key>
+    <Value lang="zh-cn">打开安装器</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
+    <Key>Installed but not loaded</Key>
+    <Value lang="zh-cn">已安装但未加载</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
+    <Key>Highlight Color</Key>
+    <Value lang="zh-cn">高亮颜色</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
+    <Key>Red</Key>
+    <Value lang="zh-cn">红色</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
+    <Key>Green</Key>
+    <Value lang="zh-cn">绿色</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
+    <Key>Blue</Key>
+    <Value lang="zh-cn">蓝色</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
+    <Key>Yellow</Key>
+    <Value lang="zh-cn">黄色</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
+    <Key>Orange</Key>
+    <Value lang="zh-cn">橙色</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
+    <Key>Magenta</Key>
+    <Value lang="zh-cn">品红</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
+    <Key>Black</Key>
+    <Value lang="zh-cn">黑色</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\DutyConfigComponent.cs -->
+    <Key>If the level of your current job is greater than 15 levels above a duty's sync level, or if your average item level is greater than 100 over a duty's required item level, Questionable will ask AutoDuty to run it solo as an Unrestricted Party.</Key>
+    <Value lang="zh-cn">如果当前职业等级高于副本同步等级 15 级以上，或你的平均品级高于副本所需品级 100 以上，Questionable 将请求 AutoDuty 以解除限制的方式单人运行该副本。</Value>
+  </Entry>
 </I18N>
