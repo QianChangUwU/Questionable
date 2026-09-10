@@ -62,10 +62,17 @@ internal static class QstWidgets
         float width = padding.X * 2f + dotRadius * 2f + 4f * scale + textSize.X;
 
         string visibleTitle = windowTitle.Split("###")[0];
-        float titleStart = ImGui.GetFontSize() + ImGui.GetStyle().FramePadding.X;
-        //+ ImGui.GetStyle().ItemInnerSpacing.X;
+        // Compute the title text's actual rendered position from the title alignment,
+        // so the pill never overlaps the title regardless of alignment.
+        float titleWidth = ImGui.CalcTextSize(visibleTitle).X;
+        Vector2 titleAlign = ImGui.GetStyle().WindowTitleAlign;
+        float titleX = windowPos.X + (windowWidth - titleWidth) * titleAlign.X;
+
+        float pillX = alignCenter
+            ? titleX + titleWidth + 4f * scale
+            : Math.Max(windowPos.X + 4f * scale, titleX - width - 4f * scale);
         Vector2 topLeft = new(
-            windowPos.X + titleStart + (alignCenter ? ImGui.CalcTextSize(visibleTitle).X - 3f * scale : 0f),
+            pillX,
             windowPos.Y + (frameHeight - height) / 2f);
 
         ImDrawListPtr drawList = ImGui.GetWindowDrawList();
