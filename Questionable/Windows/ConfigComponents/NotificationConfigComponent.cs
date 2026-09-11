@@ -75,6 +75,12 @@ internal sealed class NotificationConfigComponent
                     Configuration.Notifications.NotifyOnCriticalFailure = notifyOnCriticalFailure;
                     Save();
                 }
+                bool drModuleNotifications = Configuration.Notifications.DailyRoutinesModuleNotifications;
+                if (ImGui.Checkbox(_L("Notify when DailyRoutines modules are toggled"), ref drModuleNotifications))
+                {
+                    Configuration.Notifications.DailyRoutinesModuleNotifications = drModuleNotifications;
+                    Save();
+                }
             }
         }
     }

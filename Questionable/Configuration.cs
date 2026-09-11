@@ -280,6 +280,7 @@ internal sealed class Configuration : IPluginConfiguration
         public bool FlashTaskbar { get; set; }
         public bool NotifyOnStopCondition { get; set; }
         public bool NotifyOnCriticalFailure { get; set; } = true;
+        public bool DailyRoutinesModuleNotifications { get; set; }
     }
 
     internal sealed class AdvancedConfiguration

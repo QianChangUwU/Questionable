@@ -6551,4 +6551,9 @@
     <Key>Support &amp; community</Key>
     <Value lang="zh-cn">支持与社区</Value>
   </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\NotificationConfigComponent.cs -->
+    <Key>Notify when DailyRoutines modules are toggled</Key>
+    <Value lang="zh-cn">开启DR模块启用/禁用通知</Value>
+  </Entry>
 </I18N>

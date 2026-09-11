@@ -14,6 +14,7 @@ internal sealed class DailyRoutinesIpc : IDisposable
     private readonly ILogger<DailyRoutinesIpc> _logger;
     private readonly IChatGui _chatGui;
     private readonly QuestController _questController;
+    private readonly Configuration _configuration;
 
     private readonly ICallGateSubscriber<string, bool?> _isModuleEnabled;
     private readonly ICallGateSubscriber<string, bool, bool> _loadModule;
@@ -49,17 +50,27 @@ internal sealed class DailyRoutinesIpc : IDisposable
     private static string GetModuleDisplayName(string module) =>
         ModuleDisplayNames.TryGetValue(module, out string? name) ? name : module;
 
+    private void NotifyUser(string message)
+    {
+        if (!_configuration.Notifications.DailyRoutinesModuleNotifications)
+            return;
+
+        _chatGui.Print(message, CommandHandler.MessageTag, CommandHandler.TagColor);
+    }
+
     public DailyRoutinesIpc(
         IDalamudPluginInterface pluginInterface,
         IFramework framework,
         ILogger<DailyRoutinesIpc> logger,
         IChatGui chatGui,
-        QuestController questController)
+        QuestController questController,
+        Configuration configuration)
     {
         _framework = framework;
         _logger = logger;
         _chatGui = chatGui;
         _questController = questController;
+        _configuration = configuration;
 
         _isModuleEnabled = pluginInterface.GetIpcSubscriber<string, bool?>($"{PluginName}.IsModuleEnabled");
         _loadModule = pluginInterface.GetIpcSubscriber<string, bool, bool>($"{PluginName}.LoadModule");
@@ -108,9 +119,8 @@ internal sealed class DailyRoutinesIpc : IDisposable
             _wasAutoTalkSkipEnabled = true;
             _autoTalkSkipDisabledByUs = true;
             UnloadModule(AutoTalkSkipModule);
-            _chatGui.Print(
-                _L("DailyRoutines AutoTalkSkip has been temporarily disabled to avoid conflicts with Questionable."),
-                CommandHandler.MessageTag, CommandHandler.TagColor);
+            NotifyUser(
+                _L("DailyRoutines AutoTalkSkip has been temporarily disabled to avoid conflicts with Questionable."));
             _logger.LogInformation("Disabled DailyRoutines AutoTalkSkip module due to Questionable automation");
         }
     }
@@ -126,9 +136,8 @@ internal sealed class DailyRoutinesIpc : IDisposable
             _wasAutoCutsceneSkipEnabled = true;
             _autoCutsceneSkipDisabledByUs = true;
             UnloadModule(AutoCutsceneSkipModule);
-            _chatGui.Print(
-                _L("DailyRoutines AutoCutsceneSkip has been temporarily disabled to avoid conflicts with Questionable."),
-                CommandHandler.MessageTag, CommandHandler.TagColor);
+            NotifyUser(
+                _L("DailyRoutines AutoCutsceneSkip has been temporarily disabled to avoid conflicts with Questionable."));
             _logger.LogInformation("Disabled DailyRoutines AutoCutsceneSkip module due to Questionable automation");
         }
     }
@@ -145,9 +154,8 @@ internal sealed class DailyRoutinesIpc : IDisposable
             {
                 LoadModule(module);
                 _modulesEnabledByUs[module] = true;
-                _chatGui.Print(
-                    _LF("DailyRoutines {0} has been temporarily enabled for Questionable.", GetModuleDisplayName(module)),
-                    CommandHandler.MessageTag, CommandHandler.TagColor);
+                NotifyUser(
+                    _LF("DailyRoutines {0} has been temporarily enabled for Questionable.", GetModuleDisplayName(module)));
                 _logger.LogInformation("Enabled DailyRoutines {Module} module for Questionable automation", module);
             }
         }
@@ -163,9 +171,8 @@ internal sealed class DailyRoutinesIpc : IDisposable
             if (_wasAutoTalkSkipEnabled)
             {
                 LoadModule(AutoTalkSkipModule);
-                _chatGui.Print(
-                    _L("DailyRoutines AutoTalkSkip has been re-enabled."),
-                    CommandHandler.MessageTag, CommandHandler.TagColor);
+                NotifyUser(
+                    _L("DailyRoutines AutoTalkSkip has been re-enabled."));
                 _logger.LogInformation("Re-enabled DailyRoutines AutoTalkSkip module");
             }
 
@@ -178,9 +185,8 @@ internal sealed class DailyRoutinesIpc : IDisposable
             if (_wasAutoCutsceneSkipEnabled)
             {
                 LoadModule(AutoCutsceneSkipModule);
-                _chatGui.Print(
-                    _L("DailyRoutines AutoCutsceneSkip has been re-enabled."),
-                    CommandHandler.MessageTag, CommandHandler.TagColor);
+                NotifyUser(
+                    _L("DailyRoutines AutoCutsceneSkip has been re-enabled."));
                 _logger.LogInformation("Re-enabled DailyRoutines AutoCutsceneSkip module");
             }
 
@@ -191,9 +197,8 @@ internal sealed class DailyRoutinesIpc : IDisposable
         foreach (string module in _modulesEnabledByUs.Keys)
         {
             UnloadModule(module);
-            _chatGui.Print(
-                _LF("DailyRoutines {0} has been disabled.", GetModuleDisplayName(module)),
-                CommandHandler.MessageTag, CommandHandler.TagColor);
+            NotifyUser(
+                _LF("DailyRoutines {0} has been disabled.", GetModuleDisplayName(module)));
             _logger.LogInformation("Disabled DailyRoutines {Module} module (restoring original state)", module);
         }
 
