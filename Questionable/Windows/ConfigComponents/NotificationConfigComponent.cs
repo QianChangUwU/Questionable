@@ -19,6 +19,15 @@ internal sealed class NotificationConfigComponent
         if (!tab)
             return;
 
+        bool drModuleNotifications = Configuration.Notifications.DailyRoutinesModuleNotifications;
+        if (ImGui.Checkbox(_L("Notify when DailyRoutines modules are toggled"), ref drModuleNotifications))
+        {
+            Configuration.Notifications.DailyRoutinesModuleNotifications = drModuleNotifications;
+            Save();
+        }
+
+        ImGui.Separator();
+
         bool enabled = Configuration.Notifications.Enabled;
         if (ImGui.Checkbox(_L("Enable notifications when manual interaction is required"), ref enabled))
         {
@@ -73,12 +82,6 @@ internal sealed class NotificationConfigComponent
                 if (ImGui.Checkbox(_L("Notify when QST is unable to continue automatic questing"), ref notifyOnCriticalFailure))
                 {
                     Configuration.Notifications.NotifyOnCriticalFailure = notifyOnCriticalFailure;
-                    Save();
-                }
-                bool drModuleNotifications = Configuration.Notifications.DailyRoutinesModuleNotifications;
-                if (ImGui.Checkbox(_L("Notify when DailyRoutines modules are toggled"), ref drModuleNotifications))
-                {
-                    Configuration.Notifications.DailyRoutinesModuleNotifications = drModuleNotifications;
                     Save();
                 }
             }
