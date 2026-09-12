@@ -80,9 +80,10 @@ internal sealed partial class ActiveQuestComponent
             {
                 QuestSequence? currentSequence = currentQuest.Quest.FindSequence(currentQuest.Sequence);
                 QuestStep? currentStep = currentSequence?.FindStep(currentQuest.Step);
-                string comment = currentStep?.Comment ??
+                string rawComment = currentStep?.Comment ??
                                  currentSequence?.Comment ??
                                  currentQuest.Quest.Root.Comment ?? string.Empty;
+                string comment = rawComment.Length > 0 ? _L(rawComment) : string.Empty;
                 if (!string.IsNullOrWhiteSpace(comment))
                 {
                     bool manualStep = currentStep is
@@ -489,7 +490,7 @@ internal sealed partial class ActiveQuestComponent
 
                 if (metaSequence?.FindStep(currentQuest.Step) is { } metaStep)
                 {
-                    QstWidgets.Chip(metaStep.InteractionType.ToString(), QstTheme.Accent);
+                    QstWidgets.Chip(_L(metaStep.InteractionType.ToString()), QstTheme.Accent);
                     if (metaStep.DataId is { } metaDataId)
                     {
                         ImGui.SameLine();
@@ -499,7 +500,7 @@ internal sealed partial class ActiveQuestComponent
                 if (configuration.Advanced.Debug)
                 {
                     ImGui.SameLine();
-                    QstWidgets.Chip(questController.AutomationType.ToString(), QstTheme.Accent);
+                    QstWidgets.Chip(_L(questController.AutomationType.ToString()), QstTheme.Accent);
                 }
             }
 

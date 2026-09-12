@@ -2425,21 +2425,25 @@
     <!-- Found in: ../Questionable/Windows/ConfigComponents/PluginConfigComponent.cs -->
     <Key>Install plugin</Key>
     <Value lang="ja-jp">プラグインをインストール</Value>
+    <Value lang="zh-cn">安装插件</Value>
   </Entry>
   <Entry>
     <!-- Found in: ../Questionable/Windows/ConfigComponents/PluginConfigComponent.cs -->
     <Key>Installing...</Key>
     <Value lang="ja-jp">インストール中...</Value>
+    <Value lang="zh-cn">安装中...</Value>
   </Entry>
   <Entry>
     <!-- Found in: ../Questionable/Windows/ConfigComponents/PluginConfigComponent.cs -->
     <Key>Installed but not loaded</Key>
     <Value lang="ja-jp">インストール済みですが読み込まれていません</Value>
+    <Value lang="zh-cn">已安装但未加载</Value>
   </Entry>
   <Entry>
     <!-- Found in: ../Questionable/Windows/ConfigComponents/PluginConfigComponent.cs -->
     <Key>Open installer</Key>
     <Value lang="ja-jp">インストーラーを開く</Value>
+    <Value lang="zh-cn">打开安装器</Value>
   </Entry>
   <Entry>
     <!-- Found in: ../Questionable/Windows/ConfigComponents/PluginConfigComponent.cs -->
@@ -6432,26 +6436,6 @@
     <Value lang="zh-cn">长任务或被阻塞的任务也被加入队列——稍后请检查优先列表。</Value>
   </Entry>
   <Entry>
-    <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Install plugin</Key>
-    <Value lang="zh-cn">安装插件</Value>
-  </Entry>
-  <Entry>
-    <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Installing...</Key>
-    <Value lang="zh-cn">安装中...</Value>
-  </Entry>
-  <Entry>
-    <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Open installer</Key>
-    <Value lang="zh-cn">打开安装器</Value>
-  </Entry>
-  <Entry>
-    <!-- Found in: Windows\ConfigComponents\PluginConfigComponent.cs -->
-    <Key>Installed but not loaded</Key>
-    <Value lang="zh-cn">已安装但未加载</Value>
-  </Entry>
-  <Entry>
     <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
     <Key>Highlight Color</Key>
     <Value lang="zh-cn">高亮颜色</Value>
@@ -6555,5 +6539,221 @@
     <!-- Found in: Windows\ConfigComponents\NotificationConfigComponent.cs -->
     <Key>Notify when DailyRoutines modules are toggled</Key>
     <Value lang="zh-cn">开启DR模块启用/禁用通知</Value>
+  </Entry>
+  <!-- Interaction type names (ActiveQuestComponent chip) -->
+  <Entry>
+    <Key>Interact</Key>
+    <Value lang="zh-cn">交互</Value>
+  </Entry>
+  <Entry>
+    <Key>WalkTo</Key>
+    <Value lang="zh-cn">走到</Value>
+  </Entry>
+  <Entry>
+    <Key>AttuneAethernetShard</Key>
+    <Value lang="zh-cn">调谐以太网路水晶</Value>
+  </Entry>
+  <Entry>
+    <Key>AttuneAetheryte</Key>
+    <Value lang="zh-cn">调谐以太之光</Value>
+  </Entry>
+  <Entry>
+    <Key>RegisterFreeOrFavoredAetheryte</Key>
+    <Value lang="zh-cn">登记免费/常用传送点</Value>
+  </Entry>
+  <Entry>
+    <Key>AttuneAetherCurrent</Key>
+    <Value lang="zh-cn">调谐风脉</Value>
+  </Entry>
+  <Entry>
+    <Key>Combat</Key>
+    <Value lang="zh-cn">战斗</Value>
+  </Entry>
+  <Entry>
+    <Key>UseItem</Key>
+    <Value lang="zh-cn">使用物品</Value>
+  </Entry>
+  <Entry>
+    <Key>EquipItem</Key>
+    <Value lang="zh-cn">穿戴装备</Value>
+  </Entry>
+  <Entry>
+    <Key>UnequipItem</Key>
+    <Value lang="zh-cn">卸下装备</Value>
+  </Entry>
+  <Entry>
+    <Key>PurchaseItem</Key>
+    <Value lang="zh-cn">购买物品</Value>
+  </Entry>
+  <Entry>
+    <Key>EquipRecommended</Key>
+    <Value lang="zh-cn">穿戴推荐装备</Value>
+  </Entry>
+  <Entry>
+    <Key>Emote</Key>
+    <Value lang="zh-cn">情感动作</Value>
+  </Entry>
+  <Entry>
+    <Key>Action</Key>
+    <Value lang="zh-cn">使用技能</Value>
+  </Entry>
+  <Entry>
+    <Key>StatusOff</Key>
+    <Value lang="zh-cn">移除状态</Value>
+  </Entry>
+  <Entry>
+    <Key>WaitForObjectAtPosition</Key>
+    <Value lang="zh-cn">等待对象在指定位置</Value>
+  </Entry>
+  <Entry>
+    <Key>WaitForNpcAtPosition</Key>
+    <Value lang="zh-cn">等待NPC在指定位置</Value>
+  </Entry>
+  <Entry>
+    <Key>WaitForManualProgress</Key>
+    <Value lang="zh-cn">等待手动推进</Value>
+  </Entry>
+  <Entry>
+    <Key>Duty</Key>
+    <Value lang="zh-cn">进入副本</Value>
+  </Entry>
+  <Entry>
+    <Key>SinglePlayerDuty</Key>
+    <Value lang="zh-cn">单人副本</Value>
+  </Entry>
+  <Entry>
+    <Key>Jump</Key>
+    <Value lang="zh-cn">跳跃</Value>
+  </Entry>
+  <Entry>
+    <Key>Dive</Key>
+    <Value lang="zh-cn">潜水</Value>
+  </Entry>
+  <Entry>
+    <Key>Craft</Key>
+    <Value lang="zh-cn">制作</Value>
+  </Entry>
+  <Entry>
+    <Key>Gather</Key>
+    <Value lang="zh-cn">采集</Value>
+  </Entry>
+  <Entry>
+    <Key>Snipe</Key>
+    <Value lang="zh-cn">狙击</Value>
+  </Entry>
+  <Entry>
+    <Key>CreateGearset</Key>
+    <Value lang="zh-cn">创建职业套装</Value>
+  </Entry>
+  <Entry>
+    <Key>UpdateGearset</Key>
+    <Value lang="zh-cn">更新职业套装</Value>
+  </Entry>
+  <Entry>
+    <Key>SwitchClass</Key>
+    <Value lang="zh-cn">切换职业</Value>
+  </Entry>
+  <Entry>
+    <Key>UnlockTaxiStand</Key>
+    <Value lang="zh-cn">解锁陆行鸟出租点</Value>
+  </Entry>
+  <Entry>
+    <Key>Instruction</Key>
+    <Value lang="zh-cn">指示</Value>
+  </Entry>
+  <Entry>
+    <Key>AcceptQuest</Key>
+    <Value lang="zh-cn">接取任务</Value>
+  </Entry>
+  <Entry>
+    <Key>CompleteQuest</Key>
+    <Value lang="zh-cn">提交任务</Value>
+  </Entry>
+  <Entry>
+    <Key>Fish</Key>
+    <Value lang="zh-cn">钓鱼</Value>
+  </Entry>
+  <!-- Automation type names (debug chip) -->
+  <Entry>
+    <Key>Manual</Key>
+    <Value lang="zh-cn">手动</Value>
+  </Entry>
+  <Entry>
+    <Key>Automatic</Key>
+    <Value lang="zh-cn">自动</Value>
+  </Entry>
+  <Entry>
+    <Key>GatheringOnly</Key>
+    <Value lang="zh-cn">仅采集</Value>
+  </Entry>
+  <Entry>
+    <Key>SingleQuestA</Key>
+    <Value lang="zh-cn">单任务A</Value>
+  </Entry>
+  <Entry>
+    <Key>SingleQuestB</Key>
+    <Value lang="zh-cn">单任务B</Value>
+  </Entry>
+  <!-- Debug states (QuestController) -->
+  <Entry>
+    <Key>Not logged in</Key>
+    <Value lang="zh-cn">未登录</Value>
+  </Entry>
+  <Entry>
+    <Key>Waiting for Leve {0}</Key>
+    <Value lang="zh-cn">等待理符 {0}</Value>
+  </Entry>
+  <Entry>
+    <Key>No quest active</Key>
+    <Value lang="zh-cn">无活动任务</Value>
+  </Entry>
+  <Entry>
+    <Key>Occupied</Key>
+    <Value lang="zh-cn">占用中</Value>
+  </Entry>
+  <Entry>
+    <Key>Pathfinding is running</Key>
+    <Value lang="zh-cn">正在寻路</Value>
+  </Entry>
+  <Entry>
+    <Key>Path is running</Key>
+    <Value lang="zh-cn">正在执行路径</Value>
+  </Entry>
+  <Entry>
+    <Key>Waiting for Animation</Key>
+    <Value lang="zh-cn">等待动画播放</Value>
+  </Entry>
+  <Entry>
+    <Key>Sequence {0} not found</Key>
+    <Value lang="zh-cn">未找到序列 {0}</Value>
+  </Entry>
+  <Entry>
+    <Key>Step completed</Key>
+    <Value lang="zh-cn">步骤已完成</Value>
+  </Entry>
+  <Entry>
+    <Key>Step not found</Key>
+    <Value lang="zh-cn">未找到步骤</Value>
+  </Entry>
+  <!-- Quest path comments (frequent system notices) -->
+  <Entry>
+    <Key>This quest path is disabled. By continuing, you acknowledge that it is currently unsupported.</Key>
+    <Value lang="zh-cn">此任务路径已停用。继续操作即表示你知悉其目前不受支持。</Value>
+  </Entry>
+  <Entry>
+    <Key>This quest path is automatically generated and untested. Please report in Discord whether it works.</Key>
+    <Value lang="zh-cn">此任务路径为自动生成且未经测试。请在 Discord 中反馈是否可用。</Value>
+  </Entry>
+  <Entry>
+    <Key>Only Turn 5 is required for the next quest to unlock</Key>
+    <Value lang="zh-cn">只需通关第 5 层即可解锁下一个任务</Value>
+  </Entry>
+  <Entry>
+    <Key>Only Turn 9 is required for the next quest to unlock</Key>
+    <Value lang="zh-cn">只需通关第 9 层即可解锁下一个任务</Value>
+  </Entry>
+  <Entry>
+    <Key>Only Turn 13 is required for the next quest to unlock</Key>
+    <Value lang="zh-cn">只需通关第 13 层即可解锁下一个任务</Value>
   </Entry>
 </I18N>

@@ -510,7 +510,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
             if (!_clientState.IsLoggedIn)
             {
                 ResetInternalState();
-                DebugState = "Not logged in";
+                DebugState = _L("Not logged in");
                 return;
             }
 
@@ -518,7 +518,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
             {
                 if (!_questFunctions.IsQuestAccepted(PendingQuest.Quest.Id))
                 {
-                    DebugState = $"Waiting for Leve {PendingQuest.Quest.Id}";
+                    DebugState = _LF("Waiting for Leve {0}", PendingQuest.Quest.Id);
                     return;
                 }
 
@@ -724,32 +724,32 @@ internal sealed class QuestController : MiniTaskController<QuestController>
 
             if (questToRun == null)
             {
-                DebugState = "No quest active";
+                DebugState = _L("No quest active");
                 Stop("No quest active");
                 return;
             }
 
             if (_gameFunctions.IsOccupied() && !_gameFunctions.IsOccupiedWithCustomDeliveryNpc(questToRun.Quest))
             {
-                DebugState = "Occupied";
+                DebugState = _L("Occupied");
                 return;
             }
 
             if (_movementController.IsPathfinding)
             {
-                DebugState = "Pathfinding is running";
+                DebugState = _L("Pathfinding is running");
                 return;
             }
 
             if (_movementController.IsPathRunning)
             {
-                DebugState = "Path is running";
+                DebugState = _L("Path is running");
                 return;
             }
 
             if (DateTime.Now < _safeAnimationEnd)
             {
-                DebugState = "Waiting for Animation";
+                DebugState = _L("Waiting for Animation");
                 return;
             }
 
@@ -765,14 +765,14 @@ internal sealed class QuestController : MiniTaskController<QuestController>
             QuestSequence? sequence = q.FindSequence(questToRun.Sequence);
             if (sequence == null)
             {
-                DebugState = $"Sequence {questToRun.Sequence} not found";
+                DebugState = _LF("Sequence {0} not found", questToRun.Sequence);
                 Stop("Unknown sequence");
                 return;
             }
 
             if (questToRun.Step == CompletedStepValue)
             {
-                DebugState = "Step completed";
+                DebugState = _L("Step completed");
                 if (!_taskQueue.AllTasksComplete)
                     CheckNextTasks("Step complete");
                 return;
@@ -780,7 +780,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
 
             if (sequence.Steps.Count > 0 && questToRun.Step >= sequence.Steps.Count)
             {
-                DebugState = "Step not found";
+                DebugState = _L("Step not found");
                 Stop("Unknown step");
                 return;
             }
