@@ -15,7 +15,7 @@ internal sealed class GeneralConfigComponent : ConfigComponent
 {
     private static string[] GrandCompanyNames =>
     [
-        _L("None (manually pick quest)"), _L("Maelstrom"), _L("Twin Adder"), _L("Immortal Flames")
+        _L("Auto"), _L("Maelstrom"), _L("Twin Adder"), _L("Immortal Flames")
     ];
 
     private readonly QuestRegistry _questRegistry;
@@ -186,13 +186,13 @@ internal sealed class GeneralConfigComponent : ConfigComponent
 
             string chocoboName = Configuration.General.ChocoboName;
             ImGui.SetNextItemWidth(size.X / 2);
-            if (ImGui.InputText(_L("Chocobo name"), ref chocoboName, 20))
+            if (ImGui.InputTextEx(_L("Chocobo name"), NameGenerator.GenerateFirstName(fast: grandCompany == 0), ref chocoboName, 20))
                 Configuration.General.ChocoboName = chocoboName;
 
             if (ImGui.IsItemDeactivatedAfterEdit())
             {
                 if (string.IsNullOrWhiteSpace(Configuration.General.ChocoboName))
-                    Configuration.General.ChocoboName = _L("Chicken");
+                    Configuration.General.ChocoboName = "";
                 Save();
             }
 
@@ -201,7 +201,7 @@ internal sealed class GeneralConfigComponent : ConfigComponent
                 using (ImRaii.Tooltip())
                 {
                     ImGui.Text(_L("The name to give your chocobo during the \"My Little Chocobo\" quest."));
-                    ImGui.Text(_L("Defaults to \"Chicken\" if left blank."));
+                    ImGui.Text(_L("Generates a random name if invalid or left blank."));
                 }
             }
 

@@ -1,4 +1,3 @@
-- Merge upstream v15.306.3.26 → 15.306.3.37 - downstream 3701
-- Change: Override minimum level for Beastmaster quest "Hearts Aligned" to lv16, since the quest expects you to be at that level by the end of it -alydev
-- Change: added EC job placeholder support -alydev
 - Merge upstream v15.306.3.37 → 15.756.0.1 (version bump for patch 7.56) - downstream 0101
+- Change: Comment field becomes scrollable if more than 5 lines -alydev
+- Merge upstream v15.756.0.1 → 15.756.2.5 - downstream 2501
