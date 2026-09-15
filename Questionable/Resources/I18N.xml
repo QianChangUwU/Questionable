@@ -7534,6 +7534,7 @@
   </Entry>
   <Entry>
     <!-- Found in: ../Questionable/Windows/JournalComponents/QuestRewardComponent.cs -->
+    <!-- Found in: ../Questionable/Windows/JournalComponents/RedoComponent.cs -->
     <Key>Loading...</Key>
     <Value lang="en">Loading...</Value>
     <Value lang="zh-cn">加载中...</Value>

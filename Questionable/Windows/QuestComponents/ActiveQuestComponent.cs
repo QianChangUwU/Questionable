@@ -325,11 +325,8 @@ internal sealed partial class ActiveQuestComponent
                 {
                     ImGui.SameLine();
                     QstWidgets.Chip($"{acceptedJob}", QstTheme.Accent);
-                    if (ImGui.IsItemHovered())
-                    {
-                        ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
+                    if (ImGui.IsItemClicked())
                         classJobUtils.SwitchClassJob(acceptedJob);
-                    }
                     if (ImGui.IsItemHovered())
                         ImGui.SetMouseCursor(ImGuiMouseCursor.Hand);
                 }
@@ -362,7 +359,7 @@ internal sealed partial class ActiveQuestComponent
                 }
 
                 bool showStopClock = hasLevelCondition || hasCompleteQuestConditions || hasAcceptQuestConditions || preventQuestCompletion;
-                bool showPriorityCrystal = anyAvailable || anyUnavailable;
+                bool showPriorityCrystal = true; //anyAvailable || anyUnavailable;
                 if (showStopClock || showPriorityCrystal)
                     ImGui.SameLine();
 
@@ -462,7 +459,7 @@ internal sealed partial class ActiveQuestComponent
                 {
                     if (showStopClock)
                         ImGui.SameLine();
-                    ImGui.TextColored(QstTheme.Amber, SeIconChar.Hyadelyn.ToIconString());
+                    ImGui.TextColored(anyAvailable || anyUnavailable ? QstTheme.Amber : QstTheme.Text, SeIconChar.Hyadelyn.ToIconString());
                     if (ImGui.IsItemHovered())
                     {
                         List<ElementId> availablePriorityQuests = priorityQuests

@@ -1,3 +1,4 @@
-- Merge upstream v15.306.3.37 → 15.756.0.1 (version bump for patch 7.56) - downstream 0101
-- Change: Comment field becomes scrollable if more than 5 lines -alydev
 - Merge upstream v15.756.0.1 → 15.756.2.5 - downstream 2501
+- Feature: Added step to clean up job quests/other priority quests before continuing with msq -alydev
+- Change: crystal icon now always visible, hovering shows available job quests/other priority quests. grey when empty, amber when not -alydev
+- Merge upstream v15.756.2.5 → 15.756.2.17 - downstream 1701
