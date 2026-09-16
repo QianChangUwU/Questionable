@@ -3604,7 +3604,6 @@
     <!-- Found in: ../Questionable/Windows/QuestComponents/CreationUtilsComponent.cs -->
     <Key>No active quest</Key>
     <Value lang="en">No active quest</Value>
-    <Value lang="en-au">Crikey, no quests??</Value>
     <Value lang="af">Geen aktiewe soeke nie</Value>
     <Value lang="ar">لا توجد مهمة نشطة</Value>
     <Value lang="sq">Asnjë mision aktiv</Value>
@@ -3613,7 +3612,6 @@
     <Value lang="bg">Няма активна задача</Value>
     <Value lang="ca">Cap missió activa</Value>
     <Value lang="en-au">Crikey, no quests??</Value>
-    <Value lang="eu">Ez dago bilaketa aktiborik</Value>
     <Value lang="hr">Nema aktivnih zadataka</Value>
     <Value lang="cs">Žádný aktivní úkol</Value>
     <Value lang="es">No hay ninguna misión activa</Value>
@@ -4388,7 +4386,6 @@
     <!-- Found in: ../Questionable/Windows/ConfigComponents/GeneralConfigComponent.cs -->
     <Key>Language</Key>
     <Value lang="en">Language</Value>
-    <Value lang="en-au">Lingo</Value>
     <Value lang="af">Taal</Value>
     <Value lang="ar">لغة</Value>
     <Value lang="sq">Gjuha</Value>
@@ -4397,7 +4394,6 @@
     <Value lang="bg">Език</Value>
     <Value lang="ca">Llengua</Value>
     <Value lang="en-au">Lingo</Value>
-    <Value lang="eu">Hizkuntza</Value>
     <Value lang="hr">Jezik</Value>
     <Value lang="cs">Jazyk</Value>
     <Value lang="es">Idioma</Value>
@@ -7554,16 +7550,19 @@
   <Entry>
     <!-- Found in: ../Questionable/Windows/ConfigComponents/DebugConfigComponent.cs -->
     <Key>Don't pick up "My Feisty Little Chocobo"</Key>
-    <Value lang="zh-cn">不接取"我狂野的小陆行鸟"</Value>
+    <Value lang="en">Don't pick up "My Feisty Little Chocobo"</Value>
+    <Value lang="zh-cn">不接取「可靠的搭档」任务</Value>
   </Entry>
   <Entry>
     <!-- Found in: ../Questionable/Windows/ConfigComponents/DebugConfigComponent.cs -->
     <Key>'My Feisty Little Chocobo' enables using your companion chocobo for overworld battles, and is completed automatically after 'My Little Chocobo' unless this is ticked.</Key>
-    <Value lang="zh-cn">"我的小陆行鸟"完成后会自动完成，除非勾选此项；它允许你在野外战斗中使用陆行鸟伙伴。</Value>
+    <Value lang="en">'My Feisty Little Chocobo' enables using your companion chocobo for overworld battles, and is completed automatically after 'My Little Chocobo' unless this is ticked.</Value>
+    <Value lang="zh-cn">「可靠的搭档」任务可解锁搭档陆行鸟的野外战斗功能。除非勾选此项，否则会在完成「我的专属陆行鸟」后自动完成该任务。</Value>
   </Entry>
   <Entry>
     <!-- Found in: ../Questionable/Windows/QuestComponents/ARealmRebornComponent.cs -->
     <Key>The ARR Alliance Raids must be completed to progress to Heavensward.\nThey can be completed quickly and easily in unrestricted party mode ("unsync"), but Labyrinth of the Ancients has a minimum requirement of 12 players (4 per party) to complete the Atomos encounter.\nSyrcus Tower and World of Darkness only require three players (one player per party) to enter.</Key>
-    <Value lang="zh-cn">必须完成重生之境大型任务才能进入苍穹之禁城。\n可在解除限制模式（"unsync"）下快速轻松完成，但古代迷宫的战斗至少需要 12 人（每小队 4 人）才能击败阿托莫斯。\n希尔科斯塔和暗黑世界只需 3 人（每小队 1 人）即可进入。</Value>
+    <Value lang="en">The ARR Alliance Raids must be completed to progress to Heavensward.\nThey can be completed quickly and easily in unrestricted party mode ("unsync"), but Labyrinth of the Ancients has a minimum requirement of 12 players (4 per party) to complete the Atomos encounter.\nSyrcus Tower and World of Darkness only require three players (one player per party) to enter.</Value>
+    <Value lang="zh-cn">必须完成重生之境团队任务才能进入苍穹之禁城。在解除限制模式（"解除同步"）下可以快速轻松完成攻略，但古代人迷宫的阿托莫斯战斗至少需要12名玩家（每队4人）才能攻略。希尔科斯塔和暗之世界只需3名玩家（每队1人）即可进入。</Value>
   </Entry>
 </I18N>

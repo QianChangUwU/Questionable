@@ -1,4 +1,3 @@
-- Merge upstream v15.756.0.1 → 15.756.2.5 - downstream 2501
-- Feature: Added step to clean up job quests/other priority quests before continuing with msq -alydev
-- Change: crystal icon now always visible, hovering shows available job quests/other priority quests. grey when empty, amber when not -alydev
 - Merge upstream v15.756.2.5 → 15.756.2.17 - downstream 1701
+- Bug fix: Ignore configured job preferences if quest has only one acceptable job (class quests) -alydev
+- Merge upstream v15.756.2.17 → 15.756.3.3 - downstream 0301
