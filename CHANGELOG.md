@@ -1,3 +1,4 @@
-- Merge upstream v15.756.2.5 → 15.756.2.17 - downstream 1701
-- Bug fix: Ignore configured job preferences if quest has only one acceptable job (class quests) -alydev
 - Merge upstream v15.756.2.17 → 15.756.3.3 - downstream 0301
+- Change: quick access buttons no longer hidden by dropdown -alydev
+- Bug fix: debug option was pointing to wrong variable -alydev
+- Merge upstream v15.756.3.3 → 15.756.3.9 - downstream 0901

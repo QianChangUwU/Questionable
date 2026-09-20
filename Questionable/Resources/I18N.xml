@@ -840,7 +840,6 @@
     <!--<Value lang="ko">로딩 화면 중</Value>-->
   </Entry>
   <Entry>
-    <!-- Found in: ../Questionable/Windows/UiUtils.cs -->
     <!-- Found in: ../Questionable/Functions/QuestFunctions.cs -->
     <Key>Low level</Key>
     <Value lang="en">Low level</Value>
@@ -6219,7 +6218,7 @@
     <!--<Value lang="ko">이벤트</Value>-->
   </Entry>
   <Entry>
-    <!-- Found in: ../Questionable/Windows/QuestWindow.cs -->
+    <!-- DEPRECATED -->
     <Key>Quick Access</Key>
     <Value lang="en">Quick Access</Value>
     <Value lang="ja-jp">クイックアクセス</Value>
