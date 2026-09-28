@@ -122,7 +122,7 @@ internal sealed class PathDataUpdater : IDisposable
 
     private async Task RetryAfterDelay(int retryCount = 1)
     {
-        await Task.Delay(1000 * retryCount).ConfigureAwait(false);
+        await Task.Delay(Math.Min(1000 * retryCount, 15000)).ConfigureAwait(false);
         _configuration.PathData.InstalledDataVersion = 0;
         _configuration.PathData.BundlePluginVersion = null;
         Save();
