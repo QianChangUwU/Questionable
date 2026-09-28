@@ -1,4 +1,3 @@
-- Merge upstream v15.756.3.9 → 15.756.3.17 - downstream 1701
-- Change: revert mount128/147 fix since apparently there's more things broken elsewhere -alydev
-  - it is now unbroken -alydev
 - Merge upstream v15.756.3.17 → 15.756.3.22 - downstream 2201
+- Bug fix: Use highest level job to test if class unlock quest is blocked by low level -alydev
+- Merge upstream v15.756.3.22 → 15.756.3.24 - downstream 2401
