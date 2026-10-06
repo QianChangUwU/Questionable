@@ -4,6 +4,7 @@ using Dalamud.Interface.Components;
 using Dalamud.Interface.Utility.Raii;
 using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using Lumina.Excel.Sheets;
+using Questionable.AutoGen.Plugin;
 using Questionable.Windows.Common.Ui;
 namespace Questionable.Windows.ConfigComponents;
 
@@ -15,7 +16,7 @@ internal sealed class DebugConfigComponent
     Configuration configuration,
     PathDataUpdater pathDataUpdater,
     IDataManager dataManager,
-    AutoGen.DraftQuestPathService draftQuestPathService) : ConfigComponent(pluginInterface, configuration)
+    DraftQuestPathService draftQuestPathService) : ConfigComponent(pluginInterface, configuration)
 {
     private readonly ItemBlacklistSelector _itemBlacklistSelector = new(dataManager);
     private uint? _itemToRemove;
@@ -83,6 +84,20 @@ internal sealed class DebugConfigComponent
                 {
                     using (ImRaii.PushIndent())
                     {
+                        bool showSavedPos = Configuration.Advanced.ShowSavedPos;
+                        if (ImGui.Checkbox(_L("Show saved position"), ref showSavedPos))
+                        {
+                            Configuration.Advanced.ShowSavedPos = showSavedPos;
+                            Save();
+                        }
+
+                        bool showFlagPos = Configuration.Advanced.ShowFlagPos;
+                        if (ImGui.Checkbox(_L("Show flag position"), ref showFlagPos))
+                        {
+                            Configuration.Advanced.ShowFlagPos = showFlagPos;
+                            Save();
+                        }
+
                         bool combatDataOverlay = Configuration.Advanced.CombatDataOverlay;
                         if (ImGui.Checkbox(_L("Enable combat data overlay"), ref combatDataOverlay))
                         {

@@ -262,6 +262,16 @@ internal sealed class GeneralConfigComponent : ConfigComponent
                     Save();
                 }
 
+                using (ImRaii.Disabled(!showIncompleteSeasonalEvents))
+                {
+                    bool showCompleteSeasonalEvents = Configuration.General.ShowCompleteSeasonalEvents;
+                    if (ImGui.Checkbox(_L("Continue showing completed seasonal events"), ref showCompleteSeasonalEvents))
+                    {
+                        Configuration.General.ShowCompleteSeasonalEvents = showCompleteSeasonalEvents;
+                        Save();
+                    }
+                }
+
                 bool questIcons = Configuration.General.QuestIcons;
                 if (ImGui.Checkbox(_L("Show quest icons"), ref questIcons))
                 {
@@ -420,6 +430,13 @@ internal sealed class GeneralConfigComponent : ConfigComponent
                 if (ImGui.Checkbox(_L("Before each Interact, switch to the job a quest was accepted with"), ref sameJobThroughoutQuest))
                 {
                     Configuration.General.SameJobThroughoutQuest = sameJobThroughoutQuest;
+                    Save();
+                }
+
+                bool ignoreNextQuestIfPrioSet = Configuration.General.IgnoreNextQuestIfPrioSet;
+                if (ImGui.Checkbox(_L("Ignore 'next quest' if Priority Quests has valid alternative"), ref ignoreNextQuestIfPrioSet))
+                {
+                    Configuration.General.IgnoreNextQuestIfPrioSet = ignoreNextQuestIfPrioSet;
                     Save();
                 }
 

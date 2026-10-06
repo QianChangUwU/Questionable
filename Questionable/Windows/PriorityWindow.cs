@@ -407,6 +407,9 @@ internal sealed class PriorityWindow : LWindow
                 _presetName = string.Empty;
             }
         }
+        ImGui.SameLine();
+        if (ImGuiComponentsLocal.IconButton(FontAwesomeIcon.Redo))
+            _builtInPresets = null;
 
         bool isUserPreset = _selectedPresetName != null && userPresets.ContainsKey(_selectedPresetName);
         if (isUserPreset)
@@ -543,9 +546,9 @@ internal sealed class PriorityWindow : LWindow
             4073,4074, // Reaper
             4848,4849, // Viper
             // Ishgard
-            2109,1696, // Machinist
-            2110,2053, // Dark Knight
-            2123,2012 // Astrologian
+            2109,1696,1697, // Machinist
+            2110,2053,2054, // Dark Knight
+            2123,2012,2013, // Astrologian
         ]).FromNumericListOfQuests();
         List<ElementId> unlockCustomDeliveries = ((ushort[])[
             2095,2097,2098,1551,                                // zhloe aliapoh
@@ -572,6 +575,10 @@ internal sealed class PriorityWindow : LWindow
         ]).FromNumericListOfQuests();
         var aetherCurrents = _T<Addon>(2445);
         var roleQuests = _T<JournalCategory>(95);
+        var gilQuestsList = _questData.GetQuestsWithItemReward(onlyAvailable: true, 5825, 5826, 27994);
+        var questHealthPercent = _questData.GetQuestsMatching(q =>
+            _questRegistry.TryGetQuest(q.QuestId, out var quest) &&
+            quest.AllSteps().Any(a => a.Step.CombatItemUse?.Condition is ECombatItemUseCondition.HealthPercent), onlyAvailable: false);
         _builtInPresets = new(StringComparer.Ordinal)
         {
             [JobQuestsPresetName] = [], // Job Quests
@@ -597,6 +604,8 @@ internal sealed class PriorityWindow : LWindow
             [$"{roleQuests}: {_T<Addon>(1084)}"] = _questData.GetRoleQuests(Job.MNK).Select(x => x.QuestId).ToList(),
             [$"{roleQuests}: {_T<Addon>(1085)}"] = _questData.GetRoleQuests(Job.BRD).Select(x => x.QuestId).ToList(),
             [$"{roleQuests}: {_T<Addon>(1086)}"] = _questData.GetRoleQuests(Job.BLM).Select(x => x.QuestId).ToList(),
+            [_L("Experimental: Available quests rewarding silver/gold gil sacks")] = gilQuestsList,
+            [_L("Experimental: Quests that require a mob to be damaged to a certain health%")] = questHealthPercent,
         };
 
         return _builtInPresets;
@@ -630,7 +639,8 @@ internal sealed class PriorityWindow : LWindow
         Dictionary<string, List<ElementId>> builtInPresets = GetOrCreateBuiltInPresets();
         if (builtInPresets.TryGetValue(name, out List<ElementId>? questIds))
         {
-            _questController.PriorityManager.Import(questIds);
+            _questController.PriorityManager.Import(
+                questIds.Where(q => !_questFunctions.IsQuestUnobtainable(q) && !_questFunctions.IsQuestComplete(q)));
         }
         else if (_configuration.Priority.Presets.TryGetValue(name, out List<string>? questIdStrings))
         {

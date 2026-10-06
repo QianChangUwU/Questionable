@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <I18N>
   <Entry>
     <!-- Found in: ../Questionable/Configuration.cs -->
@@ -7644,7 +7644,7 @@
     <Value lang="zh-tw">/qst redeem - 使用背包內的所有獎勵道具</Value>
   </Entry>
   <Entry>
-    <!-- Found in: ../Questionable/Functions/QuestFunctions.cs -->
+    <!-- DEPRECATED -->
     <Key>Achievement</Key>
     <Value lang="en">Achievement</Value>
     <Value lang="ja-jp">アチーブメント</Value>
@@ -8332,16 +8332,19 @@
     <!-- Found in: ../Questionable/Windows/QuestComponents/QuestTooltipComponent.cs -->
     <Key>Job: {0}</Key>
     <Value lang="en">Job: {0}</Value>
+    <Value lang="zh-cn">职业：{0}</Value>
   </Entry>
   <Entry>
     <!-- Found in: ../Questionable/Windows/PriorityWindow.cs -->
     <Key>DoH/DoL unlocks</Key>
     <Value lang="en">DoH/DoL unlocks</Value>
+    <Value lang="zh-cn">能工巧匠/大地使者解锁</Value>
   </Entry>
   <Entry>
     <!-- Found in: ../Questionable/Windows/PriorityWindow.cs -->
     <Key>Post-HW unlocks</Key>
     <Value lang="en">Post-HW unlocks</Value>
+    <Value lang="zh-cn">3.X 后续主线解锁</Value>
   </Entry>
   <Entry>
     <!-- Found in: ../Questionable/Windows/ConfigComponents/GeneralConfigComponent.cs -->
@@ -8365,6 +8368,54 @@
     <!-- Found in: ../Questionable/Windows/QuestComponents/ActiveQuestComponent.cs -->
     <Key>This quest was added to the game in Patch {0}.\nClick here to view the changelog from this patch.</Key>
     <Value lang="en">This quest was added to the game in Patch {0}.\nClick here to view the changelog from this patch.</Value>
-    <Value lang="zh-cn">此任务在补丁 {0} 中加入游戏。\n点击此处查看该补丁的更新日志。</Value>
+    <Value lang="zh-cn">该任务于 {0} 版本加入游戏。\n点击此处查看该版本的更新笔记。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/ConfigComponents/DebugConfigComponent.cs -->
+    <Key>Show saved position</Key>
+    <Value lang="en">Show saved position</Value>
+    <Value lang="zh-cn">显示已保存位置</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/ConfigComponents/DebugConfigComponent.cs -->
+    <Key>Show flag position</Key>
+    <Value lang="en">Show flag position</Value>
+    <Value lang="zh-cn">显示旗帜位置</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/ConfigComponents/GeneralConfigComponent.cs -->
+    <Key>Continue showing completed seasonal events</Key>
+    <Value lang="en">Continue showing completed seasonal events</Value>
+    <Value lang="zh-cn">继续显示已完成的季节活动</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/QuestComponents/EventInfoComponent.cs -->
+    <Key>starts in {0}</Key>
+    <Value lang="en">starts in {0}</Value>
+    <Value lang="zh-cn">在 {0} 开始</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/QuestComponents/EventInfoComponent.cs -->
+    <Key>ends in {0}</Key>
+    <Value lang="en">ends in {0}</Value>
+    <Value lang="zh-cn">在 {0} 结束</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/ConfigComponents/GeneralConfigComponent.cs -->
+    <Key>Ignore 'next quest' if Priority Quests has valid alternative</Key>
+    <Value lang="en">Ignore 'next quest' if Priority Quests has valid alternative</Value>
+    <Value lang="zh-cn">有可接取的优先任务时，忽略“下一任务”</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/PriorityWindow.cs -->
+    <Key>Experimental: Available quests rewarding silver/gold gil sacks</Key>
+    <Value lang="en">Experimental: Available quests rewarding silver/gold gil sacks</Value>
+    <Value lang="zh-cn">实验性：奖励银币袋或金币袋的可接取任务</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/PriorityWindow.cs -->
+    <Key>Experimental: Quests that require a mob to be damaged to a certain health%</Key>
+    <Value lang="en">Experimental: Quests that require a mob to be damaged to a certain health%</Value>
+    <Value lang="zh-cn">实验性：需要将目标生命值降低到指定百分比的任务</Value>
   </Entry>
 </I18N>

@@ -150,8 +150,9 @@ internal sealed class QuestData
             4796, 4797, 4798, // ffxvi
             4801, // fall guys
         ]).FromNumericListOfQuests();
+
     /// <summary>
-    /// if any of these quests are done, all citystate aethernet locations are attuned
+    /// if any of these quests are done, all citystate aethernet locations should be attuned
     /// </summary>
     public static readonly Dictionary<EAetheryteLocation, (char Letter, ushort[] QuestIds)> AethernetUnlockQuests = new()
     {
@@ -189,12 +190,14 @@ internal sealed class QuestData
     public static readonly IReadOnlyList<QuestId> FinalShadowbringersRoleQuests =
         [new(3248), new(3272), new(3278), new(3628)];
     private readonly IPluginLog? _pluginLog;
+    private readonly IServiceProvider _serviceProvider;
 
     private readonly Dictionary<ElementId, IQuestInfo> _quests;
 
-    public QuestData(IDataManager dataManager, ClassJobUtils classJobUtils, IPluginLog? pluginLog = null)
+    public QuestData(IServiceProvider serviceProvider, IDataManager dataManager, ClassJobUtils classJobUtils, IPluginLog? pluginLog = null)
     {
         _pluginLog = pluginLog;
+        _serviceProvider = serviceProvider;
         JournalGenreOverrides journalGenreOverrides = new()
         {
             ARelicRebornQuests = dataManager.GetExcelSheet<Quest>().GetRow(65742).JournalGenre.RowId,
@@ -424,6 +427,24 @@ internal sealed class QuestData
             .SelectMany(x => x.ItemRewards.Union(x.TripleTriadCardRewards))
             .ToImmutableHashSet();
     }
+
+    public List<ElementId> GetQuestsMatching(Func<QuestInfo, bool> predicate, bool onlyAvailable = true)
+    {
+        var questFunctions = _serviceProvider.GetRequiredService<QuestFunctions>();
+        return _quests.Values
+            .OfType<QuestInfo>()
+            .Where(predicate)
+            .Where(x => !onlyAvailable ||
+                (!questFunctions.IsQuestUnobtainable(x.QuestId) &&
+                 !questFunctions.IsQuestComplete(x.QuestId) &&
+                 !questFunctions.IsQuestLocked(x.QuestId).Item1))
+            .OrderBy(x => x.ToDoLocations.Count > 0 ? x.ToDoLocations[0].Territory.RowId : x.QuestId.Value)
+            .Select(x => x.QuestId)
+            .ToList();
+    }
+
+    public List<ElementId> GetQuestsWithItemReward(bool onlyAvailable = true, params uint[] itemId)
+        => GetQuestsMatching(x => x.ItemRewardsRaw.ContainsAny(itemId), onlyAvailable: onlyAvailable);
 
     public static ImmutableHashSet<QuestId> AetherCurrentQuests { get; } =
         AetherCurrentQuestsByTerritory.Values.SelectMany(x => x).ToImmutableHashSet();

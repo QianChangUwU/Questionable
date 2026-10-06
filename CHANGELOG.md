@@ -1,3 +1,3 @@
-- Merge upstream v15.756.3.17 → 15.756.3.22 - downstream 2201
-- Bug fix: Use highest level job to test if class unlock quest is blocked by low level -alydev
-- Merge upstream v15.756.3.22 → 15.756.3.24 - downstream 2401
+- Merge upstream v15.756.3.24 to v15.756.3.35, preserving downstream localization and path bundle upload fixes.
+- Add priority quest scheduling options, seasonal event updates, and aether current skip fixes.
+- AI assistance: GPT-6 via Codex; changes require human review.

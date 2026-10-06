@@ -218,6 +218,7 @@ internal sealed class Configuration : IPluginConfiguration
         public bool UseEscToCancelQuesting { get; set; } = true;
         public bool UseQuestionableTheme { get; set; } = true;
         public bool ShowIncompleteSeasonalEvents { get; set; } = true;
+        public bool ShowCompleteSeasonalEvents { get; set; }
         public bool QuestIcons { get; set; } = true;
         public bool HideSponsorButton { get; set; }
         public bool HideRemainingTasks { get; set; }
@@ -231,6 +232,7 @@ internal sealed class Configuration : IPluginConfiguration
         public bool SkipLowPriorityDuties { get; set; }
         public bool UseTickets { get; set; }
         public bool SameJobThroughoutQuest { get; set; }
+        public bool IgnoreNextQuestIfPrioSet { get; set; }
         // Unimplemented/hidden
         public bool DismissedReportWarning { get; set; }
         public bool ReportsDisabled { get; set; }
@@ -292,6 +294,8 @@ internal sealed class Configuration : IPluginConfiguration
     internal sealed class AdvancedConfiguration
     {
         public bool DebugOverlay { get; set; }
+        public bool ShowSavedPos { get; set; }
+        public bool ShowFlagPos { get; set; }
         public bool CombatDataOverlay { get; set; }
         public bool HighlightSelectedNpc { get; set; } = true;
         public ObjectHighlightColor HighlightColor { get; set; } = ObjectHighlightColor.Yellow;
