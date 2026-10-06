@@ -1,3 +1,4 @@
 - Merge upstream v15.756.3.24 to v15.756.3.35, preserving downstream localization and path bundle upload fixes.
 - Add priority quest scheduling options, seasonal event updates, and aether current skip fixes.
 - AI assistance: GPT-6 via Codex; changes require human review.
+- Add an option to automatically unlock chocobo porter stops along quest paths (enabled by default).

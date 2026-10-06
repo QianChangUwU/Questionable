@@ -309,6 +309,7 @@ internal sealed class Configuration : IPluginConfiguration
         public bool ShowHoveredItem { get; set; }
         public bool DisableAutoDutyBareMode { get; set; }
         public bool SkipAetherCurrents { get; set; }
+        public bool UnlockChocoboTaxiStands { get; set; } = true;
         public bool SkipClassJobQuests { get; set; }
         public bool SkipARealmRebornHardModePrimals { get; set; }
         public bool SkipCrystalTowerRaids { get; set; }

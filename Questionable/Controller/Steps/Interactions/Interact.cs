@@ -70,6 +70,9 @@ internal static class Interact
             }
             else if (step.InteractionType == EInteractionType.UnlockTaxiStand)
             {
+                if (!configuration.Advanced.UnlockChocoboTaxiStands)
+                    yield break;
+
                 if (step.TaxiStandId == null)
                     yield break;
                 var skip = false;

@@ -313,7 +313,7 @@ internal sealed partial class DialogueChoiceHandler : IDisposable
                 }
             }
 
-            if (isTaxiStandUnlock)
+            if (isTaxiStandUnlock && _configuration.Advanced.UnlockChocoboTaxiStands)
             {
                 _logger.LogInformation("Adding chocobo taxi stand unlock dialogue choices");
                 dialogueChoices.Add(new(quest, new()

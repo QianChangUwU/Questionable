@@ -293,6 +293,16 @@ internal sealed class DebugConfigComponent
         {
             using (ImRaii.PushIndent())
             {
+                bool unlockChocoboTaxiStands = Configuration.Advanced.UnlockChocoboTaxiStands;
+                if (ImGui.Checkbox(_L("Automatically unlock chocobo porter stops"), ref unlockChocoboTaxiStands))
+                {
+                    Configuration.Advanced.UnlockChocoboTaxiStands = unlockChocoboTaxiStands;
+                    Save();
+                }
+
+                ImGui.SameLine();
+                ImGuiComponents.HelpMarker(_L("Unlock chocobo porter stops encountered along quest paths. Disable this to skip these stops and continue questing."));
+
                 bool skipAetherCurrents = Configuration.Advanced.SkipAetherCurrents;
                 if (ImGui.Checkbox(_L("Don't pick up aether currents/aether current quests"), ref skipAetherCurrents))
                 {

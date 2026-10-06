@@ -8418,4 +8418,16 @@
     <Value lang="en">Experimental: Quests that require a mob to be damaged to a certain health%</Value>
     <Value lang="zh-cn">实验性：需要将目标生命值降低到指定百分比的任务</Value>
   </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/ConfigComponents/DebugConfigComponent.cs -->
+    <Key>Automatically unlock chocobo porter stops</Key>
+    <Value lang="en">Automatically unlock chocobo porter stops</Value>
+    <Value lang="zh-cn">自动开启陆行鸟房</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/ConfigComponents/DebugConfigComponent.cs -->
+    <Key>Unlock chocobo porter stops encountered along quest paths. Disable this to skip these stops and continue questing.</Key>
+    <Value lang="en">Unlock chocobo porter stops encountered along quest paths. Disable this to skip these stops and continue questing.</Value>
+    <Value lang="zh-cn">自动开启任务路线途经的陆行鸟房。关闭后跳过这些站点，继续执行任务。</Value>
+  </Entry>
 </I18N>

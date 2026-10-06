@@ -14,6 +14,9 @@ internal static class SkipCondition
         public override ITask? CreateTask(Quest quest, QuestSequence sequence, QuestStep step)
         {
             SkipStepConditions? skipConditions = step.SkipConditions?.StepIf;
+            if (step.InteractionType == EInteractionType.UnlockTaxiStand && !configuration.Advanced.UnlockChocoboTaxiStands)
+                return new SkipTask(step, skipConditions ?? new(), quest.Id);
+
             if (skipConditions is { Never: true })
                 return null;
 
@@ -61,6 +64,12 @@ internal static class SkipCondition
             SkipStepConditions skipConditions = Task.SkipConditions;
             QuestStep step = Task.Step;
             ElementId elementId = Task.ElementId;
+
+            if (step.InteractionType == EInteractionType.UnlockTaxiStand && !configuration.Advanced.UnlockChocoboTaxiStands)
+            {
+                logger.LogInformation("Skipping step, as automatic chocobo porter unlocking is disabled");
+                return true;
+            }
 
             logger.LogInformation("Checking skip conditions; {ConfiguredConditions}", string.Join(",", skipConditions));
 
