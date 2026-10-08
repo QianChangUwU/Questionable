@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <I18N>
   <Entry>
     <!-- Found in: ../Questionable/Configuration.cs -->
@@ -4567,7 +4567,7 @@
     <Value lang="ko">현재 대상과 상호작용.</Value>
   </Entry>
   <Entry>
-    <!-- Found in: ../Questionable/Windows/QuestComponents/CreationUtilsComponent.cs -->
+    <!-- DEPRECATED -->
     <Key>Left click: Copy target position as JSON.\nRight click: Copy target position as C# code.</Key>
     <Value lang="en">Left click: Copy target position as JSON.\nRight click: Copy target position as C# code.</Value>
     <Value lang="zh-cn">左键点击：将目标位置复制为 JSON。\n右键点击：将目标位置复制为 C# 代码。</Value>
@@ -7881,6 +7881,7 @@
   </Entry>
   <Entry>
     <!-- Found in: ../Questionable/Windows/JournalComponents/QuestJournalUtils.cs -->
+    <!-- Found in: ../Questionable/Windows/JournalComponents/QuestRewardComponent.cs -->
     <Key>Hide Unobtainable Quests</Key>
     <Value lang="en">Hide Unobtainable Quests</Value>
     <Value lang="ja-jp">取得不可能なクエストを非表示</Value>
@@ -8429,5 +8430,17 @@
     <Key>Unlock chocobo porter stops encountered along quest paths. Disable this to skip these stops and continue questing.</Key>
     <Value lang="en">Unlock chocobo porter stops encountered along quest paths. Disable this to skip these stops and continue questing.</Value>
     <Value lang="zh-cn">自动开启任务路线途经的陆行鸟房。关闭后跳过这些站点，继续执行任务。</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/ConfigComponents/GeneralConfigComponent.cs -->
+    <Key>Hide things unavailable in your account's unlocked expansions</Key>
+    <Value lang="en">Hide things unavailable in your account's unlocked expansions</Value>
+    <Value lang="zh-cn">隐藏你的账号未解锁资料片中的内容</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/ConfigComponents/GeneralConfigComponent.cs -->
+    <Key>If you are on free trial, or do not own the current expansion, this will hide content in locked expansions</Key>
+    <Value lang="en">If you are on free trial, or do not own the current expansion, this will hide content in locked expansions</Value>
+    <Value lang="zh-cn">如果你是免费试用玩家，或未拥有当前资料片，将隐藏已锁定资料片中的内容</Value>
   </Entry>
 </I18N>
