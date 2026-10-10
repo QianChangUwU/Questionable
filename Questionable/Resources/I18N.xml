@@ -8443,4 +8443,14 @@
     <Value lang="en">If you are on free trial, or do not own the current expansion, this will hide content in locked expansions</Value>
     <Value lang="zh-cn">如果你是免费试用玩家，或未拥有当前资料片，将隐藏已锁定资料片中的内容</Value>
   </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/ConfigComponents/GeneralConfigComponent.cs -->
+    <Key>Hide quest level badge</Key>
+    <Value lang="zh-cn">隐藏任务等级徽章</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/QuestComponents/ActiveQuestComponent.cs -->
+    <Key>Pending</Key>
+    <Value lang="zh-cn">待处理</Value>
+  </Entry>
 </I18N>

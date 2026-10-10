@@ -2,10 +2,26 @@
   "$schema": "https://qstxiv.github.io/schema/quest-v1.json",
   "Author": "liza",
   "Comment": "Completion of at least one role questline is required to finish The Light of Inspiration.",
-  "LastChecked": {"Username": "jigain", "Date": "2026-09-24"},
+  "LastChecked": {"Username": "alydev", "Date": "2026-10-10"},
   "QuestSequence": [
     {
       "Sequence": 0,
+      "Steps": [
+        {
+          "DataId": 1030225,
+          "Position": {
+            "X": 28.824219,
+            "Y": 381.81906,
+            "Z": -524.4374
+          },
+          "StopDistance": 5,
+          "TerritoryId": 818,
+          "InteractionType": "AcceptQuest"
+        }
+      ]
+    },
+    {
+      "Sequence": 1,
       "Steps": [
         {
           "DataId": 1029900,
@@ -377,22 +393,6 @@
           "AetheryteShortcut": "Amh Araeng - Mord Souq"
         },
 
-        {
-          "DataId": 1030225,
-          "Position": {
-            "X": 28.824219,
-            "Y": 381.81906,
-            "Z": -524.4374
-          },
-          "StopDistance": 5,
-          "TerritoryId": 818,
-          "InteractionType": "AcceptQuest"
-        }
-      ]
-    },
-    {
-      "Sequence": 1,
-      "Steps": [
         {
           "DataId": 1027758,
           "Position": {
