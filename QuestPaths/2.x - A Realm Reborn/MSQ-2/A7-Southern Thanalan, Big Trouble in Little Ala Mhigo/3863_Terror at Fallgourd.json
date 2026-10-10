@@ -40,6 +40,16 @@
         {
           "TerritoryId": 212,
           "InteractionType": "None",
+          "AetheryteShortcut": "Gridania"
+        },
+        {
+          "TerritoryId": 132,
+          "InteractionType": "AttuneAethernetShard",
+          "AethernetShard": "[Gridania] Yellow Serpent Gate (North Shroud)"
+        },
+        {
+          "TerritoryId": 212,
+          "InteractionType": "None",
           "AethernetShortcut": [
             "[Gridania] Aetheryte Plaza",
             "[Gridania] Yellow Serpent Gate (North Shroud)"
@@ -55,6 +65,11 @@
           "TerritoryId": 154,
           "InteractionType": "UnlockTaxiStand",
           "TaxiStandId": 1179655
+        },
+        {
+          "TerritoryId": 154,
+          "InteractionType": "AttuneAetheryte",
+          "Aetheryte": "North Shroud - Fallgourd Float"
         },
         {
           "DataId": 1002984,
