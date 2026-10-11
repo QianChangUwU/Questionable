@@ -40,8 +40,7 @@
             "Z": -135.4544
           },
           "TerritoryId": 614,
-          "InteractionType": "Interact",
-          "Mount": false
+          "InteractionType": "Interact"
         }
       ]
     },
@@ -56,8 +55,7 @@
             "Z": -133.89801
           },
           "TerritoryId": 614,
-          "InteractionType": "Interact",
-          "Mount": false
+          "InteractionType": "Interact"
         }
       ]
     },
@@ -110,7 +108,6 @@
           },
           "TerritoryId": 614,
           "InteractionType": "Snipe",
-          "Mount": true,
           "Comment": "Snipe soldiers"
         }
       ]
@@ -142,8 +139,7 @@
             "Z": 584.71045
           },
           "TerritoryId": 614,
-          "InteractionType": "Interact",
-          "Mount": false
+          "InteractionType": "Interact"
         }
       ]
     },
@@ -159,7 +155,6 @@
           },
           "TerritoryId": 614,
           "InteractionType": "Snipe",
-          "Mount": true,
           "Comment": "Snipe soldiers"
         }
       ]
@@ -175,8 +170,7 @@
             "Z": 584.71045
           },
           "TerritoryId": 614,
-          "InteractionType": "Interact",
-          "Mount": false
+          "InteractionType": "Interact"
         }
       ]
     },
