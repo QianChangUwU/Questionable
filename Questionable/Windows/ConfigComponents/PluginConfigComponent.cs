@@ -21,7 +21,6 @@ internal sealed class PluginConfigComponent
     IChatGui chatGui,
     IFramework framework,
     ILogger<PluginConfigComponent> logger,
-    AutomatonIpc automatonIpc,
     PandorasBoxIpc pandorasBoxIpc) : ConfigComponent(pluginInterface, configuration)
 {
     private const string NightmareXivRepositoryUrl =
@@ -140,18 +139,6 @@ internal sealed class PluginConfigComponent
             new(PunishRepositoryUrl),
             "/autohook",
             AlternateRepositoryUrls: PunishRepositoryAlternates),
-        new("CBT (formerly known as Automaton)",
-            "Automaton",
-            _L("Automaton is a collection of automation-related tweaks."),
-            new("https://github.com/Jaksuhn/Automaton"),
-            new("https://puni.sh/api/repository/croizat"),
-            "/cbt",
-            [
-                new(_L("'Sniper no sniping' enabled"),
-                    _L("Automatically completes sniping tasks introduced in Stormblood"),
-                    () => automatonIpc.IsAutoSnipeEnabled,
-                    () => automatonIpc.SetAutoSnipeEnabled(true))
-            ]),
         //new("MogMail",
         //    "Mogmail",
         //    _L("Claim mailed items during QST operation"),

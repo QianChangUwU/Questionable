@@ -19,7 +19,7 @@ internal static class Interact
     static string JobGearsetError(string arg0, string arg1) => _LF(
         "_JobGearsetError",
         arg0, arg1);
-    internal sealed class Factory(AutomatonIpc automatonIpc, Configuration configuration, RedoUtil redoUtil) : ITaskFactory
+    internal sealed class Factory(Configuration configuration, RedoUtil redoUtil) : ITaskFactory
     {
         public IEnumerable<ITask> CreateAllTasks(Quest quest, QuestSequence sequence, QuestStep step)
         {
@@ -63,11 +63,6 @@ internal static class Interact
                 if (step.DataId == null)
                     yield break;
             }
-            else if (step.InteractionType == EInteractionType.Snipe)
-            {
-                if (!automatonIpc.IsAutoSnipeEnabled)
-                    yield break;
-            }
             else if (step.InteractionType == EInteractionType.UnlockTaxiStand)
             {
                 if (!configuration.Advanced.UnlockChocoboTaxiStands)
@@ -83,7 +78,7 @@ internal static class Interact
                 if (skip)
                     yield break;
             }
-            else if (step.InteractionType != EInteractionType.Interact)
+            else if (step.InteractionType is not (EInteractionType.Interact or EInteractionType.Snipe))
                 yield break;
             if (!step.DataId.HasValue)
                 throw new ArgumentNullException(nameof(step.DataId));

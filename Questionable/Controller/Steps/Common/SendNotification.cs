@@ -9,7 +9,6 @@ internal static class SendNotification
 {
     internal sealed class Factory
     (
-        AutomatonIpc automatonIpc,
         AutoDutyIpc autoDutyIpc,
         IAutoHookIpc autoHookIpc,
         BossModIpc bossModIpc,
@@ -19,8 +18,6 @@ internal static class SendNotification
         {
             return step.InteractionType switch
             {
-                EInteractionType.Snipe when !automatonIpc.IsAutoSnipeEnabled =>
-                    new(step.InteractionType, step.Comment),
                 EInteractionType.Duty when !autoDutyIpc.IsConfiguredToRunContent(step.DutyOptions) =>
                     new(step.InteractionType, step.DutyOptions?.ContentFinderConditionId is { } contentFinderConditionId
                         ? territoryData.GetContentFinderCondition(contentFinderConditionId)?.Name
