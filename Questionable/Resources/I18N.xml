@@ -8446,11 +8446,25 @@
   <Entry>
     <!-- Found in: ../Questionable/Windows/ConfigComponents/GeneralConfigComponent.cs -->
     <Key>Hide quest level badge</Key>
+    <Value lang="en">Hide quest level badge</Value>
     <Value lang="zh-cn">隐藏任务等级徽章</Value>
   </Entry>
   <Entry>
     <!-- Found in: ../Questionable/Windows/QuestComponents/ActiveQuestComponent.cs -->
     <Key>Pending</Key>
+    <Value lang="en">Pending</Value>
     <Value lang="zh-cn">待处理</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/ConfigComponents/DebugConfigComponent.cs -->
+    <Key>Restore BossMod setting to default</Key>
+    <Value lang="en">Restore BossMod setting to default</Value>
+    <Value lang="zh-cn">将 BossMod 设置恢复为默认</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/Windows/ConfigComponents/DebugConfigComponent.cs -->
+    <Key>When starting a solo duty or if Autoduty has finished qst-orchestrated duty automation, restore Bossmod's setting 'Prevent Movement While Casting' to default</Key>
+    <Value lang="en">When starting a solo duty or if Autoduty has finished qst-orchestrated duty automation, restore Bossmod's setting 'Prevent Movement While Casting' to default</Value>
+    <Value lang="zh-cn">开始单人副本时，或 AutoDuty 完成 QST 编排的副本自动化后，将 BossMod 的「移动中禁止吟唱」设置恢复为默认</Value>
   </Entry>
 </I18N>

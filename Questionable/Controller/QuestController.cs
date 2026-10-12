@@ -904,6 +904,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
             }
             _logger.LogInformation("Stopping automatic questing");
             AutomationType = EAutomationType.Manual;
+            StartedQuest = null;
             NextQuest = null;
             GatheringQuest = null;
             _lastTaskUpdate = DateTime.Now;
@@ -1082,7 +1083,7 @@ internal sealed class QuestController : MiniTaskController<QuestController>
     protected override void OnTaskComplete(ITask task)
     {
         if (task is WaitAtEnd.WaitQuestCompleted)
-            SimulatedQuest = null;
+            SimulatedQuest = StartedQuest = null;
 
     }
 
