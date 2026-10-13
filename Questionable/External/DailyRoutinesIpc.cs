@@ -21,10 +21,16 @@ internal sealed class DailyRoutinesIpc : IDisposable
     private readonly ICallGateSubscriber<string, bool, bool, bool> _unloadModule;
 
     private readonly Dictionary<string, bool> _modulesEnabledByUs = new();
-    private bool _autoTalkSkipDisabledByUs;
-    private bool _wasAutoTalkSkipEnabled;
-    private bool _autoCutsceneSkipDisabledByUs;
-    private bool _wasAutoCutsceneSkipEnabled;
+
+    /// <summary>Modules that must be turned OFF during automation (they conflict with QST).</summary>
+    private static readonly string[] ModulesToDisable =
+    [
+        "AutoTalkSkip",
+        "AutoCutsceneSkip",
+        "OptimizedInteraction"
+    ];
+
+    private readonly Dictionary<string, bool> _conflictModulesDisabledByUs = new();
 
     private static readonly string[] ModulesToEnable =
     [
@@ -34,13 +40,11 @@ internal sealed class DailyRoutinesIpc : IDisposable
         "IgnoreTurnAndLookAtWait"
     ];
 
-    private const string AutoTalkSkipModule = "AutoTalkSkip";
-    private const string AutoCutsceneSkipModule = "AutoCutsceneSkip";
-
     private static readonly Dictionary<string, string> ModuleDisplayNames = new()
     {
         { "AutoTalkSkip", "自动跳过对话" },
         { "AutoCutsceneSkip", "自动跳过过场动画" },
+        { "OptimizedInteraction", "游戏原生交互优化" },
         { "AutoSnipeQuest", "自动完成观察任务" },
         { "AutoCancelNPCEmote", "自动取消NPC情感动作播放" },
         { "IgnoreTransparencyWait", "自动取消NPC淡入淡出等待" },
@@ -98,8 +102,7 @@ internal sealed class DailyRoutinesIpc : IDisposable
 
         if (hasActiveQuest)
         {
-            HandleAutoTalkSkipDisable();
-            HandleAutoCutsceneSkipDisable();
+            HandleConflictModulesDisable();
             HandleHelperModulesEnable();
         }
         else
@@ -108,37 +111,23 @@ internal sealed class DailyRoutinesIpc : IDisposable
         }
     }
 
-    private void HandleAutoTalkSkipDisable()
+    private void HandleConflictModulesDisable()
     {
-        if (_autoTalkSkipDisabledByUs)
-            return;
-
-        bool? enabled = IsModuleEnabled(AutoTalkSkipModule);
-        if (enabled == true)
+        foreach (string module in ModulesToDisable)
         {
-            _wasAutoTalkSkipEnabled = true;
-            _autoTalkSkipDisabledByUs = true;
-            UnloadModule(AutoTalkSkipModule);
-            NotifyUser(
-                _L("DailyRoutines AutoTalkSkip has been temporarily disabled to avoid conflicts with Questionable."));
-            _logger.LogInformation("Disabled DailyRoutines AutoTalkSkip module due to Questionable automation");
-        }
-    }
+            if (_conflictModulesDisabledByUs.ContainsKey(module))
+                continue;
 
-    private void HandleAutoCutsceneSkipDisable()
-    {
-        if (_autoCutsceneSkipDisabledByUs)
-            return;
-
-        bool? enabled = IsModuleEnabled(AutoCutsceneSkipModule);
-        if (enabled == true)
-        {
-            _wasAutoCutsceneSkipEnabled = true;
-            _autoCutsceneSkipDisabledByUs = true;
-            UnloadModule(AutoCutsceneSkipModule);
-            NotifyUser(
-                _L("DailyRoutines AutoCutsceneSkip has been temporarily disabled to avoid conflicts with Questionable."));
-            _logger.LogInformation("Disabled DailyRoutines AutoCutsceneSkip module due to Questionable automation");
+            bool? enabled = IsModuleEnabled(module);
+            if (enabled == true)
+            {
+                UnloadModule(module);
+                _conflictModulesDisabledByUs[module] = true;
+                NotifyUser(
+                    _LF("DailyRoutines {0} has been temporarily disabled to avoid conflicts with Questionable.",
+                        GetModuleDisplayName(module)));
+                _logger.LogInformation("Disabled DailyRoutines {Module} module due to Questionable automation", module);
+            }
         }
     }
 
@@ -166,33 +155,15 @@ internal sealed class DailyRoutinesIpc : IDisposable
         if (!IPCSubscriber.IsInstalled(PluginName))
             return;
 
-        if (_autoTalkSkipDisabledByUs)
+        foreach (string module in _conflictModulesDisabledByUs.Keys)
         {
-            if (_wasAutoTalkSkipEnabled)
-            {
-                LoadModule(AutoTalkSkipModule);
-                NotifyUser(
-                    _L("DailyRoutines AutoTalkSkip has been re-enabled."));
-                _logger.LogInformation("Re-enabled DailyRoutines AutoTalkSkip module");
-            }
-
-            _autoTalkSkipDisabledByUs = false;
-            _wasAutoTalkSkipEnabled = false;
+            LoadModule(module);
+            NotifyUser(
+                _LF("DailyRoutines {0} has been re-enabled.", GetModuleDisplayName(module)));
+            _logger.LogInformation("Re-enabled DailyRoutines {Module} module", module);
         }
 
-        if (_autoCutsceneSkipDisabledByUs)
-        {
-            if (_wasAutoCutsceneSkipEnabled)
-            {
-                LoadModule(AutoCutsceneSkipModule);
-                NotifyUser(
-                    _L("DailyRoutines AutoCutsceneSkip has been re-enabled."));
-                _logger.LogInformation("Re-enabled DailyRoutines AutoCutsceneSkip module");
-            }
-
-            _autoCutsceneSkipDisabledByUs = false;
-            _wasAutoCutsceneSkipEnabled = false;
-        }
+        _conflictModulesDisabledByUs.Clear();
 
         foreach (string module in _modulesEnabledByUs.Keys)
         {
