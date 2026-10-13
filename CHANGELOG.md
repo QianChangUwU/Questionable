@@ -9,3 +9,7 @@
 - Feature: show/hide quest level requirement -alydev
 - Bug fix: "seq 255 / not accepted" fixed -alydev
 - Merge upstream v15.756.3.43 → 15.756.3.49 - downstream 4901
+- Change: 移除 CBT（Bundle of Tweaks / 原 Automaton）依赖，未安装 CBT 时狙击任务不再被跳过 - 下游
+- Change: 狙击与观察任务改用 DailyRoutines 的自动完成观察任务模块（运行时临时启用，结束后恢复）- 下游
+- Feature: DailyRoutines 的「游戏原生交互优化」加入冲突模块（运行时临时禁用，停止后恢复）- 下游
+- Feature: 通知页新增「开启DR模块启用/禁用通知」开关（默认关闭）- 下游
