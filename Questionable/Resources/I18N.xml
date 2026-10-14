@@ -8457,4 +8457,10 @@
     <Value lang="en">When starting a solo duty or if Autoduty has finished qst-orchestrated duty automation, restore Bossmod's setting 'Prevent Movement While Casting' to default</Value>
     <Value lang="zh-cn">开始单人副本时，或 AutoDuty 完成 QST 编排的副本自动化后，将 BossMod 的「移动中禁止吟唱」设置恢复为默认</Value>
   </Entry>
+  <Entry>
+    <!-- Found in: ../Questionable/PathData/PathDataUpdater.cs -->
+    <Key>Update check failed; will retry next launch</Key>
+    <Value lang="en">Update check failed; will retry next launch</Value>
+    <Value lang="zh-cn">更新检查失败，将于下次启动时重试</Value>
+  </Entry>
 </I18N>

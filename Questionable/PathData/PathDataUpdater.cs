@@ -122,11 +122,16 @@ internal sealed class PathDataUpdater : IDisposable
 
     private async Task RetryAfterDelay(int retryCount = 1)
     {
+        if (retryCount >= 10)
+        {
+            Status = _L("Update check failed; will retry next launch");
+            return;
+        }
         await Task.Delay(Math.Min(1000 * retryCount, 15000)).ConfigureAwait(false);
         _configuration.PathData.InstalledDataVersion = 0;
         _configuration.PathData.BundlePluginVersion = null;
         Save();
-        retryCount *= 2;
+        retryCount++;
         await CheckForUpdatesAsync(retryCount).ConfigureAwait(false);
     }
 
