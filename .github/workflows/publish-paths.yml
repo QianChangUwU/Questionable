@@ -76,17 +76,34 @@ jobs:
           zip -q -X -j out/paths.zip manifest.json
 
           SHA=$(sha256sum out/paths.zip | cut -d' ' -f1)
-          S3_URL="https://cn-nb1.rains3.com/qst/paths-${CHANNEL}/paths.zip"
+          SHA12=${SHA:0:12}
+          # Content-addressed bundle name: the bytes never change for a given name,
+          # so it stays valid forever even behind a cache.
+          COS_URL="https://questionable-1304787170.cos.ap-guangzhou.myqcloud.com/paths-${CHANNEL}/paths-${SHA12}.zip"
+          RAINYUN_URL="https://cn-nb1.rains3.com/qst/paths-${CHANNEL}/paths.zip"
           GH_URL="https://github.com/${{ github.repository }}/releases/download/paths-${CHANNEL}/paths.zip"
 
-          # RainYun S3 manifest (primary)
+          # Tencent COS manifest (primary)
           cat > out/manifest-${CHANNEL}.json <<EOF
           {
             "schemaVersion": 1,
             "dataVersion": ${{ steps.meta.outputs.data_version }},
             "minPluginDataFormat": ${{ steps.meta.outputs.min_format }},
             "maxPluginDataFormat": null,
-            "bundleUrl": "$S3_URL",
+            "bundleUrl": "$COS_URL",
+            "bundleSha256": "$SHA",
+            "generatedAt": "$GENERATED_AT"
+          }
+          EOF
+
+          # RainYun manifest (transitional mirror for older clients)
+          cat > out/manifest-${CHANNEL}-rainyun.json <<EOF
+          {
+            "schemaVersion": 1,
+            "dataVersion": ${{ steps.meta.outputs.data_version }},
+            "minPluginDataFormat": ${{ steps.meta.outputs.min_format }},
+            "maxPluginDataFormat": null,
+            "bundleUrl": "$RAINYUN_URL",
             "bundleSha256": "$SHA",
             "generatedAt": "$GENERATED_AT"
           }
@@ -105,8 +122,36 @@ jobs:
           }
           EOF
 
+          echo "sha12=$SHA12" >> $GITHUB_OUTPUT
           echo "Bundle SHA-256: $SHA"
           ls -la out/
+
+      - name: Install and configure coscli
+        run: |
+          curl -fsSL -o coscli https://github.com/tencentyun/coscli/releases/download/v1.0.9/coscli-v1.0.9-linux-amd64
+          chmod +x coscli
+          ./coscli config set --secret_id "${{ secrets.TENCENT_SECRET_ID }}" --secret_key "${{ secrets.TENCENT_SECRET_KEY }}"
+          ./coscli config add -b questionable-1304787170 -r ap-guangzhou -e cos.ap-guangzhou.myqcloud.com -a qst
+          ./coscli config show
+
+      - name: Upload to Tencent COS
+        continue-on-error: true
+        id: cos_upload
+        run: |
+          CHANNEL=${{ steps.channel.outputs.channel }}
+          SHA12=${{ steps.bundle.outputs.sha12 }}
+          # Upload the zip FIRST and the manifest LAST: clients only ever see
+          # either the previous consistent pair, or the new zip + new manifest.
+          ./coscli cp out/paths.zip cos://qst/paths-${CHANNEL}/paths-${SHA12}.zip
+          ./coscli cp out/manifest-${CHANNEL}.json cos://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json
+
+      - name: Fallback - upload GitHub manifest to COS
+        if: steps.cos_upload.outcome == 'failure'
+        continue-on-error: true
+        run: |
+          CHANNEL=${{ steps.channel.outputs.channel }}
+          cp out/manifest-${CHANNEL}-gh.json out/manifest-${CHANNEL}.json
+          ./coscli cp out/manifest-${CHANNEL}.json cos://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json
 
       - name: Configure AWS CLI for RainYun S3
         run: |
@@ -114,23 +159,21 @@ jobs:
           aws configure set aws_secret_access_key "${{ secrets.RAINYUN_SECRET_KEY }}"
           aws configure set default.region us-east-1
 
-      - name: Upload to RainYun S3
+      - name: Upload to RainYun S3 (transitional)
         continue-on-error: true
         id: s3_upload
         run: |
           CHANNEL=${{ steps.channel.outputs.channel }}
-          # Upload the zip FIRST and the manifest LAST: clients only ever see
-          # either the previous consistent pair, or the new zip + new manifest.
-          # (manifest-first caused checksum mismatches while the slow zip
-          # upload was still in progress)
+          # Old clients (before the COS migration) still read this bucket, so it
+          # keeps the fixed bundle name and its own manifest. zip first, manifest last.
           aws s3 cp out/paths.zip \
             s3://qst/paths-${CHANNEL}/paths.zip \
             --endpoint-url https://cn-nb1.rains3.com --acl public-read
-          aws s3 cp out/manifest-${CHANNEL}.json \
+          aws s3 cp out/manifest-${CHANNEL}-rainyun.json \
             s3://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json \
             --endpoint-url https://cn-nb1.rains3.com --acl public-read
 
-      - name: Fallback - upload GitHub manifest to S3
+      - name: Fallback - upload GitHub manifest to RainYun
         if: steps.s3_upload.outcome == 'failure'
         continue-on-error: true
         run: |
@@ -158,4 +201,3 @@ jobs:
           draft: false
           prerelease: ${{ steps.channel.outputs.channel == 'testing' }}
           make_latest: false
-

@@ -16,3 +16,4 @@
 - Bug fix: trial players can't complete retainer venture quest -alydev
 - Change: 路径包重试增加最多 10 次上限，超过后提示「更新检查失败，下次启动重试」；分发自有的雨云 S3 + GitHub 保底保持不变（不采用上游 gh.qstxiv.dev 代理）- 下游
 - Merge upstream v15.756.3.49 → v15.756.3.50 - downstream 5001
+- Change: 路径包分发迁移至腾讯云 COS（questionable-1304787170.cos.ap-guangzhou.myqcloud.com），zip 改为内容哈希命名；过渡期同时上传雨云以兼容旧客户端，GitHub 保底不变 - 下游

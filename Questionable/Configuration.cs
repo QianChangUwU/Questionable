@@ -363,7 +363,7 @@ internal sealed class Configuration : IPluginConfiguration
         public bool AutoUpdate { get; set; } = true;
 
         /// <summary>Source to download path data from.</summary>
-        public EPathDataSource DataSource { get; set; } = EPathDataSource.RainYun;
+        public EPathDataSource DataSource { get; set; } = EPathDataSource.TencentCos;
 
         /// <summary>Data version of the path bundle currently in <c>{ConfigDirectory}/PathData/</c>; 0 if none.</summary>
         public long InstalledDataVersion { get; set; }
