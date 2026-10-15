@@ -1,19 +1,6 @@
-- Merge upstream v15.756.3.24 to v15.756.3.35, preserving downstream localization and path bundle upload fixes.
-- Add priority quest scheduling options, seasonal event updates, and aether current skip fixes.
-- AI assistance: GPT-6 via Codex; changes require human review.
-- Add an option to automatically unlock chocobo porter stops along quest paths (enabled by default).
-- Bug fix: quest actions don't seem to be working right, reverted the change, but i'm too tired to investigate further today. -alydev
-- Feature: and i'm tired because i automated the lv15 rogue quest battle in aleport, so that works now -alydev
-- Merge upstream v15.756.3.35 → 15.756.3.40 - downstream 4001
-- Change: adjusted quest window component positions -alydev
-- Feature: show/hide quest level requirement -alydev
-- Bug fix: "seq 255 / not accepted" fixed -alydev
-- Merge upstream v15.756.3.43 → 15.756.3.49 - downstream 4901
-- Change: 移除 CBT（Bundle of Tweaks / 原 Automaton）依赖，未安装 CBT 时狙击任务不再被跳过 - 下游
-- Change: 狙击与观察任务改用 DailyRoutines 的自动完成观察任务模块（运行时临时启用，结束后恢复）- 下游
-- Feature: DailyRoutines 的「游戏原生交互优化」加入冲突模块（运行时临时禁用，停止后恢复）- 下游
-- Feature: 通知页新增「开启DR模块启用/禁用通知」开关（默认关闭）- 下游
-- Bug fix: trial players can't complete retainer venture quest -alydev
-- Change: 路径包重试增加最多 10 次上限，超过后提示「更新检查失败，下次启动重试」；分发自有的雨云 S3 + GitHub 保底保持不变（不采用上游 gh.qstxiv.dev 代理）- 下游
-- Merge upstream v15.756.3.49 → v15.756.3.50 - downstream 5001
-- Change: 路径包分发迁移至腾讯云 COS（questionable-1304787170.cos.ap-guangzhou.myqcloud.com），zip 改为内容哈希命名；过渡期同时上传雨云以兼容旧客户端，GitHub 保底不变 - 下游
+- 合并上游 v15.756.3.52 - 下游 5201
+- 新增 2026 万圣节（All Saints' Wake）活动支持
+- 战斗开始时清空 BossMod（VBM）地图，并补充更多解锁检查
+- 修复 GitHub Release 的 manifest 长期未更新（重命名语法不生效）
+- 路径包分发迁移至腾讯云 COS：zip 改为内容哈希命名，雨云过渡期双传，GitHub 保底不变
+- 移除 CBT（Bundle of Tweaks）依赖，狙击与观察任务改用 DailyRoutines 的自动完成观察任务模块
