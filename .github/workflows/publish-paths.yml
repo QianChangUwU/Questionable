@@ -109,7 +109,8 @@ jobs:
           }
           EOF
 
-          # GitHub Release manifest (fallback)
+          # GitHub Release manifest (fallback); also staged under the plain name so the
+          # release step can upload it without relying on a rename syntax.
           cat > out/manifest-${CHANNEL}-gh.json <<EOF
           {
             "schemaVersion": 1,
@@ -121,6 +122,9 @@ jobs:
             "generatedAt": "$GENERATED_AT"
           }
           EOF
+
+          mkdir -p out/release
+          cp out/manifest-${CHANNEL}-gh.json out/release/manifest-${CHANNEL}.json
 
           echo "sha12=$SHA12" >> $GITHUB_OUTPUT
           echo "Bundle SHA-256: $SHA"
@@ -197,7 +201,7 @@ jobs:
             Updated automatically when path data changes. This does not trigger a plugin release.
           files: |
             out/paths.zip
-            out/manifest-${{ steps.channel.outputs.channel }}-gh.json:manifest-${{ steps.channel.outputs.channel }}.json
+            out/release/manifest-${{ steps.channel.outputs.channel }}.json
           draft: false
           prerelease: ${{ steps.channel.outputs.channel == 'testing' }}
           make_latest: false
