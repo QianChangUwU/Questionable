@@ -11,6 +11,7 @@ namespace Questionable.PathData;
 [RegisterSingleton]
 internal sealed class PathDataUpdater : IDisposable
 {
+    private const string RainYunBaseUrl = "https://cn-nb1.rains3.com/qst";
     private const string CosBaseUrl = "https://questionable-1304787170.cos.ap-guangzhou.myqcloud.com";
     private const string GitHubBaseUrl = "https://github.com/QianChangUwU/Questionable";
 
@@ -140,12 +141,18 @@ internal sealed class PathDataUpdater : IDisposable
         Status = _L("Checking for path updates…");
         using HttpClient http = new() { Timeout = TimeSpan.FromSeconds(30) };
 
+        string rainYunManifestUrl = $"{RainYunBaseUrl}/paths-{_channel}/manifest-{_channel}.json";
         string cosManifestUrl = $"{CosBaseUrl}/paths-{_channel}/manifest-{_channel}.json";
         string ghManifestUrl = $"{GitHubBaseUrl}/releases/download/paths-{_channel}/manifest-{_channel}.json";
 
-        bool useCos = _configuration.PathData.DataSource == EPathDataSource.TencentCos;
-        string primaryUrl = useCos ? cosManifestUrl : ghManifestUrl;
-        string? fallbackUrl = useCos ? ghManifestUrl : null;
+        EPathDataSource dataSource = _configuration.PathData.DataSource;
+        string primaryUrl = dataSource switch
+        {
+            EPathDataSource.RainYun => rainYunManifestUrl,
+            EPathDataSource.TencentCos => cosManifestUrl,
+            _ => ghManifestUrl,
+        };
+        string? fallbackUrl = dataSource == EPathDataSource.GitHub ? null : ghManifestUrl;
 
         _logger.LogDebug($"Requesting path updates from {primaryUrl}");
         PathDataManifest? manifest;

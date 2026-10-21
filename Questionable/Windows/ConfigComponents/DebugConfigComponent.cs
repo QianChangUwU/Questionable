@@ -462,7 +462,7 @@ internal sealed class DebugConfigComponent
 
             int dataSource = (int)Configuration.PathData.DataSource;
             ImGui.SetNextItemWidth(200);
-            string[] dataSourceNames = [_L("国内存储"), _L("GitHub")];
+            string[] dataSourceNames = [_L("国内存储"), _L("腾讯 COS"), _L("GitHub")];
             if (ImGui.Combo(_L("Path data source"), ref dataSource, dataSourceNames, dataSourceNames.Length))
             {
                 Configuration.PathData.DataSource = (EPathDataSource)dataSource;

@@ -7757,6 +7757,11 @@
   </Entry>
   <Entry>
     <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
+    <Key>腾讯 COS</Key>
+    <Value lang="zh-cn">腾讯 COS</Value>
+  </Entry>
+  <Entry>
+    <!-- Found in: Windows\ConfigComponents\DebugConfigComponent.cs -->
     <Key>GitHub</Key>
     <Value lang="zh-cn">GitHub</Value>
   </Entry>
