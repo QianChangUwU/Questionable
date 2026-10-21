@@ -1,6 +1,4 @@
-- 合并上游 v15.756.3.52 - 下游 5201
-- 新增 2026 万圣节（All Saints' Wake）活动支持
-- 战斗开始时清空 BossMod（VBM）地图，并补充更多解锁检查
-- 修复 GitHub Release 的 manifest 长期未更新（重命名语法不生效）
-- 路径包分发迁移至腾讯云 COS：zip 改为内容哈希命名，雨云过渡期双传，GitHub 保底不变
-- 移除 CBT（Bundle of Tweaks）依赖，狙击与观察任务改用 DailyRoutines 的自动完成观察任务模块
+- 合并上游 v15.756.3.53 - 下游 5301
+- 任务窗口在任务 ID 旁显示该任务的职业
+- 万圣节活动任务路径补充「地面目标」（GroundTarget）
+- 路径数据更新
