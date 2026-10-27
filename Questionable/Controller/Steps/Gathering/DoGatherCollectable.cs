@@ -34,6 +34,8 @@ internal static class DoGatherCollectable
         private Queue<EAction>? _actionQueue;
 
         private bool? _expectedScrutiny;
+        private DateTime _expectedScrutinySince;
+        private DateTime _lastActionAt = DateTime.MinValue;
 
         protected override bool Start() => true;
 
@@ -76,7 +78,17 @@ internal static class DoGatherCollectable
             if (_expectedScrutiny != null)
             {
                 if (nodeCondition.ScrutinyActive != _expectedScrutiny)
+                {
+                    if (DateTime.Now - _expectedScrutinySince < TimeSpan.FromSeconds(5))
+                        return ETaskResult.StillRunning;
+
+                    // The game rejected the action even though the status check passed; retry it.
+                    logger.LogWarning("Expected scrutiny state {Expected} did not occur; re-evaluating actions",
+                        _expectedScrutiny);
+                    _expectedScrutiny = null;
+                    _actionQueue = null;
                     return ETaskResult.StillRunning;
+                }
 
                 // continue on next frame
                 _expectedScrutiny = null;
@@ -85,8 +97,13 @@ internal static class DoGatherCollectable
 
             if (_actionQueue != null && _actionQueue.TryPeek(out EAction nextAction))
             {
+                // Gathering actions have a 2.5s recast; firing sooner is rejected by the game.
+                if (DateTime.Now - _lastActionAt < TimeSpan.FromMilliseconds(2500))
+                    return ETaskResult.StillRunning;
+
                 if (gameFunctions.UseAction(nextAction))
                 {
+                    _lastActionAt = DateTime.Now;
                     _expectedScrutiny = nextAction switch
                     {
                         EAction.ScrutinyMiner or EAction.ScrutinyBotanist => true,
@@ -94,6 +111,7 @@ internal static class DoGatherCollectable
                             or EAction.MeticulousBotanist => false,
                         var _ => null
                     };
+                    _expectedScrutinySince = DateTime.Now;
                     logger.LogInformation("Used action {Action} on node", nextAction);
                     _actionQueue.Dequeue();
                 }
