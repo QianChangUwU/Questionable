@@ -147,8 +147,17 @@ jobs:
           SHA12=${{ steps.bundle.outputs.sha12 }}
           # Upload the zip FIRST and the manifest LAST: clients only ever see
           # either the previous consistent pair, or the new zip + new manifest.
-          ./coscli cp out/paths.zip cos://qst/paths-${CHANNEL}/paths-${SHA12}.zip
-          ./coscli cp out/manifest-${CHANNEL}.json cos://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json
+          # part-size defaults to 32MB, which would send our ~4MB bundle over a
+          # single slow cross-border connection; 1MB parts across 8 connections
+          # upload far faster, and the retry flags absorb rate limiting.
+          if curl -fsI --max-time 20 "https://questionable-1304787170.cos.ap-guangzhou.myqcloud.com/paths-${CHANNEL}/paths-${SHA12}.zip" > /dev/null; then
+            echo "Bundle ${SHA12} already exists in COS; skipping upload"
+          else
+            ./coscli cp out/paths.zip cos://qst/paths-${CHANNEL}/paths-${SHA12}.zip \
+              --part-size 1 --thread-num 8 --retry-num 10 --err-retry-num 10
+          fi
+          ./coscli cp out/manifest-${CHANNEL}.json cos://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json \
+            --retry-num 10 --err-retry-num 10
 
       - name: Fallback - upload GitHub manifest to COS
         if: steps.cos_upload.outcome == 'failure'
