@@ -17,6 +17,7 @@ permissions:
 jobs:
   publish-paths:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     if: contains(fromJson(vars.RELEASE_USERNAMES), github.actor)
     steps:
       - name: Checkout repository
@@ -162,6 +163,29 @@ jobs:
           aws configure set aws_access_key_id "${{ secrets.RAINYUN_ACCESS_KEY }}"
           aws configure set aws_secret_access_key "${{ secrets.RAINYUN_SECRET_KEY }}"
           aws configure set default.region us-east-1
+          # Cross-border uploads to RainYun are slow on a single stream; use small
+          # multipart chunks so parts upload in parallel, and be patient on timeouts.
+          aws configure set default.s3.multipart_threshold 1MB
+          aws configure set default.s3.multipart_chunksize 1MB
+          aws configure set default.s3.max_concurrent_requests 6
+          aws configure set default.retry_mode adaptive
+          aws configure set default.max_attempts 10
+
+      - name: Check whether the RainYun bundle is already up to date
+        id: rainyun_state
+        continue-on-error: true
+        run: |
+          CHANNEL=${{ steps.channel.outputs.channel }}
+          LOCAL_SHA=$(sha256sum out/paths.zip | cut -d' ' -f1)
+          MANIFEST=$(curl -fsS --max-time 30 "https://cn-nb1.rains3.com/qst/paths-${CHANNEL}/manifest-${CHANNEL}.json" || true)
+          REMOTE_SHA=$(echo "$MANIFEST" | grep -o '"bundleSha256"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/')
+          REMOTE_URL=$(echo "$MANIFEST" | grep -o '"bundleUrl"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/')
+          if [ "$REMOTE_SHA" = "$LOCAL_SHA" ] && echo "$REMOTE_URL" | grep -q "cn-nb1.rains3.com"; then
+            echo "skip_zip=true" >> $GITHUB_OUTPUT
+            echo "RainYun already serves this bundle ($LOCAL_SHA); skipping zip upload"
+          else
+            echo "skip_zip=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Upload to RainYun S3 (transitional)
         continue-on-error: true
@@ -170,12 +194,18 @@ jobs:
           CHANNEL=${{ steps.channel.outputs.channel }}
           # Old clients (before the COS migration) still read this bucket, so it
           # keeps the fixed bundle name and its own manifest. zip first, manifest last.
-          aws s3 cp out/paths.zip \
-            s3://qst/paths-${CHANNEL}/paths.zip \
-            --endpoint-url https://cn-nb1.rains3.com --acl public-read
+          if [ "${{ steps.rainyun_state.outputs.skip_zip }}" != "true" ]; then
+            aws s3 cp out/paths.zip \
+              s3://qst/paths-${CHANNEL}/paths.zip \
+              --endpoint-url https://cn-nb1.rains3.com --acl public-read \
+              --cli-connect-timeout 60 --cli-read-timeout 600
+          else
+            echo "Skipping zip upload; bundle unchanged"
+          fi
           aws s3 cp out/manifest-${CHANNEL}-rainyun.json \
             s3://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json \
-            --endpoint-url https://cn-nb1.rains3.com --acl public-read
+            --endpoint-url https://cn-nb1.rains3.com --acl public-read \
+            --cli-connect-timeout 60 --cli-read-timeout 600
 
       - name: Fallback - upload GitHub manifest to RainYun
         if: steps.s3_upload.outcome == 'failure'
