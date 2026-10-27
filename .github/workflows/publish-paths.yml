@@ -1,4 +1,4 @@
-name: Publish path data bundle
+﻿name: Publish path data bundle
 
 on:
   push:
@@ -16,7 +16,10 @@ permissions:
 
 jobs:
   publish-paths:
-    runs-on: ubuntu-latest
+    # Runs on the maintainer's local Linux runner (in China) so uploads to
+    # RainYun/COS stay in-country instead of crossing the border from GitHub's
+    # hosted runners.
+    runs-on: [self-hosted, linux, qst-paths]
     timeout-minutes: 30
     if: contains(fromJson(vars.RELEASE_USERNAMES), github.actor)
     steps:
@@ -59,6 +62,9 @@ jobs:
       - name: Build bundle
         id: bundle
         run: |
+          # Self-hosted runners reuse their workspace; zip would append to a
+          # previous bundle, so start from a clean output directory.
+          rm -rf out manifest.json
           mkdir -p out
           GENERATED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)
           CHANNEL=${{ steps.channel.outputs.channel }}
@@ -131,13 +137,18 @@ jobs:
           echo "Bundle SHA-256: $SHA"
           ls -la out/
 
-      - name: Install and configure coscli
+      - name: Configure coscli
         run: |
-          curl -fsSL -o coscli https://github.com/tencentyun/coscli/releases/download/v1.0.9/coscli-v1.0.9-linux-amd64
-          chmod +x coscli
-          ./coscli config set --secret_id "${{ secrets.TENCENT_SECRET_ID }}" --secret_key "${{ secrets.TENCENT_SECRET_KEY }}"
-          ./coscli config add -b questionable-1304787170 -r ap-guangzhou -e cos.ap-guangzhou.myqcloud.com -a qst
-          ./coscli config show
+          command -v coscli > /dev/null || {
+            echo "coscli not found in PATH; install it on the runner (see docs)"
+            exit 1
+          }
+          coscli config set --secret_id "${{ secrets.TENCENT_SECRET_ID }}" --secret_key "${{ secrets.TENCENT_SECRET_KEY }}"
+          # The runner keeps its coscli config between runs; only add the bucket once.
+          if ! coscli config show | grep -q "questionable-1304787170"; then
+            coscli config add -b questionable-1304787170 -r ap-guangzhou -e cos.ap-guangzhou.myqcloud.com -a qst
+          fi
+          coscli config show
 
       - name: Upload to Tencent COS
         continue-on-error: true
@@ -153,10 +164,10 @@ jobs:
           if curl -fsI --max-time 20 "https://questionable-1304787170.cos.ap-guangzhou.myqcloud.com/paths-${CHANNEL}/paths-${SHA12}.zip" > /dev/null; then
             echo "Bundle ${SHA12} already exists in COS; skipping upload"
           else
-            ./coscli cp out/paths.zip cos://qst/paths-${CHANNEL}/paths-${SHA12}.zip \
+            coscli cp out/paths.zip cos://qst/paths-${CHANNEL}/paths-${SHA12}.zip \
               --part-size 1 --thread-num 8 --retry-num 10 --err-retry-num 10
           fi
-          ./coscli cp out/manifest-${CHANNEL}.json cos://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json \
+          coscli cp out/manifest-${CHANNEL}.json cos://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json \
             --retry-num 10 --err-retry-num 10
 
       - name: Fallback - upload GitHub manifest to COS
@@ -165,7 +176,7 @@ jobs:
         run: |
           CHANNEL=${{ steps.channel.outputs.channel }}
           cp out/manifest-${CHANNEL}-gh.json out/manifest-${CHANNEL}.json
-          ./coscli cp out/manifest-${CHANNEL}.json cos://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json
+          coscli cp out/manifest-${CHANNEL}.json cos://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json
 
       - name: Configure AWS CLI for RainYun S3
         run: |
