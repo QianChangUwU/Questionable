@@ -158,17 +158,12 @@ jobs:
           SHA12=${{ steps.bundle.outputs.sha12 }}
           # Upload the zip FIRST and the manifest LAST: clients only ever see
           # either the previous consistent pair, or the new zip + new manifest.
-          # part-size defaults to 32MB, which would send our ~4MB bundle over a
-          # single slow cross-border connection; 1MB parts across 8 connections
-          # upload far faster, and the retry flags absorb rate limiting.
           if curl -fsI --max-time 20 "https://questionable-1304787170.cos.ap-guangzhou.myqcloud.com/paths-${CHANNEL}/paths-${SHA12}.zip" > /dev/null; then
             echo "Bundle ${SHA12} already exists in COS; skipping upload"
           else
-            coscli cp out/paths.zip cos://qst/paths-${CHANNEL}/paths-${SHA12}.zip \
-              --part-size 1 --thread-num 8 --retry-num 10 --err-retry-num 10
+            coscli cp out/paths.zip cos://qst/paths-${CHANNEL}/paths-${SHA12}.zip
           fi
-          coscli cp out/manifest-${CHANNEL}.json cos://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json \
-            --retry-num 10 --err-retry-num 10
+          coscli cp out/manifest-${CHANNEL}.json cos://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json
 
       - name: Fallback - upload GitHub manifest to COS
         if: steps.cos_upload.outcome == 'failure'
@@ -183,13 +178,6 @@ jobs:
           aws configure set aws_access_key_id "${{ secrets.RAINYUN_ACCESS_KEY }}"
           aws configure set aws_secret_access_key "${{ secrets.RAINYUN_SECRET_KEY }}"
           aws configure set default.region us-east-1
-          # Cross-border uploads to RainYun are slow on a single stream; use small
-          # multipart chunks so parts upload in parallel, and be patient on timeouts.
-          aws configure set default.s3.multipart_threshold 1MB
-          aws configure set default.s3.multipart_chunksize 1MB
-          aws configure set default.s3.max_concurrent_requests 6
-          aws configure set default.retry_mode adaptive
-          aws configure set default.max_attempts 10
 
       - name: Check whether the RainYun bundle is already up to date
         id: rainyun_state
@@ -217,15 +205,13 @@ jobs:
           if [ "${{ steps.rainyun_state.outputs.skip_zip }}" != "true" ]; then
             aws s3 cp out/paths.zip \
               s3://qst/paths-${CHANNEL}/paths.zip \
-              --endpoint-url https://cn-nb1.rains3.com --acl public-read \
-              --cli-connect-timeout 60 --cli-read-timeout 600
+              --endpoint-url https://cn-nb1.rains3.com --acl public-read
           else
             echo "Skipping zip upload; bundle unchanged"
           fi
           aws s3 cp out/manifest-${CHANNEL}-rainyun.json \
             s3://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json \
-            --endpoint-url https://cn-nb1.rains3.com --acl public-read \
-            --cli-connect-timeout 60 --cli-read-timeout 600
+            --endpoint-url https://cn-nb1.rains3.com --acl public-read
 
       - name: Fallback - upload GitHub manifest to RainYun
         if: steps.s3_upload.outcome == 'failure'
