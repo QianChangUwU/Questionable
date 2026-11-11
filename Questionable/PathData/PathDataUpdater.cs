@@ -11,7 +11,7 @@ namespace Questionable.PathData;
 [RegisterSingleton]
 internal sealed class PathDataUpdater : IDisposable
 {
-    private const string RainYunBaseUrl = "https://cn-nb1.rains3.com/qst";
+    private const string RainYunBaseUrl = "https://cn-nb2.rains3.com/questionable";
     private const string CosBaseUrl = "https://questionable-1304787170.cos.ap-guangzhou.myqcloud.com";
     private const string GitHubBaseUrl = "https://github.com/QianChangUwU/Questionable";
 

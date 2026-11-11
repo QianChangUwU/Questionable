@@ -1,4 +1,4 @@
-﻿name: Publish path data bundle
+name: Publish path data bundle
 
 on:
   push:
@@ -87,7 +87,7 @@ jobs:
           # Content-addressed bundle name: the bytes never change for a given name,
           # so it stays valid forever even behind a cache.
           COS_URL="https://questionable-1304787170.cos.ap-guangzhou.myqcloud.com/paths-${CHANNEL}/paths-${SHA12}.zip"
-          RAINYUN_URL="https://cn-nb1.rains3.com/qst/paths-${CHANNEL}/paths.zip"
+          RAINYUN_URL="https://cn-nb2.rains3.com/questionable/paths-${CHANNEL}/paths.zip"
           GH_URL="https://github.com/${{ github.repository }}/releases/download/paths-${CHANNEL}/paths.zip"
 
           # Tencent COS manifest (primary)
@@ -185,10 +185,10 @@ jobs:
         run: |
           CHANNEL=${{ steps.channel.outputs.channel }}
           LOCAL_SHA=$(sha256sum out/paths.zip | cut -d' ' -f1)
-          MANIFEST=$(curl -fsS --max-time 30 "https://cn-nb1.rains3.com/qst/paths-${CHANNEL}/manifest-${CHANNEL}.json" || true)
+          MANIFEST=$(curl -fsS --max-time 30 "https://cn-nb2.rains3.com/questionable/paths-${CHANNEL}/manifest-${CHANNEL}.json" || true)
           REMOTE_SHA=$(echo "$MANIFEST" | grep -o '"bundleSha256"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/')
           REMOTE_URL=$(echo "$MANIFEST" | grep -o '"bundleUrl"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"\([^"]*\)"$/\1/')
-          if [ "$REMOTE_SHA" = "$LOCAL_SHA" ] && echo "$REMOTE_URL" | grep -q "cn-nb1.rains3.com"; then
+          if [ "$REMOTE_SHA" = "$LOCAL_SHA" ] && echo "$REMOTE_URL" | grep -q "cn-nb2.rains3.com"; then
             echo "skip_zip=true" >> $GITHUB_OUTPUT
             echo "RainYun already serves this bundle ($LOCAL_SHA); skipping zip upload"
           else
@@ -204,14 +204,14 @@ jobs:
           # keeps the fixed bundle name and its own manifest. zip first, manifest last.
           if [ "${{ steps.rainyun_state.outputs.skip_zip }}" != "true" ]; then
             aws s3 cp out/paths.zip \
-              s3://qst/paths-${CHANNEL}/paths.zip \
-              --endpoint-url https://cn-nb1.rains3.com --acl public-read
+              s3://questionable/paths-${CHANNEL}/paths.zip \
+              --endpoint-url https://cn-nb2.rains3.com --acl public-read
           else
             echo "Skipping zip upload; bundle unchanged"
           fi
           aws s3 cp out/manifest-${CHANNEL}-rainyun.json \
-            s3://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json \
-            --endpoint-url https://cn-nb1.rains3.com --acl public-read
+            s3://questionable/paths-${CHANNEL}/manifest-${CHANNEL}.json \
+            --endpoint-url https://cn-nb2.rains3.com --acl public-read
 
       - name: Fallback - upload GitHub manifest to RainYun
         if: steps.s3_upload.outcome == 'failure'
@@ -220,8 +220,8 @@ jobs:
           CHANNEL=${{ steps.channel.outputs.channel }}
           cp out/manifest-${CHANNEL}-gh.json out/manifest-${CHANNEL}.json
           aws s3 cp out/manifest-${CHANNEL}.json \
-            s3://qst/paths-${CHANNEL}/manifest-${CHANNEL}.json \
-            --endpoint-url https://cn-nb1.rains3.com --acl public-read
+            s3://questionable/paths-${CHANNEL}/manifest-${CHANNEL}.json \
+            --endpoint-url https://cn-nb2.rains3.com --acl public-read
 
       - name: Publish path bundle release (backup)
         uses: softprops/action-gh-release@v2
