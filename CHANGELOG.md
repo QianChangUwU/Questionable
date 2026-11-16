@@ -1,1 +1,1 @@
-- 雨云存储切换到 cn-nb2 节点与 questionable 桶
+- 修复国服版 vnavmesh 等重命名插件被误判为未就绪、卡在 Navmesh: 100% 的问题
