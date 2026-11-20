@@ -4585,7 +4585,7 @@
     <!--<Value lang="ko">왼쪽 클릭: 내 위치를 JSON으로 복사\n오른쪽 클릭: 내 위치를 C# 코드로 복사</Value>-->
   </Entry>
   <Entry>
-    <!-- Found in: ../Questionable/Windows/QuestComponents/EventInfoComponent.cs -->
+    <!-- DEPRECATED -->
     <Key>Limited Time Items</Key>
     <Value lang="en">Limited Time Items</Value>
     <Value lang="zh-cn">限时道具</Value>
